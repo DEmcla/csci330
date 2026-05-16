@@ -1,0 +1,124 @@
+# ============================================================================
+# CSCI 330 Summer 2026 -- .gitignore
+#
+# This gitignore is the single biggest thing between you and a clean submission.
+# If a file is listed here, DO NOT force-add it with `git add -f`.
+#
+# Golden rule: you should only commit SOURCE files you wrote, plus the
+# README.md for each assignment. Everything else is either provided by the
+# course repo or is a build artifact your grader does not need.
+# ============================================================================
+
+
+# ---------------------------------------------------------------------------
+# Build artifacts -- NEVER commit. Your grader will rebuild from source.
+# ---------------------------------------------------------------------------
+build/
+Build/
+cmake-build-*/
+out/
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+*.exe
+*.out
+
+# CMake cache and configuration
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+Makefile
+*.cbp
+
+# Debug info
+*.dSYM/
+*.pdb
+*.ilk
+
+
+# ---------------------------------------------------------------------------
+# Editor / IDE state -- personal to your machine
+# ---------------------------------------------------------------------------
+# The course ships a shared .vscode/ directory (tasks.json, settings.json).
+# Do NOT commit your own per-user overrides. If you tweak launch.json for
+# debugging, keep it local by leaving the line below uncommented.
+.vscode/*.user.json
+*.code-workspace
+
+# JetBrains (CLion, etc.)
+.idea/
+
+# Vim / emacs swap
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Linux
+.directory
+
+
+# ---------------------------------------------------------------------------
+# Docker artifacts
+# ---------------------------------------------------------------------------
+.devcontainer/test
+.devcontainer/*.out
+
+
+# ---------------------------------------------------------------------------
+# Logs and temp files
+# ---------------------------------------------------------------------------
+*.log
+*.tmp
+*.temp
+.cache/
+
+
+# ---------------------------------------------------------------------------
+# Archives (students sometimes try to commit zipped turn-ins -- don't)
+# ---------------------------------------------------------------------------
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+
+# ---------------------------------------------------------------------------
+# Python tooling (used by occasional helper scripts)
+# ---------------------------------------------------------------------------
+__pycache__/
+*.pyc
+*.pyo
+
+
+# ---------------------------------------------------------------------------
+# Secrets -- never commit these
+# ---------------------------------------------------------------------------
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+
+# ---------------------------------------------------------------------------
+# Personal notes / scratch (keep local)
+# ---------------------------------------------------------------------------
+personal_notes/
+scratch/
+SCRATCH/
+notes.md
+TODO.private.md

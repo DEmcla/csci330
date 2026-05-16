@@ -1,0 +1,7 @@
+{
+  // Local (host) VS Code settings for the C/C++ extension. The real
+  // compiler and IntelliSense run inside the Dev Container, so the
+  // host-side editor only needs to avoid showing misleading red error
+  // squiggles before you choose "Reopen in Container".
+  "C_Cpp.errorSquiggles": "disabled"
+}

@@ -1,0 +1,79 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build active file (g++)",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-g",
+                "-Wall",
+                "-Wextra",
+                "-Wpedantic",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Compile the active .cpp file with g++ -std=c++17"
+        },
+        {
+            "label": "cmake configure + build (current working dir)",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "cmake -B build && cmake --build build"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Run inside a directory that has a CMakeLists.txt (an assignment-template or your assignments/ copy)"
+        },
+        {
+            "label": "cmake clean",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "rm -rf build"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Remove the build/ directory in the current folder"
+        },
+        {
+            "label": "format active file (clang-format)",
+            "type": "shell",
+            "command": "clang-format",
+            "args": [
+                "-i",
+                "-style=Google",
+                "${file}"
+            ],
+            "group": "none",
+            "problemMatcher": [],
+            "detail": "Format the active file in-place with clang-format (Google style)"
+        },
+        {
+            "label": "valgrind on active file build",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "valgrind --leak-check=full --track-origins=yes ${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "group": "test",
+            "problemMatcher": [],
+            "detail": "Run valgrind on the binary built from the active .cpp file"
+        }
+    ]
+}
