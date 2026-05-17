@@ -93,9 +93,12 @@ for the full workflow.
 ## Assessment model
 
 This course uses a **no-exam** model — there is no midterm and no final exam.
-Your grade combines the three-phase capstone project (35%), one low-stakes
-chapter quiz per chapter on Canvas (20%, lowest two dropped), per-chapter
-homework plus the GitHub onboarding assignment (25%), and participation (20%).
+Your grade combines the three-phase capstone project (35%), participation in
+the weekly synchronous meeting (30%), per-chapter homework plus the GitHub
+onboarding assignment (25%), and one low-stakes pacing quiz per chapter on
+Canvas (10%). Every offering of CSCI 330 — both the short, intensive pace and
+the full-semester pace — includes a mandatory weekly synchronous meeting where
+you defend your work; see [reference/code-review-guide.md](reference/code-review-guide.md).
 The **official weighting and grading scale are in the syllabus on Canvas.**
 
 ## Learning Objectives

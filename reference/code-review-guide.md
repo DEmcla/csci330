@@ -1,39 +1,101 @@
-# Giving a Useful Code Review
+# The Weekly Defense & Co-Examiner Guide
 
-In this course, peer review is not a form — it is a real **GitHub code review**
-on a classmate's Pull Request. Reviewing code is half of the professional Git
-workflow, and it is a graded part of your participation.
+CSCI 330 has a **mandatory weekly synchronous meeting** — about one hour, on a
+fixed mid-week day, in every offering of the course (both the short, intensive
+pace and the full-semester pace). This guide explains what that meeting is, how
+to prepare for it, and what is expected of you whether you are defending your
+own work or co-examining a classmate's.
 
-## When you review
+## The meeting is a defense
 
-At each capstone phase checkpoint you are assigned classmates' PRs to review.
-Substantive reviews count toward the **20% participation** grade; a one-line
-"looks good!" earns little.
+The weekly meeting is a **defense of your own work** — not a code-review ritual,
+not a lecture. Each week it works through the *previous* week's homework: you
+explain what you built, why you built it that way, and answer questions about
+it live. The instructor leads the questioning; your classmates join in as
+co-examiners.
 
-## How to leave a GitHub review
+This is how the course verifies that the work is yours and that you understand
+it. You may use AI to help you *write* code and to help you *prepare* for the
+defense — that is fine and expected. What you cannot do is outsource the live
+conversation. If you understand what you submitted, the defense is
+straightforward.
 
-1. Open the assigned PR and click the **Files changed** tab.
-2. Hover over a line of code and click the blue **+** to leave an **inline
-   comment** on that specific line.
-3. When done, click **Review changes**, write a short **summary**, and submit.
+## How a meeting runs
 
-## What makes a review useful
+- **About 4 students defend each meeting**, **chosen by random call** from the
+  section. You will not know in advance whether this is your week.
+- Because the call is random, **every student must arrive prepared every
+  week.** Being prepared — not being called — is the obligation. Treat each
+  week's homework as something you may have to defend on the spot.
+- **Week 1 has no defense** (there is no prior homework yet). The final week's
+  homework is graded normally but is not defended.
+- The meeting is graded as part of your **Participation** grade (30% of the
+  course). Both defending well and co-examining well count.
 
-A useful review is **specific** and **kind**. Aim for:
+## At the three capstone phase-anchor weeks
 
-- Two or three **inline comments** tied to actual lines — a question, a
-  suggestion, a spotted bug, or genuine praise for something done well.
-- A **summary** that says what works and the one thing you would change.
-- Comments that explain *why*, so they help the author improve.
+Most weeks the meeting defends homework, and the capstone runs underneath as
+async work. But at the **three capstone phase-anchor weeks (Chapters 5, 11, and
+17)**, the meeting becomes a **capstone-phase defense** instead: you present and
+defend that phase of your project, and classmates co-examine it. **Phase 3's
+defense is the final project presentation.** Phase deliverables are due a few
+days before the defense meeting so you are not finishing a phase and prepping a
+defense on the same day.
 
-**Weak:** "Looks good." / "Nice work!"
+## If you are defending
 
-**Useful:** "Line 42 — this `new` has no matching `delete`; the destructor would
-fix the leak." / "The `Buffer` move constructor is clean — leaving the source at
-`size = 0` is exactly right."
+When it is your turn, expect to:
 
-## What not to do
+- **Walk through your code** — including a **function of the instructor's
+  choosing**, not just the part you are most proud of. Be ready to explain any
+  part of what you submitted.
+- **Justify a design decision** — why you structured it this way, what you
+  considered and rejected, what the trade-off was.
+- **Answer the co-examiner question set** below, plus live follow-up questions.
 
-- Do not rewrite their code for them — review it.
-- Do not approve work you did not actually read.
-- Do not be harsh. You are helping a classmate, and they review you back.
+Preparation: re-read your own code before the meeting. If a part of it only
+worked because AI suggested it, make sure you understand *why* it works. The
+defense rewards understanding, not memorized scripts.
+
+## If you are co-examining
+
+When you are not defending, you are a **co-examiner** — not a passive observer
+and not an independent reviewer. You arrive with questions and observations and
+**join the questioning** of whoever is defending.
+
+To make this possible, the defending students **share their code in advance**.
+Read it before the meeting — you cannot review code cold in a one-hour session.
+Come with at least one specific question or observation per defender.
+
+Co-examination counts toward your Participation grade. Substantive questions
+that move the discussion forward count; silence and "looks fine to me" do not.
+
+## The co-examiner question set
+
+These five questions are **fixed and published**. Use them to prepare your
+questions for every defense. The defending student knows these questions are
+coming.
+
+1. **Comprehension** — In your own words, what does this code do?
+2. **Correctness** — Does it do what the assignment or feature requires? Find a
+   case where it would not.
+3. **Risk** — Name one input or situation it does not handle well.
+4. **Improvement** — Suggest one concrete change (naming, structure, a C++
+   idiom).
+5. **Strength** — Name one thing it does well.
+
+**Weak co-examination:** "Looks good." / "I don't have any questions."
+
+**Useful co-examination:** "What happens if the input file is empty — does the
+loop on line 30 still terminate?" / "The `Buffer` move constructor leaves the
+source at `size = 0`, which is exactly right — was that deliberate?"
+
+## What to expect and what not to do
+
+- **Defending:** be ready to discuss *any* part of your submission, including a
+  function the instructor picks. Do not assume you can steer the conversation to
+  your strongest code.
+- **Co-examining:** ask real questions and be specific. Do not be harsh — you
+  are helping a classmate understand their own work better, and they
+  co-examine you in turn.
+- **Either role:** arrive prepared. The random call means there is no week off.

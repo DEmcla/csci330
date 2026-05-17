@@ -84,7 +84,7 @@ Working code that proves the hardest part is solvable:
 - **Share your project idea** in the Project Collaboration Hub discussion for community feedback
 - **Post proof-of-concept screenshots** or demos to get early input
 - **Help others** troubleshoot their Phase 1 challenges
-- **Build connections** with potential peer reviewers
+- **Build connections** with the classmates who will co-examine your phase defenses
 
 #### Asynchronous Instructor Check-In
 **Required**: Submit a short written/video check-in via Canvas as part of the Phase 1 submission
@@ -93,12 +93,13 @@ Working code that proves the hardest part is solvable:
 - **Plan**: Adjustments needed for Phase 2
 - **Follow-up**: If needed, schedule virtual office hours by appointment or email the instructor for one-on-one guidance
 
-#### Peer Review Requirements
-Each phase includes mandatory peer collaboration:
-- **Receive feedback from 2 peers** on your deliverables
-- **Provide feedback to 2 peers** using structured review forms
-- Peer reviews are conducted on GitHub: open a pull request for your phase submission and review classmates' PRs
-- The Canvas calendar sets the review window for each offering
+#### Phase Defense
+At the Chapter 5 anchor week, the weekly synchronous meeting becomes a **Phase 1 defense**:
+- You **present and defend your phase work** — proposal and proof of concept — to the instructor and your classmates.
+- **Classmates act as co-examiners**, questioning your work from the published co-examiner question set.
+- Expect to **walk through a function of the instructor's choosing** and **justify a design decision**.
+- Share your code in advance so co-examiners can prepare. See the **Weekly Defense Guide** (`reference/code-review-guide.md`) for how a defense runs.
+- The phase deliverable is due a few days before the defense meeting; the Canvas calendar sets the exact dates for each offering.
 
 ### Grading (40 points)
 
@@ -163,6 +164,14 @@ Build a complete MVP, then add the features that make your project interesting a
 - **Review**: Progress toward Phase 3 goals
 - **Follow-up**: Virtual office hours by appointment, Canvas discussion board, or email the instructor for deeper feedback
 
+#### Phase Defense
+At the Chapter 11 anchor week, the weekly synchronous meeting becomes a **Phase 2 defense**:
+- You **present and defend your MVP and new features** to the instructor and your classmates.
+- **Classmates act as co-examiners**, questioning your work from the published co-examiner question set.
+- Expect to **walk through a function of the instructor's choosing** and **justify a design decision**.
+- Share your code in advance so co-examiners can prepare. See the **Weekly Defense Guide** (`reference/code-review-guide.md`) for how a defense runs.
+- The phase deliverable is due a few days before the defense meeting; the Canvas calendar sets the exact dates for each offering.
+
 ### Grading (130 points)
 
 The point-by-point rubric for this phase lives in its phase guide, **`project/phases/PROJECT_PHASE_2.md`** -- that guide is the single source of truth for how the 130 points are awarded. Read it before you start so you know exactly what is being graded.
@@ -212,8 +221,8 @@ Make it production-ready, create a professional finish, and reflect on your jour
 - **Help others** prepare for their final submissions
 - **Thank classmates** who supported you through the term
 
-#### 3.2 Final Project Presentation (Phase 3 deliverable)
-**Required**: Submit a recorded **10-12 minute** presentation video via Canvas (async delivery - no synchronous meeting required). If the instructor approves, you may instead give a live 10-12 minute presentation via Zoom during end-of-course virtual office hours.
+#### 3.2 Final Project Presentation & Defense (Phase 3 deliverable)
+**Required**: At the Chapter 17 anchor week, the weekly synchronous meeting becomes your **Phase 3 defense** — and that defense *is* the final project presentation. You give a **10-12 minute** presentation live to the instructor and your classmates, who act as co-examiners. The structure below is what to cover; expect live follow-up questions, including a walk-through of a function of the instructor's choosing and a justification of a design decision. Share your code in advance so co-examiners can prepare.
 
 **Live Demo** (~5 minutes)
 - Show it working end-to-end
@@ -233,7 +242,7 @@ Make it production-ready, create a professional finish, and reflect on your jour
 - What you'd do differently
 - Reflection on growth as a C++ developer
 
-Instructor follow-up questions (if any) will be posted in Canvas; you'll respond asynchronously. You may also request virtual office hours by appointment for a live discussion.
+Instructor and co-examiner follow-up questions are part of the live defense. If anything needs more discussion afterward, you may request virtual office hours by appointment.
 
 #### 3.3 Comprehensive Reflection Paper (2-3 pages)
 

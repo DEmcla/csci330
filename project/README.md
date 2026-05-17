@@ -37,7 +37,7 @@ The capstone project is your opportunity to apply everything you learn in a subs
   - **[Phase 3](phases/PROJECT_PHASE_3.md)**: Robustness, Polish & Presentation (anchored at **Chapter 17**, course end, 130 pts)
 
 ### **Collaboration and Feedback**
-- **👥 [Code Review Guide](../reference/code-review-guide.md)** -- how to give a useful GitHub code review on a classmate's PR at each checkpoint
+- **👥 [Weekly Defense Guide](../reference/code-review-guide.md)** -- how the weekly synchronous meeting works, how to defend your own work, and the co-examiner question set
 
 ---
 
@@ -58,6 +58,8 @@ If you have prior experience in a specific domain (web, ML, embedded, finance), 
 ## ⏰ Project Phases
 
 The capstone is introduced after Chapter 2 and runs parallel to the chapters from there. Each phase is anchored to a chapter; the calendar dates for those anchors are set per offering in Canvas.
+
+At each of the three phase-anchor weeks (Chapters 5, 11, 17), that week's synchronous meeting becomes a **capstone-phase defense**: you present and defend your phase work, with classmates acting as co-examiners. Phase 3's defense is the final project presentation. See the **[Weekly Defense Guide](../reference/code-review-guide.md)** for how a defense runs.
 
 | Phase | Chapter Anchor | Points | Focus |
 |-------|----------------|--------|-------|
@@ -87,7 +89,7 @@ Each phase rubric is in its own file. The project as a whole is evaluated agains
 - Consistent Git workflow across all three phases
 - Meaningful commit messages
 - Incremental, testable progress between phases
-- Responsive to peer feedback
+- Able to defend the work in the weekly meeting at each phase anchor
 
 ### **Presentation and Communication (~15%)**
 - Clear README with build + run instructions
@@ -151,7 +153,7 @@ Each phase rubric is in its own file. The project as a whole is evaluated agains
 
 ### **Project Planning**
 - Post ideas early in the Canvas Project Discussion board
-- Peer feedback on scope during each phase
+- Bring scope questions to the weekly meeting for feedback during each phase
 - Email instructor for a virtual 1:1 before major pivots
 
 ### **Technical Issues**
@@ -162,7 +164,7 @@ Each phase rubric is in its own file. The project as a whole is evaluated agains
 
 ### **Project Management**
 - Async weekly check-in posts on Canvas
-- Peer reviews at each phase checkpoint
+- A capstone-phase defense in the weekly meeting at each phase anchor (Chapters 5, 11, 17)
 - Your own Git history -- use it to see how consistently you have been working
 
 ---
