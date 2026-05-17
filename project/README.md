@@ -59,7 +59,7 @@ If you have prior experience in a specific domain (web, ML, embedded, finance), 
 
 The capstone is introduced after Chapter 2 and runs parallel to the chapters from there. Each phase is anchored to a chapter; the calendar dates for those anchors are set per offering in Canvas.
 
-At each of the three phase-anchor weeks (Chapters 5, 11, 17), that week's synchronous meeting becomes a **capstone-phase defense**: you present and defend your phase work, with classmates acting as co-examiners. Phase 3's defense is the final project presentation. See the **[Weekly Defense Guide](../reference/code-review-guide.md)** for how a defense runs.
+At each of the three phase-anchor weeks (Chapters 5, 11, 17), a **capstone-phase defense** runs as its own dedicated session that week -- a separate session held in addition to the weekly homework-defense meeting, which still runs as usual. In the phase-defense session you present and defend your phase work, with classmates acting as co-examiners. Phase 3's session is the final project presentation. See the **[Weekly Defense Guide](../reference/code-review-guide.md)** for how a defense runs.
 
 | Phase | Chapter Anchor | Points | Focus |
 |-------|----------------|--------|-------|

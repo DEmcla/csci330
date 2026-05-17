@@ -94,7 +94,7 @@ Working code that proves the hardest part is solvable:
 - **Follow-up**: If needed, schedule virtual office hours by appointment or email the instructor for one-on-one guidance
 
 #### Phase Defense
-At the Chapter 5 anchor week, the weekly synchronous meeting becomes a **Phase 1 defense**:
+At the Chapter 5 anchor week, a dedicated **Phase 1 defense** session runs in addition to the weekly homework-defense meeting -- a separate session, not a replacement of it:
 - You **present and defend your phase work** — proposal and proof of concept — to the instructor and your classmates.
 - **Classmates act as co-examiners**, questioning your work from the published co-examiner question set.
 - Expect to **walk through a function of the instructor's choosing** and **justify a design decision**.
@@ -165,7 +165,7 @@ Build a complete MVP, then add the features that make your project interesting a
 - **Follow-up**: Virtual office hours by appointment, Canvas discussion board, or email the instructor for deeper feedback
 
 #### Phase Defense
-At the Chapter 11 anchor week, the weekly synchronous meeting becomes a **Phase 2 defense**:
+At the Chapter 11 anchor week, a dedicated **Phase 2 defense** session runs in addition to the weekly homework-defense meeting -- a separate session, not a replacement of it:
 - You **present and defend your MVP and new features** to the instructor and your classmates.
 - **Classmates act as co-examiners**, questioning your work from the published co-examiner question set.
 - Expect to **walk through a function of the instructor's choosing** and **justify a design decision**.
@@ -222,7 +222,7 @@ Make it production-ready, create a professional finish, and reflect on your jour
 - **Thank classmates** who supported you through the term
 
 #### 3.2 Final Project Presentation & Defense (Phase 3 deliverable)
-**Required**: At the Chapter 17 anchor week, the weekly synchronous meeting becomes your **Phase 3 defense** — and that defense *is* the final project presentation. You give a **10-12 minute** presentation live to the instructor and your classmates, who act as co-examiners. The structure below is what to cover; expect live follow-up questions, including a walk-through of a function of the instructor's choosing and a justification of a design decision. Share your code in advance so co-examiners can prepare.
+**Required**: At the Chapter 17 anchor week, a dedicated **Phase 3 defense** session runs in addition to the weekly homework-defense meeting — a separate session, not a replacement of it — and that defense *is* the final project presentation. You give a **10-12 minute** presentation live to the instructor and your classmates, who act as co-examiners. The structure below is what to cover; expect live follow-up questions, including a walk-through of a function of the instructor's choosing and a justification of a design decision. Share your code in advance so co-examiners can prepare.
 
 **Live Demo** (~5 minutes)
 - Show it working end-to-end

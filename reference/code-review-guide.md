@@ -22,8 +22,9 @@ straightforward.
 
 ## How a meeting runs
 
-- **About 4 students defend each meeting**, **chosen by random call** from the
-  section. You will not know in advance whether this is your week.
+- **About 6 students defend each meeting**, in ~10-minute slots, **chosen by
+  random call** from the section. You will not know in advance whether this is
+  your week.
 - Because the call is random, **every student must arrive prepared every
   week.** Being prepared — not being called — is the obligation. Treat each
   week's homework as something you may have to defend on the spot.
@@ -34,13 +35,15 @@ straightforward.
 
 ## At the three capstone phase-anchor weeks
 
-Most weeks the meeting defends homework, and the capstone runs underneath as
-async work. But at the **three capstone phase-anchor weeks (Chapters 5, 11, and
-17)**, the meeting becomes a **capstone-phase defense** instead: you present and
-defend that phase of your project, and classmates co-examine it. **Phase 3's
-defense is the final project presentation.** Phase deliverables are due a few
-days before the defense meeting so you are not finishing a phase and prepping a
-defense on the same day.
+The weekly meeting defends homework every week, and the capstone runs underneath
+as async work. At the **three capstone phase-anchor weeks (Chapters 5, 11, and
+17)**, a **capstone-phase defense** runs as its own dedicated session that week
+— a separate session held *in addition to* the weekly homework-defense meeting,
+which still runs as usual; homework defense is never displaced. In the
+phase-defense session you present and defend that phase of your project, and
+classmates co-examine it. **Phase 3's session is the final project
+presentation.** Phase deliverables are due a few days before the phase-defense
+session so you are not finishing a phase and prepping a defense on the same day.
 
 ## If you are defending
 
