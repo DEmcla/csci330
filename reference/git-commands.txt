@@ -11,7 +11,7 @@ Start New Assignment
 git checkout main           # Switch to main branch
 git pull upstream main      # Get latest course updates
 git push origin main        # Update your fork
-git checkout -b week##-assignment-name  # Create feature branch
+git checkout -b chapter-NN-assignment-name  # Create feature branch
 
 Work on Assignment
 git add .                   # Stage all changes
@@ -23,9 +23,9 @@ Initial Setup Commands (One Time Only)
 
 Fork Setup
 # After forking on GitHub, clone your fork:
-git clone https://github.com/YOUR_USERNAME/csci330_u26.git
-cd csci330_u26
-git remote add upstream https://github.com/DEmcla/csci330_u26.git
+git clone https://github.com/YOUR_USERNAME/csci330.git
+cd csci330
+git remote add upstream https://github.com/DEmcla/csci330.git
 
 Configure Identity
 git config user.name "FirstName LastName - CSCI330"
@@ -42,9 +42,9 @@ git checkout existing-branch        # Switch to existing branch
 git branch                          # List all branches
 
 Naming Conventions
-git checkout -b week01-pointers-basics
-git checkout -b week02-dynamic-memory  
-git checkout -b week03-classes-intro
+git checkout -b chapter-03-pointers-basics
+git checkout -b chapter-04-object-lifecycle
+git checkout -b chapter-05-polymorphism
 
 Cleaning Up Branches
 git branch -d branch-name              # Delete local branch
@@ -133,7 +133,7 @@ Emergency Commands
 
 Accidentally on Main Branch
 # If you made changes on main instead of feature branch:
-git checkout -b week01-assignment-name  # Create branch with current changes
+git checkout -b chapter-NN-assignment-name  # Create branch with current changes
 # Now you're on the correct branch!
 
 Lost Changes
@@ -143,7 +143,7 @@ git checkout HEAD@{2}       # Go back to specific state
 Need to Start Over
 git checkout main
 git pull upstream main
-git checkout -b week01-assignment-name-v2
+git checkout -b chapter-NN-assignment-name-v2
 # Copy your work manually if needed
 
 Common Error Solutions
@@ -152,7 +152,7 @@ Common Error Solutions
 git checkout existing-branch-name     # Switch to it instead
 # OR delete it first:
 git branch -d old-branch-name
-git checkout -b week01-assignment-name
+git checkout -b chapter-NN-assignment-name
 
 "Nothing to commit"
 git status                  # Check if files are staged
@@ -172,9 +172,9 @@ Workflow Checklist
 
 Before Each Assignment:
 - git checkout main
-- git pull upstream main 
+- git pull upstream main
 - git push origin main
-- git checkout -b week##-assignment-name
+- git checkout -b chapter-NN-assignment-name
 
 During Assignment:
 - Work in your assignment directory

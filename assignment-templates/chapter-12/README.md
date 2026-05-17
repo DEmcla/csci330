@@ -20,107 +20,112 @@
 ## Problem Set 1: Foundation Problems (45 minutes)
 *Focus: Basic usage of each utility type*
 
-### Problem 1.1: Safe String Operations (15 minutes)
+### Problem 1.1: Safe GPS Fix Operations (15 minutes)
 **Learning Objective**: Practice `std::optional` for safe operations
 
-**Problem**: Create a `SafeStringProcessor` class that handles potentially invalid string operations.
+**Problem**: Create a `SafeFixReader` class that handles potentially invalid GPS fix operations. A GPS receiver does not always produce a usable fix, so each lookup may legitimately have "no value".
 
 ```cpp
-class SafeStringProcessor {
+class SafeFixReader {
 public:
-    // Returns the character at index, or nullopt if index is invalid
-    static std::optional<char> char_at(const std::string& str, size_t index);
+    // Returns the satellite ID at index, or nullopt if index is invalid
+    static std::optional<int> satellite_at(const std::vector<int>& satellites, size_t index);
     
-    // Finds the first occurrence of a character, returns its index or nullopt
-    static std::optional<size_t> find_char(const std::string& str, char c);
+    // Finds the first occurrence of a satellite ID, returns its index or nullopt
+    static std::optional<size_t> find_satellite(const std::vector<int>& satellites, int sat_id);
     
-    // Converts string to integer, returns nullopt if conversion fails
-    static std::optional<int> to_int(const std::string& str);
+    // Converts a raw coordinate string to a decimal-degree value,
+    // returns nullopt if conversion fails
+    static std::optional<double> to_coordinate(const std::string& raw);
 };
 ```
 
 **Test Cases**:
 ```cpp
+std::vector<int> sats{12, 24, 5, 31};
+
 // Should work
-assert(SafeStringProcessor::char_at("hello", 1) == 'e');
-assert(SafeStringProcessor::find_char("hello", 'l') == 2);
-assert(SafeStringProcessor::to_int("123") == 123);
+assert(SafeFixReader::satellite_at(sats, 1) == 24);
+assert(SafeFixReader::find_satellite(sats, 5) == 2);
+assert(SafeFixReader::to_coordinate("42.637") == 42.637);
 
 // Should return nullopt
-assert(!SafeStringProcessor::char_at("hello", 10).has_value());
-assert(!SafeStringProcessor::find_char("hello", 'x').has_value());
-assert(!SafeStringProcessor::to_int("not_a_number").has_value());
+assert(!SafeFixReader::satellite_at(sats, 10).has_value());
+assert(!SafeFixReader::find_satellite(sats, 99).has_value());
+assert(!SafeFixReader::to_coordinate("no_fix").has_value());
 ```
 
-**Python/Java Connection**: Similar to Python's string methods that return None or Java's Optional returns.
+**Python/Java Connection**: Similar to Python methods that return None or Java's Optional returns.
 
 ---
 
-### Problem 1.2: Data Processor with Multiple Types (15 minutes)
-**Learning Objective**: Practice `std::variant` for handling different data types
+### Problem 1.2: Coordinate Format Handler (15 minutes)
+**Learning Objective**: Practice `std::variant` for handling different data representations
 
-**Problem**: Create a simple data processor that can handle different types of input.
+**Problem**: A waypoint coordinate may be stored as a raw decimal-degree number, a degrees-minutes-seconds (DMS) string, or a named landmark. Create a handler that works with any of these representations.
 
 ```cpp
-using DataValue = std::variant<int, double, std::string>;
+using Coordinate = std::variant<double, std::string, int>;
+// double -> decimal degrees, std::string -> DMS text, int -> landmark code
 
-class DataProcessor {
+class CoordinateHandler {
 public:
-    // Process a single data value and return a description string
-    static std::string describe(const DataValue& data);
+    // Process a single coordinate and return a description string
+    static std::string describe(const Coordinate& coord);
     
-    // Calculate the "size" of the data (int->value, double->rounded, string->length)
-    static int calculate_size(const DataValue& data);
+    // Calculate a numeric "key" for the coordinate
+    // (double->rounded degrees, string->length, int->the code value)
+    static int calculate_key(const Coordinate& coord);
 };
 ```
 
 **Expected Behavior**:
 ```cpp
-DataValue int_data = 42;
-DataValue double_data = 3.14159;
-DataValue string_data = std::string("Hello World");
+Coordinate decimal_coord = 42.6;
+Coordinate dms_coord = std::string("42 deg 36 min N");
+Coordinate landmark_coord = 7;
 
-assert(DataProcessor::describe(int_data) == "Integer: 42");
-assert(DataProcessor::describe(double_data) == "Double: 3.14159");
-assert(DataProcessor::describe(string_data) == "String: Hello World");
+assert(CoordinateHandler::describe(decimal_coord) == "Decimal: 42.6");
+assert(CoordinateHandler::describe(dms_coord) == "DMS: 42 deg 36 min N");
+assert(CoordinateHandler::describe(landmark_coord) == "Landmark: 7");
 
-assert(DataProcessor::calculate_size(int_data) == 42);
-assert(DataProcessor::calculate_size(double_data) == 3);  // rounded
-assert(DataProcessor::calculate_size(string_data) == 11); // length
+assert(CoordinateHandler::calculate_key(decimal_coord) == 43);  // rounded
+assert(CoordinateHandler::calculate_key(dms_coord) == 15);      // length
+assert(CoordinateHandler::calculate_key(landmark_coord) == 7);  // the code
 ```
 
 ---
 
-### Problem 1.3: Student Record System (15 minutes)
+### Problem 1.3: Waypoint Record System (15 minutes)
 **Learning Objective**: Practice `std::tuple` for grouping related data
 
-**Problem**: Create a student record system that uses tuples to manage student information.
+**Problem**: Create a waypoint record system that uses tuples to manage GPS waypoint information.
 
 ```cpp
-using StudentRecord = std::tuple<std::string, int, double>; // name, age, gpa
+using WaypointRecord = std::tuple<std::string, double, double>; // label, latitude, longitude
 
-class StudentManager {
+class WaypointManager {
 public:
-    // Create a student record
-    static StudentRecord create_student(const std::string& name, int age, double gpa);
+    // Create a waypoint record
+    static WaypointRecord create_waypoint(const std::string& label, double lat, double lon);
     
-    // Extract student information
-    static std::string get_name(const StudentRecord& student);
-    static int get_age(const StudentRecord& student);
-    static double get_gpa(const StudentRecord& student);
+    // Extract waypoint information
+    static std::string get_label(const WaypointRecord& wp);
+    static double get_latitude(const WaypointRecord& wp);
+    static double get_longitude(const WaypointRecord& wp);
     
-    // Format student information as a string
-    static std::string format_student(const StudentRecord& student);
+    // Format waypoint information as a string
+    static std::string format_waypoint(const WaypointRecord& wp);
 };
 ```
 
 **Expected Output**:
 ```cpp
-auto student = StudentManager::create_student("Alice Johnson", 20, 3.75);
-assert(StudentManager::get_name(student) == "Alice Johnson");
-assert(StudentManager::get_age(student) == 20);
-assert(StudentManager::get_gpa(student) == 3.75);
-assert(StudentManager::format_student(student) == "Alice Johnson (20) - GPA: 3.75");
+auto wp = WaypointManager::create_waypoint("Trailhead", 42.75, -73.10);
+assert(WaypointManager::get_label(wp) == "Trailhead");
+assert(WaypointManager::get_latitude(wp) == 42.75);
+assert(WaypointManager::get_longitude(wp) == -73.10);
+assert(WaypointManager::format_waypoint(wp) == "Trailhead (42.75, -73.10)");
 ```
 
 ---
@@ -128,22 +133,22 @@ assert(StudentManager::format_student(student) == "Alice Johnson (20) - GPA: 3.7
 ## Problem Set 2: Intermediate Applications (50 minutes)
 *Focus: Practical applications combining multiple utilities*
 
-### Problem 2.1: Configuration Parser (25 minutes)
+### Problem 2.1: Track Metadata Parser (25 minutes)
 **Learning Objective**: Combine `std::optional` and `std::variant` for robust parsing
 
-**Problem**: Create a configuration parser that can handle different types of configuration values safely.
+**Problem**: A recorded GPS track carries metadata (units, device name, sample interval, etc.) as raw text. Create a parser that can safely interpret these values as different types.
 
 ```cpp
-using ConfigValue = std::variant<int, double, std::string, bool>;
+using MetaValue = std::variant<int, double, std::string, bool>;
 
-class ConfigParser {
+class TrackMetadataParser {
 private:
     std::map<std::string, std::string> raw_data;
     
 public:
-    ConfigParser(const std::map<std::string, std::string>& data) : raw_data(data) {}
+    TrackMetadataParser(const std::map<std::string, std::string>& data) : raw_data(data) {}
     
-    // Get a configuration value, attempting to parse it as the requested type
+    // Get a metadata value, attempting to parse it as the requested type
     template<typename T>
     std::optional<T> get_value(const std::string& key);
     
@@ -151,89 +156,89 @@ public:
     template<typename T>
     T get_value_or(const std::string& key, const T& default_value);
     
-    // Get all configuration as a map of ConfigValues
-    std::map<std::string, ConfigValue> get_all_parsed();
+    // Get all metadata as a map of MetaValues
+    std::map<std::string, MetaValue> get_all_parsed();
 };
 ```
 
 **Test Scenario**:
 ```cpp
-std::map<std::string, std::string> config_data = {
-    {"port", "8080"},
-    {"host", "localhost"},
-    {"timeout", "30.5"},
-    {"debug", "true"},
-    {"invalid_number", "not_a_number"}
+std::map<std::string, std::string> meta_data = {
+    {"sample_interval", "5"},
+    {"device", "TrailMate-3"},
+    {"min_elevation", "318.4"},
+    {"smoothing", "true"},
+    {"bad_field", "not_a_number"}
 };
 
-ConfigParser parser(config_data);
+TrackMetadataParser parser(meta_data);
 
 // Should successfully parse
-assert(parser.get_value<int>("port") == 8080);
-assert(parser.get_value<std::string>("host") == "localhost");
-assert(parser.get_value<double>("timeout") == 30.5);
+assert(parser.get_value<int>("sample_interval") == 5);
+assert(parser.get_value<std::string>("device") == "TrailMate-3");
+assert(parser.get_value<double>("min_elevation") == 318.4);
 
 // Should return nullopt for invalid parsing
-assert(!parser.get_value<int>("invalid_number").has_value());
+assert(!parser.get_value<int>("bad_field").has_value());
 
 // Should use defaults
-assert(parser.get_value_or<int>("missing_key", 3000) == 3000);
+assert(parser.get_value_or<int>("missing_key", 60) == 60);
 ```
 
 ---
 
-### Problem 2.2: Performance Benchmarker (25 minutes)
-**Learning Objective**: Use `std::chrono` and `std::tuple` for performance measurement
+### Problem 2.2: Leg Timing Recorder (25 minutes)
+**Learning Objective**: Use `std::chrono` and `std::tuple` for elapsed-time measurement
 
-**Problem**: Create a benchmarking utility that measures function performance and returns detailed statistics.
+**Problem**: A track is made of legs (the segment between two waypoints). Create a utility that measures how long a leg takes to process and returns detailed timing statistics.
 
 ```cpp
 #include <chrono>
 #include <functional>
 
-using BenchmarkResult = std::tuple<double, double, double>; // min_time, max_time, avg_time (in milliseconds)
+using TimingResult = std::tuple<double, double, double>; // min_time, max_time, avg_time (in milliseconds)
 
-class Benchmarker {
+class LegTimer {
 public:
-    // Run a function multiple times and return timing statistics
+    // Run a leg-processing function multiple times and return timing statistics
     template<typename Func>
-    static BenchmarkResult benchmark(Func function, int iterations = 1000);
+    static TimingResult time_leg(Func leg_function, int iterations = 1000);
     
-    // Format benchmark results as a string
-    static std::string format_results(const BenchmarkResult& results);
+    // Format timing results as a string
+    static std::string format_results(const TimingResult& results);
     
-    // Compare two benchmark results - returns optional<string> with comparison
+    // Compare two timing results - returns optional<string> with comparison
     static std::optional<std::string> compare_results(
-        const BenchmarkResult& result1, 
-        const BenchmarkResult& result2,
-        const std::string& name1 = "Function 1",
-        const std::string& name2 = "Function 2"
+        const TimingResult& result1, 
+        const TimingResult& result2,
+        const std::string& name1 = "Leg 1",
+        const std::string& name2 = "Leg 2"
     );
 };
 ```
 
 **Example Usage**:
 ```cpp
-// Test functions
-auto fast_function = []() {
+// Leg-processing functions of different cost
+auto short_leg = []() {
     int sum = 0;
     for (int i = 0; i < 100; ++i) sum += i;
     return sum;
 };
 
-auto slow_function = []() {
+auto long_leg = []() {
     int sum = 0;
     for (int i = 0; i < 10000; ++i) sum += i;
     return sum;
 };
 
-auto fast_results = Benchmarker::benchmark(fast_function, 1000);
-auto slow_results = Benchmarker::benchmark(slow_function, 100);
+auto short_results = LegTimer::time_leg(short_leg, 1000);
+auto long_results = LegTimer::time_leg(long_leg, 100);
 
-std::cout << "Fast function: " << Benchmarker::format_results(fast_results) << std::endl;
-std::cout << "Slow function: " << Benchmarker::format_results(slow_results) << std::endl;
+std::cout << "Short leg: " << LegTimer::format_results(short_results) << std::endl;
+std::cout << "Long leg: " << LegTimer::format_results(long_results) << std::endl;
 
-auto comparison = Benchmarker::compare_results(fast_results, slow_results, "Fast", "Slow");
+auto comparison = LegTimer::compare_results(short_results, long_results, "Short", "Long");
 if (comparison) {
     std::cout << *comparison << std::endl;
 }
@@ -244,35 +249,36 @@ if (comparison) {
 ## Problem Set 3: Integration Project (40 minutes)
 *Focus: Building a complete application using all utilities*
 
-### Problem 3.1: Data Analysis Pipeline (40 minutes)
-**Learning Objective**: Integrate all utilities in a realistic data processing scenario
+### Problem 3.1: GPS Track Analysis Pipeline (40 minutes)
+**Learning Objective**: Integrate all utilities in a realistic GPS-track processing scenario
 
-**Problem**: Build a data analysis pipeline that processes mixed-type data from different sources, handles errors gracefully, and provides timing information.
+**Problem**: Build a track analysis pipeline that processes elevation readings logged at GPS waypoints, handles failed fixes gracefully, and provides timing information.
 
 ```cpp
 // Data structures
-using DataPoint = std::variant<int, double, std::string>;
+using ElevationSample = std::variant<int, double, std::string>;
+// int / double -> elevation in metres; std::string -> a failed fix (raw text)
 using ProcessingResult = std::tuple<size_t, size_t, double>; // processed_count, error_count, processing_time_ms
-using DataSummary = std::tuple<std::optional<double>, std::optional<double>, size_t>; // min, max, count
+using TrackSummary = std::tuple<std::optional<double>, std::optional<double>, size_t>; // min, max, count
 
-class DataAnalyzer {
+class TrackAnalyzer {
 private:
-    std::vector<DataPoint> data;
+    std::vector<ElevationSample> samples;
     
 public:
-    // Load data from different sources
-    void add_data_point(const DataPoint& point);
-    void load_from_strings(const std::vector<std::string>& raw_data);
+    // Load samples from different sources
+    void add_sample(const ElevationSample& sample);
+    void load_from_strings(const std::vector<std::string>& raw_samples);
     
-    // Process data with error handling and timing
-    ProcessingResult process_data();
+    // Process samples with error handling and timing
+    ProcessingResult process_samples();
     
-    // Calculate statistics for numeric data only
-    DataSummary calculate_numeric_summary();
+    // Calculate elevation statistics for numeric samples only
+    TrackSummary calculate_elevation_summary();
     
-    // Get data points of a specific type
+    // Get samples of a specific type
     template<typename T>
-    std::vector<T> get_data_of_type();
+    std::vector<T> get_samples_of_type();
     
     // Export results with timing information
     std::optional<std::string> export_summary();
@@ -294,45 +300,45 @@ public:
 
 **Implementation Requirements**:
 
-1. **Data Loading**: Handle conversion from strings to appropriate types, storing invalid conversions as error information
+1. **Sample Loading**: Handle conversion from raw GPS-log strings to numeric elevations, storing unconvertible entries (failed fixes) as string samples
 2. **Processing**: Time the processing operation and count successes/failures
-3. **Analysis**: Calculate min/max for numeric values only, handle empty data gracefully
+3. **Analysis**: Calculate min/max elevation for numeric values only, handle an empty track gracefully
 4. **Error Handling**: Use optional types for operations that might fail
 5. **Timing**: Provide accurate timing for all major operations
 
 **Test Scenario**:
 ```cpp
-DataAnalyzer analyzer;
+TrackAnalyzer analyzer;
 
-// Load mixed data
-std::vector<std::string> raw_data = {
-    "42",           // int
-    "3.14159",      // double
-    "hello",        // string
-    "99",           // int
-    "2.71828",      // double
-    "invalid_num",  // string (not convertible to number)
-    "world"         // string
+// Load mixed elevation log data
+std::vector<std::string> raw_samples = {
+    "318",          // int elevation
+    "402.7",        // double elevation
+    "no_fix",       // failed fix
+    "455",          // int elevation
+    "289.3",        // double elevation
+    "signal_lost",  // failed fix
+    "dropout"       // failed fix
 };
 
-analyzer.load_from_strings(raw_data);
+analyzer.load_from_strings(raw_samples);
 
 // Process and analyze
-auto [processed, errors, time_ms] = analyzer.process_data();
-auto [min_val, max_val, numeric_count] = analyzer.calculate_numeric_summary();
+auto [processed, errors, time_ms] = analyzer.process_samples();
+auto [min_val, max_val, numeric_count] = analyzer.calculate_elevation_summary();
 
 // Verify results
 assert(processed == 7);  // All items processed
-assert(errors == 0);     // No processing errors (conversion errors handled gracefully)
+assert(errors == 0);     // No processing errors (failed fixes handled gracefully)
 assert(time_ms > 0);     // Some time elapsed
 
-assert(min_val.has_value() && *min_val == 2.71828);  // Min of numeric values
-assert(max_val.has_value() && *max_val == 99);       // Max of numeric values
-assert(numeric_count == 4);  // 42, 3.14159, 99, 2.71828
+assert(min_val.has_value() && *min_val == 289.3);  // Lowest elevation
+assert(max_val.has_value() && *max_val == 455);    // Highest elevation
+assert(numeric_count == 4);  // 318, 402.7, 455, 289.3
 
 // Test type filtering
-auto strings = analyzer.get_data_of_type<std::string>();
-assert(strings.size() == 3);  // "hello", "invalid_num", "world"
+auto failed_fixes = analyzer.get_samples_of_type<std::string>();
+assert(failed_fixes.size() == 3);  // "no_fix", "signal_lost", "dropout"
 
 // Export summary
 auto summary = analyzer.export_summary();
@@ -341,11 +347,11 @@ assert(summary.has_value());
 
 **Expected Summary Output**:
 ```
-Data Analysis Summary
-====================
-Total data points: 7
-Numeric values: 4 (min: 2.71828, max: 99)
-String values: 3
+GPS Track Analysis Summary
+==========================
+Total samples: 7
+Numeric elevations: 4 (min: 289.3, max: 455)
+Failed fixes: 3
 Processing time: X.XX ms
 ```
 

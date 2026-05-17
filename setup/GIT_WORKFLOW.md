@@ -1,6 +1,6 @@
 # CSCI 330 Git Workflow Guide
 
-This guide is what you follow every week to submit an assignment. **Read it once at the start of the term. Bookmark it. Come back when you get stuck.**
+This guide is what you follow for every chapter assignment. **Read it once at the start of the term. Bookmark it. Come back when you get stuck.**
 
 Total skim time: 10 minutes. Total doing-the-setup time (one-time): ~15 minutes.
 
@@ -10,16 +10,16 @@ Total skim time: 10 minutes. Total doing-the-setup time (one-time): ~15 minutes.
 
 ```
 one time, start of term:
-  fork → clone → add upstream → Week 0 GitHub Onboarding assignment
+  fork → clone → add upstream → GitHub Onboarding assignment
 
 every assignment:
   git checkout main
   git pull upstream main
-  git checkout -b weekNN-short-description
-  (do the work inside assignments/CSCI330_First_Last/weekNN/)
+  git checkout -b chapter-NN-short-description
+  (do the work inside assignments/CSCI330_First_Last/chapter-NN/)
   git add <specific files, not .>
-  git commit -m "Week NN: brief description"
-  git push origin weekNN-short-description
+  git commit -m "Chapter NN: brief description"
+  git push origin chapter-NN-short-description
   (open PR on github.com → fill out the template → wait for CI checks to go green)
   (submit the PR URL to Canvas)
 ```
@@ -29,8 +29,8 @@ the PR's CI checks (scope + build) run automatically, and once they are green yo
 submit the **PR URL** to Canvas. There is no separate "directory URL" — the PR is
 the submission, and it is not complete until the CI checks pass.
 
-**Before HW 1, do the Week 0 GitHub Onboarding assignment first.**
-`assignment-templates/HW_01/` is the Week 0 GitHub Onboarding assignment — a tiny
+**Before HW 1, do the GitHub Onboarding assignment first.**
+`assignment-templates/HW_01/` is the GitHub Onboarding assignment — a tiny
 Hello-World project that walks you through one full submission cycle. It is a
 **graded prerequisite**: HW 1 is not accepted until your onboarding PR passes its
 CI checks. Do it during setup, before the first chapter assignment.
@@ -43,9 +43,9 @@ If you already know Git, that box is everything. The rest of this file is "why" 
 
 ### 1. Fork the course repository
 
-1. Open the course repository on GitHub: `https://github.com/DEmcla/csci330_u26`
+1. Open the course repository on GitHub: `https://github.com/DEmcla/csci330`
 2. Click the **Fork** button (top-right of the page).
-3. GitHub creates `https://github.com/YOUR_USERNAME/csci330_u26` — your personal copy. This is where you'll push your work.
+3. GitHub creates `https://github.com/YOUR_USERNAME/csci330` — your personal copy. This is where you'll push your work.
 
 **"Fork" vs "clone" vs "upstream" in one sentence each:**
 - **Fork** = a copy of the course repo that belongs to you on GitHub.
@@ -59,21 +59,21 @@ If you already know Git, that box is everything. The rest of this file is "why" 
 cd ~/Desktop
 
 # Replace YOUR_USERNAME with your GitHub handle
-git clone https://github.com/YOUR_USERNAME/csci330_u26.git
-cd csci330_u26
+git clone https://github.com/YOUR_USERNAME/csci330.git
+cd csci330
 ```
 
 ### 3. Add the upstream remote
 
 ```bash
-git remote add upstream https://github.com/DEmcla/csci330_u26.git
+git remote add upstream https://github.com/DEmcla/csci330.git
 
 # Sanity check -- you should see BOTH of these
 git remote -v
-# origin    https://github.com/YOUR_USERNAME/csci330_u26.git (fetch)
-# origin    https://github.com/YOUR_USERNAME/csci330_u26.git (push)
-# upstream  https://github.com/DEmcla/csci330_u26.git (fetch)
-# upstream  https://github.com/DEmcla/csci330_u26.git (push)
+# origin    https://github.com/YOUR_USERNAME/csci330.git (fetch)
+# origin    https://github.com/YOUR_USERNAME/csci330.git (push)
+# upstream  https://github.com/DEmcla/csci330.git (fetch)
+# upstream  https://github.com/DEmcla/csci330.git (push)
 ```
 
 If either line is missing, redo step 3. If both say `YOUR_USERNAME` or both say `DEmcla`, you probably typo'd a URL — fix with `git remote set-url <name> <correct-url>`.
@@ -88,7 +88,7 @@ git config user.email "your.email@mcla.edu"
 ### 5. Make your personal assignment directory
 
 ```bash
-# Inside the csci330_u26/ clone directory you just cd'd into
+# Inside the csci330/ clone directory you just cd'd into
 mkdir -p assignments/CSCI330_FirstName_LastName
 ```
 
@@ -105,7 +105,7 @@ The naming matters because the grader uses it to find your work. Non-matching na
 
 ## The per-assignment loop
 
-Do this every week, in order.
+Do this for every chapter assignment, in order.
 
 ### Step 1: Sync your fork with the course
 
@@ -122,24 +122,23 @@ If this step prints merge-conflict messages, see **Help, I broke it → Merge co
 ### Step 2: Create a feature branch
 
 ```bash
-# Pattern: weekNN-short-description (all lowercase, hyphen-separated)
-git checkout -b week01-types-and-arrays
+# Pattern: chapter-NN-short-description (all lowercase, hyphen-separated)
+git checkout -b chapter-02-types-and-arrays
 
 # Sanity check -- you should be on your new branch, NOT on main
 git branch
-# * week01-types-and-arrays       ← the asterisk should be here
+# * chapter-02-types-and-arrays       ← the asterisk should be here
 #   main
 ```
 
 > ⚠️ **Never commit on `main`.** If you do, your work will be rejected. See "Forgot to branch" below.
 
-### Step 3: Copy the week's template into your directory
+### Step 3: Copy the chapter's template into your directory
 
 ```bash
-# Week 1 is Ch 1 + Ch 2; the HW template is chapter-02/.
-cp -r assignment-templates/chapter-02 assignments/CSCI330_FirstName_LastName/week01/
+cp -r assignment-templates/chapter-02 assignments/CSCI330_FirstName_LastName/chapter-02/
 
-cd assignments/CSCI330_FirstName_LastName/week01/
+cd assignments/CSCI330_FirstName_LastName/chapter-02/
 ```
 
 The full assignment specification is the `README.md` **inside that template**
@@ -150,7 +149,7 @@ assignment file to hunt down.
 ### Step 4: Do the work
 
 - Edit source files (`src/main.cpp`, etc.)
-- Write a short `README.md` in your week directory explaining what you did
+- Write a short `README.md` in your chapter directory explaining what you did
 - Build and test frequently:
   ```bash
   cmake -B build
@@ -168,14 +167,14 @@ git add .
 ✅ **Do this instead** (stage only source files you actually wrote):
 ```bash
 # From the repo root
-cd ~/Desktop/csci330_u26
+cd ~/Desktop/csci330
 
 git status     # see what changed
-git add assignments/CSCI330_FirstName_LastName/week01/src/
-git add assignments/CSCI330_FirstName_LastName/week01/README.md
+git add assignments/CSCI330_FirstName_LastName/chapter-02/src/
+git add assignments/CSCI330_FirstName_LastName/chapter-02/README.md
 git status     # confirm -- should show ONLY your source files and README
 
-git commit -m "Week 01: types and arrays assignment"
+git commit -m "Chapter 02: types and arrays assignment"
 ```
 
 The course `.gitignore` excludes `build/`, `*.o`, `.DS_Store`, `.vscode/*.user.json`, and other junk. But `git add .` sometimes tries to sneak new files past it. Stage specific paths; avoid surprises.
@@ -183,12 +182,12 @@ The course `.gitignore` excludes `build/`, `*.o`, `.DS_Store`, `.vscode/*.user.j
 ### Step 6: Push your branch to your fork
 
 ```bash
-git push origin week01-types-and-arrays
+git push origin chapter-02-types-and-arrays
 ```
 
 ### Step 7: Open a Pull Request
 
-1. Go to `https://github.com/YOUR_USERNAME/csci330_u26` in your browser.
+1. Go to `https://github.com/YOUR_USERNAME/csci330` in your browser.
 2. GitHub will show a banner: *"Compare & pull request"* for your just-pushed branch. Click it.
 3. **Critical:** the PR target should be **your fork's `main` branch**, not the instructor's upstream. GitHub sometimes defaults to the wrong base — double-check.
 4. Fill out the PR template completely. Partial submissions lose points for process even if the code is right.
@@ -199,7 +198,7 @@ git push origin week01-types-and-arrays
 Once the PR is open, GitHub runs **CI checks** on it automatically:
 
 - **Scope check** — confirms you only touched files inside your own
-  `assignments/CSCI330_FirstName_LastName/weekNN/` folder.
+  `assignments/CSCI330_FirstName_LastName/chapter-NN/` folder.
 - **Build check** — confirms your code compiles.
 
 **Both checks must be green for your submission to be complete.** If a check is
@@ -218,12 +217,12 @@ Your grade comes from the review comments on that PR plus Canvas.
 
 Before you hit Submit, run through this list. A clean PR saves you and the grader 20 minutes of back-and-forth.
 
-- [ ] PR title follows the format: `Week NN Assignment - FirstName LastName`
+- [ ] PR title follows the format: `Chapter NN Assignment - FirstName LastName`
 - [ ] PR targets **your fork's `main`**, not `upstream/main`
-- [ ] Only files inside `assignments/CSCI330_FirstName_LastName/weekNN/` are touched
+- [ ] Only files inside `assignments/CSCI330_FirstName_LastName/chapter-NN/` are touched
 - [ ] No `build/` directory, `.o` files, `.exe`, or `.DS_Store` in the file list
 - [ ] No modifications to `assignment-templates/`, `setup/`, `project/`, or any other course directory (those are the course's; leave them alone)
-- [ ] `README.md` in your week directory explains what the assignment does and how to build/run it
+- [ ] `README.md` in your chapter directory explains what the assignment does and how to build/run it
 - [ ] Code compiles without warnings under `-Wall -Wextra`
 - [ ] The PR template is filled out, including the AI-assistance disclosure
 - [ ] The PR's CI checks (scope + build) are **green** — fix and re-push if not
@@ -240,14 +239,14 @@ Symptom: `git branch` shows `* main`, and you have uncommitted or committed work
 Fix:
 ```bash
 # Create a branch from your current state (this preserves your work)
-git checkout -b week01-forgot-to-branch
+git checkout -b chapter-02-forgot-to-branch
 
 # If you had already committed to main, reset main back to upstream
 git checkout main
 git reset --hard upstream/main     # ⚠️ destructive, only on main
 
 # Now switch back to your feature branch -- your work is safe there
-git checkout week01-forgot-to-branch
+git checkout chapter-02-forgot-to-branch
 ```
 
 ### Merge conflicts when pulling upstream
@@ -300,8 +299,8 @@ git rm -r --cached build/
 grep "^build/" .gitignore
 
 # Re-stage only what you meant to commit
-git add assignments/CSCI330_FirstName_LastName/week01/src/
-git commit -m "Week 01: types and arrays"
+git add assignments/CSCI330_FirstName_LastName/chapter-02/src/
+git commit -m "Chapter 02: types and arrays"
 ```
 
 ### My fork is wildly out of sync with upstream
@@ -313,7 +312,7 @@ git checkout main
 git reset --hard upstream/main
 git push --force origin main
 ```
-⚠️ **Only do this to `main`, never to a branch with your work.** If your work is on `week01-something`, it is not affected by this.
+⚠️ **Only do this to `main`, never to a branch with your work.** If your work is on `chapter-02-something`, it is not affected by this.
 
 ---
 
@@ -328,8 +327,8 @@ git pull upstream main
 git push origin main
 
 # Delete the feature branch locally and remotely
-git branch -d week01-types-and-arrays
-git push origin --delete week01-types-and-arrays
+git branch -d chapter-02-types-and-arrays
+git push origin --delete chapter-02-types-and-arrays
 ```
 
 Then for the next assignment, start from step 1 of **The per-assignment loop** above.
@@ -368,7 +367,7 @@ See also `reference/git-commands.md` for a longer reference.
 
 ### ✅ Always do these
 
-- Work in feature branches named `weekNN-description`
+- Work in feature branches named `chapter-NN-description`
 - Stage specific files with `git add <path>`, not `git add .`
 - Fill out the PR template completely
 - Keep your fork synchronized before starting a new assignment

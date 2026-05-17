@@ -20,36 +20,36 @@
 ## Problem Set 1: Container Basics and Sequence Containers (45 minutes)
 
 ### Problem 1.1: Vector Fundamentals (15 minutes)
-**Scenario**: You're building a grade management system similar to a Python list of grades.
+**Scenario**: You're modeling a transit route as an ordered sequence of ride times between consecutive stations, similar to a Python list of numbers.
 
 Create a program that:
-1. Declares a `std::vector<double>` to store student grades
-2. Adds at least 5 grades using `push_back()`
-3. Calculates and displays the average grade
-4. Finds and displays the highest grade
+1. Declares a `std::vector<double>` to store leg ride times (minutes between consecutive stations)
+2. Adds at least 5 leg times using `push_back()`
+3. Calculates and displays the average leg time
+4. Finds and displays the longest leg
 5. Uses both `[]` operator and `at()` method to access elements
 
 **Python Equivalent**:
 ```python
-grades = []
-grades.append(85.5)
-# ... add more grades
-average = sum(grades) / len(grades)
-highest = max(grades)
+leg_times = []
+leg_times.append(4.5)
+# ... add more leg times
+average = sum(leg_times) / len(leg_times)
+longest = max(leg_times)
 ```
 
 **Learning Focus**: Basic vector operations, element access methods, iteration
 
 ### Problem 1.2: Dynamic Array Operations (15 minutes)
-**Scenario**: You need to manage a dynamic list of student names that can grow and shrink.
+**Scenario**: You need to manage the ordered list of station names along a transit line that can grow and shrink as the line is extended or rerouted.
 
 Requirements:
-1. Create a `std::vector<std::string>` for student names
+1. Create a `std::vector<std::string>` for station names along a line
 2. Implement functions to:
-   - Add a student name to the end
-   - Insert a student name at a specific position
-   - Remove a student by name (use `std::find` and `erase`)
-   - Display all students with their positions
+   - Add a station name to the end of the line
+   - Insert a station name at a specific position (a new stop mid-line)
+   - Remove a station by name (use `std::find` and `erase`)
+   - Display all stations with their positions
 
 **Starter Code**:
 ```cpp
@@ -58,14 +58,14 @@ Requirements:
 #include <algorithm>
 #include <iostream>
 
-class StudentRoster {
+class TransitLine {
 private:
-    std::vector<std::string> students;
+    std::vector<std::string> stations;
 public:
-    void addStudent(const std::string& name);
-    void insertStudent(const std::string& name, size_t position);
-    void removeStudent(const std::string& name);
-    void displayStudents() const;
+    void addStation(const std::string& name);
+    void insertStation(const std::string& name, size_t position);
+    void removeStation(const std::string& name);
+    void displayStations() const;
 };
 ```
 
@@ -75,11 +75,11 @@ public:
 **Scenario**: Compare vector and list performance for different operations.
 
 Create a program that:
-1. Creates both a `std::vector<int>` and `std::list<int>` with 10,000 elements
+1. Creates both a `std::vector<int>` and `std::list<int>` with 10,000 station IDs
 2. Measures time for:
-   - Adding elements to the front (hint: use `insert()` for vector)
-   - Adding elements to the back
-   - Accessing the middle element (only possible with vector)
+   - Adding station IDs to the front (hint: use `insert()` for vector)
+   - Adding station IDs to the back
+   - Accessing the middle station ID (only possible with vector)
 3. Reports which container is faster for each operation
 
 **Timing Helper**:
@@ -98,47 +98,47 @@ auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - star
 
 ## Problem Set 2: Associative Containers (50 minutes)
 
-### Problem 2.1: Word Frequency Counter (20 minutes)
-**Scenario**: Build a word frequency analyzer like Python's `collections.Counter`.
+### Problem 2.1: Line Usage Counter (20 minutes)
+**Scenario**: Build a line-usage analyzer that counts how often each transit line is ridden, like Python's `collections.Counter`.
 
 Requirements:
-1. Read words from user input (or a string) until "quit"
-2. Use `std::map<std::string, int>` to count word frequencies
-3. Display all words and their counts in alphabetical order
-4. Find and display the most frequent word
+1. Read line names from user input (or a string) until "quit"
+2. Use `std::map<std::string, int>` to count line-usage frequencies
+3. Display all lines and their counts in alphabetical order
+4. Find and display the busiest line
 
 **Python Equivalent**:
 ```python
 from collections import Counter
-words = ["apple", "banana", "apple", "cherry", "banana", "apple"]
-counter = Counter(words)
-most_common = counter.most_common(1)
+rides = ["Red", "Blue", "Red", "Green", "Blue", "Red"]
+counter = Counter(rides)
+busiest = counter.most_common(1)
 ```
 
 **Sample Input/Output**:
 ```
-Enter words (type 'quit' to finish):
-apple banana apple cherry banana apple quit
+Enter line names (type 'quit' to finish):
+Red Blue Red Green Blue Red quit
 
-Word frequencies:
-apple: 3
-banana: 2
-cherry: 1
+Line usage:
+Blue: 2
+Green: 1
+Red: 3
 
-Most frequent word: apple (3 times)
+Busiest line: Red (3 rides)
 ```
 
 **Learning Focus**: Map operations, key-value pairs, iteration over maps
 
 ### Problem 2.2: Set Operations (15 minutes)
-**Scenario**: Implement basic set operations like Python's set type.
+**Scenario**: Implement basic set operations on the sets of stations served by two transit lines.
 
 Create a program that:
-1. Creates two `std::set<int>` objects with different numbers
+1. Creates two `std::set<int>` objects holding the station IDs on two different lines
 2. Implements functions to find:
-   - Union of two sets (elements in either set)
-   - Intersection (elements in both sets)
-   - Difference (elements in first set but not second)
+   - Union of two lines' stations (stations on either line)
+   - Intersection (transfer stations - stations on both lines)
+   - Difference (stations only on the first line)
 3. Uses `std::set_union`, `std::set_intersection`, and `std::set_difference`
 
 **Starter Code**:
@@ -147,25 +147,25 @@ Create a program that:
 #include <algorithm>
 #include <iterator>
 
-std::set<int> setUnion(const std::set<int>& set1, const std::set<int>& set2);
-std::set<int> setIntersection(const std::set<int>& set1, const std::set<int>& set2);
-std::set<int> setDifference(const std::set<int>& set1, const std::set<int>& set2);
+std::set<int> setUnion(const std::set<int>& line1, const std::set<int>& line2);
+std::set<int> setIntersection(const std::set<int>& line1, const std::set<int>& line2);
+std::set<int> setDifference(const std::set<int>& line1, const std::set<int>& line2);
 ```
 
 **Learning Focus**: Set operations, STL algorithms, set theory concepts
 
-### Problem 2.3: Student Database (15 minutes)
-**Scenario**: Create a student information system using multiple associative containers.
+### Problem 2.3: Station Directory (15 minutes)
+**Scenario**: Create a station information system using multiple associative containers.
 
 Requirements:
-1. Use `std::map<int, std::string>` for student ID to name mapping
-2. Use `std::map<std::string, double>` for student name to GPA mapping
-3. Use `std::set<std::string>` for honor roll students (GPA >= 3.5)
+1. Use `std::map<int, std::string>` for station ID to station name mapping
+2. Use `std::map<std::string, int>` for station name to daily ridership mapping
+3. Use `std::set<std::string>` for major hub stations (ridership >= 10000)
 4. Implement functions to:
-   - Add a student with ID, name, and GPA
-   - Find a student's GPA by ID
-   - List all honor roll students
-   - Display all students with their information
+   - Add a station with ID, name, and daily ridership
+   - Find a station's ridership by ID
+   - List all major hub stations
+   - Display all stations with their information
 
 **Learning Focus**: Multiple container coordination, real-world data modeling
 
@@ -177,10 +177,10 @@ Requirements:
 **Scenario**: Compare performance of ordered vs unordered containers for large datasets.
 
 Create a program that:
-1. Generates 100,000 random integers
+1. Generates 100,000 random station IDs
 2. Inserts them into both `std::map<int, int>` and `std::unordered_map<int, int>`
 3. Measures insertion time for both
-4. Measures lookup time for 10,000 random searches in both
+4. Measures lookup time for 10,000 random station lookups in both
 5. Reports performance differences
 
 **Learning Focus**: Hash table performance, when to use unordered containers
@@ -189,55 +189,55 @@ Create a program that:
 **Scenario**: Create a hash table for custom objects (similar to Python's custom `__hash__`).
 
 Requirements:
-1. Define a `Student` struct with name, ID, and major
-2. Create a custom hash function for `Student`
-3. Use `std::unordered_set<Student>` to store unique students
+1. Define a `Station` struct with name, ID, and zone
+2. Create a custom hash function for `Station`
+3. Use `std::unordered_set<Station>` to store unique stations
 4. Implement equality operator for duplicate detection
-5. Test with students having same names but different IDs
+5. Test with stations having same names but different IDs
 
 **Starter Code**:
 ```cpp
-struct Student {
+struct Station {
     std::string name;
     int id;
-    std::string major;
+    std::string zone;
     
-    bool operator==(const Student& other) const;
+    bool operator==(const Station& other) const;
 };
 
-struct StudentHash {
-    std::size_t operator()(const Student& s) const;
+struct StationHash {
+    std::size_t operator()(const Station& s) const;
 };
 
-// Usage: std::unordered_set<Student, StudentHash> students;
+// Usage: std::unordered_set<Station, StationHash> stations;
 ```
 
 **Learning Focus**: Custom hash functions, equality operators, advanced unordered container usage
 
-### Problem 3.3: Container Integration Project - Library Management System (15 minutes)
-**Scenario**: Build a simplified library management system that demonstrates multiple container usage.
+### Problem 3.3: Container Integration Project - Transit Network System (15 minutes)
+**Scenario**: Build a simplified transit network system that demonstrates multiple container usage.
 
 Requirements:
-1. **Books**: Use `std::map<std::string, Book>` (ISBN -> Book details)
-2. **Authors**: Use `std::unordered_set<std::string>` for unique author names  
-3. **Categories**: Use `std::set<std::string>` for book categories (auto-sorted)
-4. **Checked Out**: Use `std::unordered_map<std::string, std::string>` (ISBN -> borrower name)
+1. **Stations**: Use `std::map<std::string, Station>` (station code -> Station details)
+2. **Operators**: Use `std::unordered_set<std::string>` for unique transit operator names  
+3. **Zones**: Use `std::set<std::string>` for fare zones (auto-sorted)
+4. **Out Of Service**: Use `std::unordered_map<std::string, std::string>` (station code -> reason)
 
 Implement functions:
-- `addBook(isbn, title, author, category)`
-- `checkOutBook(isbn, borrower)`
-- `returnBook(isbn)`
-- `findBooksByAuthor(author)` -> returns vector of books
-- `listCategories()` -> shows all categories in alphabetical order
-- `showCheckedOutBooks()` -> shows all currently borrowed books
+- `addStation(code, name, operator, zone)`
+- `closeStation(code, reason)`
+- `reopenStation(code)`
+- `findStationsByOperator(operator)` -> returns vector of stations
+- `listZones()` -> shows all fare zones in alphabetical order
+- `showClosedStations()` -> shows all currently out-of-service stations
 
-**Book Structure**:
+**Station Structure**:
 ```cpp
-struct Book {
-    std::string title;
-    std::string author;
-    std::string category;
-    bool isAvailable = true;
+struct Station {
+    std::string name;
+    std::string lineOperator;
+    std::string zone;
+    bool inService = true;
 };
 ```
 
@@ -250,10 +250,10 @@ struct Book {
 ### Challenge 1: Iterator Invalidation Bug
 Find and fix the bug in this code:
 ```cpp
-std::vector<int> numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-for (auto it = numbers.begin(); it != numbers.end(); ++it) {
+std::vector<int> stationIds = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+for (auto it = stationIds.begin(); it != stationIds.end(); ++it) {
     if (*it % 2 == 0) {
-        numbers.erase(it);  // Bug: What's wrong here?
+        stationIds.erase(it);  // Bug: What's wrong here?
     }
 }
 ```
@@ -261,11 +261,11 @@ for (auto it = numbers.begin(); it != numbers.end(); ++it) {
 ### Challenge 2: Map Access Bug  
 Find and fix the bug in this code:
 ```cpp
-std::map<std::string, int> scores;
-// ... add some scores
-std::string name = "John";
-if (scores[name] > 0) {  // Bug: What's the issue?
-    std::cout << name << " has a positive score\n";
+std::map<std::string, int> ridership;
+// ... add some ridership counts
+std::string station = "Central";
+if (ridership[station] > 0) {  // Bug: What's the issue?
+    std::cout << station << " has riders\n";
 }
 ```
 

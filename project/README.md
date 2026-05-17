@@ -1,8 +1,10 @@
-# Summer Project - CSCI 330 (U26)
+# Capstone Project - CSCI 330
 
-**🎯 Build Something Ambitious in 6 Weeks**
+**🎯 Build Something Ambitious**
 
-The capstone project is your opportunity to apply everything you learn in a substantial, portfolio-worthy C++ application. In the 6-week summer term, the project is compressed from 5 phases to **3 phases** but the total point value and the level of ambition remain the same.
+The capstone project is your opportunity to apply everything you learn in a substantial, portfolio-worthy C++ application. It runs in **3 phases**, each anchored to a chapter in the course sequence. The capstone is *introduced* after Chapter 2; the three phases land at Chapter 5, Chapter 11, and Chapter 15 (course end).
+
+> **A note on the calendar.** This guide describes the capstone in terms of *chapters*, not weeks. The actual dates for each phase — and how the chapters are spread across a term — are set per offering in Canvas. A short, intensive offering and a full-semester offering run the *same* 3-phase capstone, on different calendars.
 
 ---
 
@@ -11,11 +13,11 @@ The capstone project is your opportunity to apply everything you learn in a subs
 ### **What You'll Build**
 - **Substantial application** (~1500-2500 lines by the end)
 - **Portfolio-quality code** with clear architecture
-- **Progressive development** over 6 weeks (three iterative phases)
+- **Progressive development** across three iterative phases
 
 ### **Core Requirements**
 - Written in modern **C++17** (pinned to match the course textbook / Docker container)
-- Demonstrates multiple course concepts from Weeks 1-6
+- Demonstrates multiple course concepts from across the chapter sequence
 - Uses appropriate tests (formal framework optional)
 - Professional documentation (README, usage examples)
 - Clean Git workflow with meaningful commits
@@ -25,14 +27,14 @@ The capstone project is your opportunity to apply everything you learn in a subs
 ## 📚 Project Resources
 
 ### **Planning and Design**
-- **💡 [Brainstorming Guide](brainstorming-guide.md)** -- find a project idea that fits a 6-week budget
-- **📋 [Project Overview](semester-project.md)** -- complete requirements, timeline, rubric
+- **💡 [Brainstorming Guide](brainstorming-guide.md)** -- find a project idea that fits the time budget
+- **📋 [Project Overview](semester-project.md)** -- complete requirements, phase anchors, rubric
 
 ### **Development Process**
 - **🏗️ [3-Phase Development](phases/)** -- structured progression, each phase is a graded checkpoint
-  - **[Phase 1](phases/PROJECT_PHASE_1.md)**: Planning + Proof of Concept (due **end of Week 2**, 40 pts)
-  - **[Phase 2](phases/PROJECT_PHASE_2.md)**: MVP + Feature Development (due **end of Week 4**, 130 pts)
-  - **[Phase 3](phases/PROJECT_PHASE_3.md)**: Robustness, Polish & Presentation (due **end of Week 6**, 130 pts)
+  - **[Phase 1](phases/PROJECT_PHASE_1.md)**: Planning + Proof of Concept (anchored at **Chapter 5**, 40 pts)
+  - **[Phase 2](phases/PROJECT_PHASE_2.md)**: MVP + Feature Development (anchored at **Chapter 11**, 130 pts)
+  - **[Phase 3](phases/PROJECT_PHASE_3.md)**: Robustness, Polish & Presentation (anchored at **Chapter 15**, course end, 130 pts)
 
 ### **Collaboration and Feedback**
 - **👥 [Code Review Guide](../reference/code-review-guide.md)** -- how to give a useful GitHub code review on a classmate's PR at each checkpoint
@@ -53,14 +55,16 @@ If you have prior experience in a specific domain (web, ML, embedded, finance), 
 
 ---
 
-## ⏰ Project Timeline (6 weeks)
+## ⏰ Project Phases
 
-| Phase | Weeks | Due | Points | Focus |
-|-------|-------|-----|--------|-------|
-| 1 -- Planning & PoC | 1-2 | End of Week 2 | 40 | Prove the idea works |
-| 2 -- MVP + Features | 3-4 | End of Week 4 | 130 | Core functionality + interesting features |
-| 3 -- Robustness + Polish + Presentation | 5-6 | End of Week 6 | 130 | Production-quality polish + demo |
-| **Total** | | | **300** | 30% of course grade |
+The capstone is introduced after Chapter 2 and runs parallel to the chapters from there. Each phase is anchored to a chapter; the calendar dates for those anchors are set per offering in Canvas.
+
+| Phase | Chapter Anchor | Points | Focus |
+|-------|----------------|--------|-------|
+| 1 -- Planning & PoC | Chapter 5 | 40 | Prove the idea works |
+| 2 -- MVP + Features | Chapter 11 | 130 | Core functionality + interesting features |
+| 3 -- Robustness + Polish + Presentation | Chapter 15 (course end) | 130 | Production-quality polish + demo |
+| **Total** | | **300** | 35% of course grade |
 
 ---
 
@@ -75,28 +79,28 @@ Each phase rubric is in its own file. The project as a whole is evaluated agains
 - Testing and reliability
 
 ### **Project Scope (~25%)**
-- Appropriate complexity for a 6-week budget (ambitious but finishable)
+- Appropriate complexity for the time budget (ambitious but finishable)
 - Shows learning progression from Phase 1 to Phase 3
 - Solves a meaningful problem or delivers a clear user experience
 
 ### **Development Process (~20%)**
-- Consistent Git workflow across all 6 weeks
+- Consistent Git workflow across all three phases
 - Meaningful commit messages
 - Incremental, testable progress between phases
 - Responsive to peer feedback
 
 ### **Presentation and Communication (~15%)**
 - Clear README with build + run instructions
-- Effective code walk-through in the Week 6 demo video
+- Effective code walk-through in the Phase 3 demo video
 - Reflection paper shows genuine self-awareness about the work
 
 ---
 
 ## 💡 Success Strategies
 
-### **Choose Wisely (in Week 1)**
-- Pick a project you are passionate about -- you'll spend ~10-15 hrs/week on it
-- Scope it for **6 weeks, not 15**. A smaller, finished project beats an ambitious, half-done one.
+### **Choose Wisely (at the start)**
+- Pick a project you are passionate about -- you'll put real time into it every week
+- Scope it for **one term, not a career**. A smaller, finished project beats an ambitious, half-done one.
 - If your first draft feels safe, make it a little scarier. The hard-to-solve piece is what will make it portfolio-worthy.
 
 ### **Plan Systematically**
@@ -180,4 +184,4 @@ Each phase rubric is in its own file. The project as a whole is evaluated agains
 
 ---
 
-*Your capstone project is more than an assignment -- it is your chance to build something meaningful while mastering C++17 in six weeks.*
+*Your capstone project is more than an assignment -- it is your chance to build something meaningful while mastering modern C++17.*

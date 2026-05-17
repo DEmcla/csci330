@@ -1,17 +1,16 @@
 # Phase 3: Robustness, Polish & Presentation
-**Duration**: Weeks 5-6
-**Due**: End of Week 6 (final submission + presentation)
+**Anchor**: Chapter 15 (course end) -- final submission + presentation
 **Points**: 130 of 300 (≈43% of project grade)
 **Goal**: Make the project solid, make it look professional, and present it convincingly.
 
-This phase merges what was two phases in the 15-week course (Robustness + Polish/Presentation) into one in the summer version.
+This phase combines robustness work with polish and presentation. It is the culminating work of the course -- there is no separate final exam. The calendar date this phase is due is set per offering in Canvas; it is the last day of class.
 
-> ⚠️ **Week 6 is stacked.** The Final Assessment is also due end of Week 6. Plan accordingly:
-> - **By Week 6 Wednesday:** lock your project code (no new features after this point; only fixes)
-> - **Week 6 Thursday-Friday:** record your demo video, finalize your reflection paper, submit the project
-> - **Week 6 weekend:** complete the Final Assessment in its 72-hour window
+> ⚠️ **Sequence the final stretch deliberately.** Do not save everything for the final day:
+> - **First:** lock your project code (no new features after this point; only fixes)
+> - **Then:** record your demo video and finalize your reflection paper
+> - **Last:** submit the project before the deadline
 >
-> Do **not** try to do both on the last day. Students who attempt that consistently lose points on both.
+> Students who cram the demo and reflection into the final day consistently lose points. Lock the code early so the polish and presentation get the time they need.
 
 ### Grading Breakdown (130 pts)
 | Component | Points |
@@ -27,7 +26,7 @@ This phase merges what was two phases in the 15-week course (Robustness + Polish
 
 ## Your Phase 3 Todo List
 
-### Week 5: Make It Robust (~6-7 hours)
+### Stage 1 -- Make It Robust (~6-7 hours)
 - [ ] Test with bad/weird inputs -- it should not crash:
   - Empty inputs, very long inputs, malformed inputs
   - Boundary conditions (max int, negative numbers, unicode where relevant)
@@ -38,7 +37,7 @@ This phase merges what was two phases in the 15-week course (Robustness + Polish
 - [ ] Write or expand tests for the **main** functions (informal is fine -- you can use `assert()` or write small driver programs; no need to adopt a formal framework unless you want to)
 - [ ] Optional: profile a slow path with `time` or `perf` and make at least one meaningful optimization
 
-### Week 6: Polish, Document, Present (~7-10 hours)
+### Stage 2 -- Polish, Document, Present (~7-10 hours)
 
 #### Final Polish (~3 hours)
 - [ ] Consistent code style across all files (run `clang-format` if you have it)
@@ -62,7 +61,7 @@ This phase merges what was two phases in the 15-week course (Robustness + Polish
 
 #### Presentation (~1-2 hours prep + ~12 min video)
 - [ ] Record a **10-12 minute** video demo: live demo of the program running, then a walk through 2-3 pieces of code you are proud of. Submit the video link via Canvas.
-- [ ] **Or**, if instructor approves, schedule a live 10-12 min presentation via Zoom during final-week virtual office hours.
+- [ ] **Or**, if instructor approves, schedule a live 10-12 min presentation via Zoom during end-of-course virtual office hours.
 
 ### Before Final Submission
 - [ ] Push everything to GitHub
@@ -92,7 +91,7 @@ This phase merges what was two phases in the 15-week course (Robustness + Polish
 
 ## Common Pitfalls to Avoid
 
-- Cramming new features in Week 6 instead of polishing what exists
+- Cramming new features into the final stretch instead of polishing what exists
 - Weak documentation: if a classmate cannot run it, it does not count as finished
 - Unprepared demo: rehearse the recording once, at minimum
 - Over-optimizing before profiling: measure first

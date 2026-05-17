@@ -24,33 +24,33 @@
 ### Problem 1.1: Your First Virtual Function
 **Objective**: Practice basic inheritance with virtual functions
 
-Create a base class `Animal` with:
-- A virtual function `make_sound()` that prints "Some generic animal sound"
+Create a base class `MediaItem` with:
+- A virtual function `play()` that prints "Playing a generic media item"
 - A virtual destructor
 
-Create a derived class `Dog` that:
-- Inherits from `Animal`
-- Overrides `make_sound()` to print "Woof!"
+Create a derived class `Song` that:
+- Inherits from `MediaItem`
+- Overrides `play()` to print "Now playing a song"
 
 **Template to get you started**:
 ```cpp
 #include <iostream>
 
-struct Animal {
-    virtual ~Animal() = default;
-    virtual void make_sound() const {
-        std::cout << "Some generic animal sound\n";
+struct MediaItem {
+    virtual ~MediaItem() = default;
+    virtual void play() const {
+        std::cout << "Playing a generic media item\n";
     }
 };
 
-struct Dog : Animal {
+struct Song : MediaItem {
     // Your override here
 };
 
 int main() {
-    Animal* animal = new Dog();
-    animal->make_sound();  // Should print "Woof!"
-    delete animal;
+    MediaItem* item = new Song();
+    item->play();  // Should print "Now playing a song"
+    delete item;
     return 0;
 }
 ```
@@ -61,8 +61,8 @@ int main() {
 **Objective**: Learn the importance of the `override` keyword
 
 Take your solution from 1.1 and:
-1. Add the `override` keyword to your `Dog::make_sound()` function
-2. Deliberately introduce a typo in the function name (like `make_soud`)
+1. Add the `override` keyword to your `Song::play()` function
+2. Deliberately introduce a typo in the function name (like `ploy`)
 3. Observe the compiler error
 4. Fix the typo and verify everything works
 
@@ -71,186 +71,184 @@ Take your solution from 1.1 and:
 ### Problem 1.3: Base Class Pointers
 **Objective**: Practice polymorphic behavior through base class pointers
 
-Create an array of `Animal*` pointers containing different animal types:
+Create an array of `MediaItem*` pointers containing different media types:
 ```cpp
-Animal* zoo[3] = {
-    new Dog(),
-    new Animal(),
-    // Add a Cat class that meows
+MediaItem* playlist[3] = {
+    new Song(),
+    new MediaItem(),
+    // Add a Podcast class that prints "Streaming a podcast episode"
 };
 ```
 
-Loop through the array and call `make_sound()` on each animal. Don't forget to clean up memory!
+Loop through the array and call `play()` on each item. Don't forget to clean up memory!
 
 ---
 
 ## Problem Set 2: Abstract Classes and Pure Virtual Functions (60 minutes)
 
-### Problem 2.1: Creating an Abstract Shape Class
+### Problem 2.1: Creating an Abstract Track Class
 **Objective**: Work with pure virtual functions and abstract base classes
 
-Create an abstract `Shape` class with:
-- Pure virtual function `double area() const = 0`
-- Pure virtual function `double perimeter() const = 0`
+Create an abstract `Track` class with:
+- Pure virtual function `int duration() const = 0` (length in seconds)
+- Pure virtual function `std::string title() const = 0`
 - Virtual destructor
 
 **Template**:
 ```cpp
 #include <iostream>
-#include <cmath>
+#include <string>
 
-struct Shape {
-    virtual ~Shape() = default;
+struct Track {
+    virtual ~Track() = default;
     // Add your pure virtual functions here
-    
+
     // This can be implemented in base class
     virtual void display_info() const {
-        std::cout << "Area: " << area() << ", Perimeter: " << perimeter() << "\n";
+        std::cout << "Title: " << title() << ", Duration: " << duration() << "s\n";
     }
 };
 ```
 
-### Problem 2.2: Implementing Concrete Shapes
+### Problem 2.2: Implementing Concrete Tracks
 **Objective**: Create concrete implementations of abstract interface
 
 Implement two derived classes:
 
-**Rectangle**:
+**AudioTrack**:
 ```cpp
-struct Rectangle : Shape {
-    double width, height;
-    
-    Rectangle(double w, double h) : width(w), height(h) {}
-    
-    // Implement area() and perimeter()
+struct AudioTrack : Track {
+    std::string name;
+    int seconds;
+
+    AudioTrack(const std::string& n, int s) : name(n), seconds(s) {}
+
+    // Implement title() and duration()
 };
 ```
 
-**Circle**:
+**VideoTrack**:
 ```cpp
-struct Circle : Shape {
-    double radius;
-    
-    Circle(double r) : radius(r) {}
-    
-    // Implement area() and perimeter()
-    // Use M_PI for pi (or 3.14159)
+struct VideoTrack : Track {
+    std::string name;
+    int seconds;
+
+    VideoTrack(const std::string& n, int s) : name(n), seconds(s) {}
+
+    // Implement title() and duration()
+    // For VideoTrack, override display_info() to also print "[video]"
 };
 ```
 
-### Problem 2.3: Polymorphic Shape Collection
+### Problem 2.3: Polymorphic Track Collection
 **Objective**: Use polymorphism with collections of objects
 
 Create a program that:
-1. Creates a vector or array of `Shape*` containing different shape types
-2. Loops through and calls `display_info()` on each shape
+1. Creates a vector or array of `Track*` containing different track types
+2. Loops through and calls `display_info()` on each track
 3. Properly cleans up memory
 
 **Expected output example**:
 ```
-Area: 20, Perimeter: 18
-Area: 12.566, Perimeter: 12.566
+Title: Intro Theme, Duration: 95s
+Title: Episode 1, Duration: 1820s [video]
 ```
 
 ---
 
-## Problem Set 3: Advanced Logging System (60 minutes)
+## Problem Set 3: Configurable Media Player (60 minutes)
 
-### Problem 3.1: Logger Interface Design
-**Objective**: Create a practical logging system using polymorphism
+### Problem 3.1: MediaItem Interface Design
+**Objective**: Create a practical media-player system using polymorphism
 
-Create an abstract `Logger` base class:
+Create an abstract `Playable` base class:
 ```cpp
 #include <iostream>
-#include <fstream>
 #include <string>
 
-struct Logger {
-    virtual ~Logger() = default;
-    virtual void log(const std::string& message) const = 0;
-    
+struct Playable {
+    virtual ~Playable() = default;
+    virtual void play() const = 0;
+
     // Convenience function implemented in base
-    virtual void log_error(const std::string& message) const {
-        log("ERROR: " + message);
+    virtual void play_with_announcement() const {
+        std::cout << "Up next: ";
+        play();
     }
 };
 ```
 
-### Problem 3.2: Multiple Logger Implementations
-**Objective**: Implement different logging strategies
+### Problem 3.2: Multiple Playable Implementations
+**Objective**: Implement different media types
 
-Create three concrete logger classes:
+Create three concrete classes:
 
-**ConsoleLogger**:
+**Song**:
 ```cpp
-struct ConsoleLogger : Logger {
-    void log(const std::string& message) const override {
-        std::cout << "[Console] " << message << "\n";
+struct Song : Playable {
+    void play() const override {
+        std::cout << "[Song] track is playing\n";
     }
 };
 ```
 
-**FileLogger** (Starter code provided):
+**Podcast** (Starter code provided):
 ```cpp
-struct FileLogger : Logger {
-    std::string filename;
-    
-    FileLogger(const std::string& file) : filename(file) {}
-    
-    void log(const std::string& message) const override {
-        std::ofstream out(filename, std::ios::app);
-        if (out) {
-            out << "[File] " << message << "\n";
-        }
+struct Podcast : Playable {
+    std::string episode;
+
+    Podcast(const std::string& ep) : episode(ep) {}
+
+    void play() const override {
+        std::cout << "[Podcast] streaming episode: " << episode << "\n";
     }
 };
 ```
 
-**SilentLogger** (for testing/debugging):
+**SilentItem** (for testing/debugging — a placeholder slot that plays nothing):
 ```cpp
-struct SilentLogger : Logger {
+struct SilentItem : Playable {
     // Implement this - it should do nothing but satisfy the interface
 };
 ```
 
-### Problem 3.3: Application with Configurable Logging
+### Problem 3.3: Player with Configurable Content
 **Objective**: Use polymorphism to create flexible, configurable systems
 
-Create a simple application class that uses logging:
+Create a simple player class that uses a `Playable`:
 
 ```cpp
-struct Application {
-    Logger* logger;
-    
-    Application(Logger* log) : logger(log) {}
-    
-    void run() {
-        logger->log("Application started");
-        do_some_work();
-        logger->log("Application finished");
+struct Player {
+    Playable* item;
+
+    Player(Playable* media) : item(media) {}
+
+    void start() {
+        std::cout << "Player started\n";
+        play_current();
+        std::cout << "Player finished\n";
     }
-    
+
 private:
-    void do_some_work() {
-        logger->log("Doing important work...");
-        // Simulate potential error
-        logger->log_error("Something went wrong!");
-        logger->log("Recovered from error");
+    void play_current() {
+        item->play();
+        // Announce the next item using the base-class convenience function
+        item->play_with_announcement();
     }
 };
 ```
 
 **Your task**: Create a main function that:
-1. Creates different logger types
-2. Runs the application with each logger
-3. Demonstrates how the same application code works with different logging strategies
+1. Creates different `Playable` types
+2. Runs the player with each item
+3. Demonstrates how the same player code works with different media types
 4. Properly manages memory
 
 **Test cases to verify**:
-- Console output appears immediately
-- File logging creates/appends to a file
-- Silent logger produces no output
-- Error messages are properly prefixed
+- A `Song` plays its track output
+- A `Podcast` streams the configured episode
+- A `SilentItem` produces no playback output
+- `play_with_announcement()` prefixes "Up next: " then dispatches polymorphically
 
 ---
 
@@ -277,7 +275,6 @@ chapter05_solutions/
 │   ├── problem_3_1.cpp
 │   ├── problem_3_2.cpp
 │   └── problem_3_3.cpp
-├── log_output.txt (from Problem 3.2)
 └── README.md (with compilation notes and observations)
 ```
 

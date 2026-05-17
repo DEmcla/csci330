@@ -1,17 +1,19 @@
-# CSCI 330 - Summer Term C++ Project
+# CSCI 330 - Capstone C++ Project
 
 ## Overview
 
-This is an audacious project: I'm asking you to build a substantial C++ application over the course of a compressed 6-week summer term using professional software development practices. This project runs parallel to your coursework - you can use whatever C++ features you've learned (or research on your own) at any point. AI is a tool and you can use AI, but you must credit where you use AI and be able to explain every aspect of your code, your development environment, and the development process.
+This is an audacious project: I'm asking you to build a substantial C++ application over the course of the term using professional software development practices. This project runs parallel to your coursework - you can use whatever C++ features you've learned (or research on your own) at any point. AI is a tool and you can use AI, but you must credit where you use AI and be able to explain every aspect of your code, your development environment, and the development process.
 
-**Duration**: Full summer term (6 weeks, fully online asynchronous)
-**Weight**: 30% of course grade (300 points)
-**Philosophy**: This is a serious project, so I expect you to build something real, substantial, and portfolio-worthy - just compressed into a shorter, more intense timeline
+**Structure**: 3 phases, each anchored to a chapter in the course sequence
+**Weight**: 35% of course grade (300 points)
+**Philosophy**: This is a serious project, so I expect you to build something real, substantial, and portfolio-worthy
+
+> **A note on the calendar.** This guide describes the capstone in terms of *chapters*, not weeks or dates. The capstone is *introduced* after Chapter 2; its three phases are anchored at Chapter 5, Chapter 11, and Chapter 15 (course end). The actual due dates — and how the chapters are spread across a term — are set per offering in Canvas. A short, intensive offering and a full-semester offering run the *same* 3-phase capstone, on different calendars.
 
 > **How to Use These Documents:**
 > - Start here for the complete project overview ("map of the world")
 > - Use the individual phase guides (PROJECT_PHASE_1.md through PROJECT_PHASE_3.md) for detailed todo checklists
-> - Each phase guide breaks down the work into manageable weekly tasks
+> - Each phase guide breaks the work into a manageable set of tasks
 > - Check off items as you complete them to track your progress
 
 ## Important: Two Parallel Learning Paths
@@ -29,20 +31,20 @@ You might use `std::vector` in Phase 1 before studying the container chapter in 
 
 Each phase has its own detailed guide with todo checklists to keep you on track:
 
-### Phase 1: Planning & Proof of Concept (Weeks 1-2)
-**Due**: End of Week 2
+### Phase 1: Planning & Proof of Concept
+**Anchor**: Chapter 5
 **Points**: 40 (13%)
 **Focus**: Validate your idea works
 **Detailed Todo List**: PROJECT_PHASE_1.md
 
-### Phase 2: MVP & Feature Development (Weeks 3-4)
-**Due**: End of Week 4
+### Phase 2: MVP & Feature Development
+**Anchor**: Chapter 11
 **Points**: 130 (43%)
 **Focus**: Core functionality complete, then the features that make it interesting
 **Detailed Todo List**: PROJECT_PHASE_2.md
 
-### Phase 3: Robustness, Polish & Presentation (Weeks 5-6)
-**Due**: End of Week 6
+### Phase 3: Robustness, Polish & Presentation
+**Anchor**: Chapter 15 (course end)
 **Points**: 130 (43%)
 **Focus**: Production quality, professional finish, and reflection
 **Detailed Todo List**: PROJECT_PHASE_3.md
@@ -52,11 +54,11 @@ Each phase has its own detailed guide with todo checklists to keep you on track:
 ## Phase 1: Planning & Proof of Concept
 
 ### Goal
-Prove your idea is feasible and worth building. Get the hard part working first. In a 6-week term, you cannot afford to spend two weeks discovering your idea doesn't work.
+Prove your idea is feasible and worth building. Get the hard part working first. You cannot afford to spend a large chunk of the term discovering your idea doesn't work.
 
 ### Deliverables
 
-#### 1.1 Project Proposal (Early Week 1)
+#### 1.1 Project Proposal (early in Phase 1)
 A solid plan that shows you've thought this through:
 - **What**: Clear description of what you're building
 - **Why**: Problem it solves or need it fills
@@ -64,7 +66,7 @@ A solid plan that shows you've thought this through:
 - **Risks**: What might go wrong and backup plans
 - **Success Criteria**: How we'll know it works
 
-#### 1.2 Proof of Concept (End of Week 2)
+#### 1.2 Proof of Concept (Phase 1 deliverable)
 Working code that proves the hardest part is solvable:
 - The core algorithm works
 - The key technical challenge is solved
@@ -85,7 +87,7 @@ Working code that proves the hardest part is solvable:
 - **Build connections** with potential peer reviewers
 
 #### Asynchronous Instructor Check-In
-**Required**: Submit a short written/video check-in via Canvas during Week 2
+**Required**: Submit a short written/video check-in via Canvas as part of the Phase 1 submission
 - **Discuss**: Project proposal and proof of concept
 - **Review**: Technical feasibility and scope appropriateness
 - **Plan**: Adjustments needed for Phase 2
@@ -95,8 +97,8 @@ Working code that proves the hardest part is solvable:
 Each phase includes mandatory peer collaboration:
 - **Receive feedback from 2 peers** on your deliverables
 - **Provide feedback to 2 peers** using structured review forms
-- Reviews assigned within 24 hours of submission deadline (tight turnaround for the summer pace)
-- 48-hour window to complete peer reviews
+- Peer reviews are conducted on GitHub: open a pull request for your phase submission and review classmates' PRs
+- The Canvas calendar sets the review window for each offering
 
 ### Grading (40 points)
 
@@ -107,7 +109,7 @@ The point-by-point rubric for this phase lives in its phase guide, **`project/ph
 ## Phase 2: MVP & Feature Development
 
 ### Goal
-Build a complete MVP, then add the features that make your project interesting and differentiate it from a toy implementation. This is the longest-running phase of the summer term because it combines core build-out with feature enrichment.
+Build a complete MVP, then add the features that make your project interesting and differentiate it from a toy implementation. This is the longest-running phase of the capstone because it combines core build-out with feature enrichment.
 
 ### Deliverables
 
@@ -155,7 +157,7 @@ Build a complete MVP, then add the features that make your project interesting a
 - **Help others** debug their MVP and feature challenges
 
 #### Asynchronous Instructor Check-In
-**Required**: Submit a mid-phase check-in via Canvas during Week 3, and a Phase 2 submission check-in at end of Week 4
+**Required**: Submit a mid-phase check-in via Canvas partway through Phase 2, and a check-in with the Phase 2 submission itself
 - **Demo**: Core MVP functionality working, then new features added
 - **Discuss**: Architecture decisions, code organization, and C++ features used
 - **Review**: Progress toward Phase 3 goals
@@ -170,7 +172,7 @@ The point-by-point rubric for this phase lives in its phase guide, **`project/ph
 ## Phase 3: Robustness, Polish & Presentation
 
 ### Goal
-Make it production-ready, create a professional finish, and reflect on your journey. In two weeks you'll harden the code, polish the user experience, and deliver a presentation-quality artifact.
+Make it production-ready, create a professional finish, and reflect on your journey. In this final phase you'll harden the code, polish the user experience, and deliver a presentation-quality artifact.
 
 ### Deliverables
 
@@ -210,8 +212,8 @@ Make it production-ready, create a professional finish, and reflect on your jour
 - **Help others** prepare for their final submissions
 - **Thank classmates** who supported you through the term
 
-#### 3.2 Final Project Presentation (End of Week 6)
-**Required**: Submit a recorded **10-12 minute** presentation video via Canvas (async delivery - no synchronous meeting required). If the instructor approves, you may instead give a live 10-12 minute presentation via Zoom during final-week virtual office hours.
+#### 3.2 Final Project Presentation (Phase 3 deliverable)
+**Required**: Submit a recorded **10-12 minute** presentation video via Canvas (async delivery - no synchronous meeting required). If the instructor approves, you may instead give a live 10-12 minute presentation via Zoom during end-of-course virtual office hours.
 
 **Live Demo** (~5 minutes)
 - Show it working end-to-end
@@ -242,7 +244,7 @@ Instructor follow-up questions (if any) will be posted in Canvas; you'll respond
 - What you'd do differently technically
 
 **Process Section**
-- Project management approach under a compressed timeline
+- Project management approach across the three phases
 - Time estimation vs. reality
 - Biggest surprises
 - Most valuable learning moments
@@ -276,13 +278,13 @@ The point-by-point rubric for this phase lives in its phase guide, **`project/ph
 | 2 | 800-1800 | 8-14 | 5-8 |
 | 3 | 1500-2500+ | 14-20+ | All polished |
 
-Target: **~1500-2500 lines over 6 weeks** for a complete, polished project. Quality over quantity.
+Target: **~1500-2500 lines** for a complete, polished project. Quality over quantity.
 
 ### Good Project Characteristics
-- **Interesting enough** to sustain six weeks of intense work
+- **Interesting enough** to sustain a term of sustained work
 - **Complex enough** to demonstrate various C++17 features
 - **Practical enough** that someone might actually use it
-- **Scoped appropriately** - challenging but achievable in a compressed term
+- **Scoped appropriately** - challenging but achievable within the term
 - **Extensible** - can grow naturally over phases
 
 ### Project Categories & Inspiration
@@ -331,7 +333,7 @@ Each phase submission must include an AI usage section documenting:
 - **Document When Used**: Algorithm suggestions, design patterns, optimization
 - **Not Acceptable**: Having AI write entire features without understanding
 
-### Term-Long AI Documentation
+### Project-Long AI Documentation
 Track your AI collaboration evolution:
 - Phase 1: Learning C++17 basics and project planning
 - Phase 2: Architecture decisions, implementation help, and advanced feature development
@@ -366,7 +368,7 @@ Track your AI collaboration evolution:
 ## Success Tips
 
 ### Start with the Hard Part
-Don't build the easy UI first. Solve the core technical challenge in Phase 1. In a 6-week term this is non-negotiable.
+Don't build the easy UI first. Solve the core technical challenge in Phase 1. This is non-negotiable.
 
 ### Keep It Working
 Never break your build for more than a day. Always have a working version.
@@ -405,7 +407,7 @@ Because this course is fully online and asynchronous:
 ## FAQ
 
 **Q: Can I change my project idea after Phase 1?**
-A: Yes, but email the instructor first. Better to pivot early than fail later - especially in a 6-week term.
+A: Yes, but email the instructor first. Better to pivot early than fail later.
 
 **Q: What if my Phase 1 proof of concept reveals my idea won't work?**
 A: That's valuable! Pivot to your backup plan. Finding out early is the point.

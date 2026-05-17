@@ -3,6 +3,8 @@
 ## Purpose
 Scaffolding and hints for the reference assignments. Use when stuck or to verify your approach.
 
+**Domain reminder:** Every problem works with **game player state** - health, score, level, position. References let your code touch that state directly instead of copying it.
+
 ---
 
 ## Key Concepts Reminder
@@ -27,32 +29,32 @@ void by_const_ref(const Type& x) // No copy, cannot modify
 ### Problem 1.1: Reference Fundamentals Helper
 ```cpp
 int main() {
-    int score = 85;
-    int& score_ref = score;  // Reference MUST be initialized
+    int health = 85;
+    int& health_ref = health;  // Reference MUST be initialized
 
     // Both refer to same memory location
-    printf("Original score: %d, Reference: %d\n", score, score_ref);
-    printf("Addresses: %p vs %p\n", &score, &score_ref);  // Same!
+    printf("Original health: %d, Reference: %d\n", health, health_ref);
+    printf("Addresses: %p vs %p\n", &health, &health_ref);  // Same!
 
-    score_ref = 92;  // Modifies original
-    printf("Modified score: %d, Reference: %d\n", score, score_ref);
+    health_ref = 92;  // Modifies original
+    printf("Modified health: %d, Reference: %d\n", health, health_ref);
 }
 ```
 
 ### Problem 1.2: Array References Helper
 ```cpp
-// Function taking array by reference (preserves size info!)
-void process_array(int (&arr)[5]) {  // Note syntax: (&arr)[5]
-    // sizeof(arr) works correctly here!
+// Function taking a roster array by reference (preserves size info!)
+void boost_roster(int (&scores)[5]) {  // Note syntax: (&scores)[5]
+    // sizeof(scores) works correctly here!
     for (int i = 0; i < 5; i++) {
-        arr[i] *= 2;
+        scores[i] *= 2;
     }
 }
 ```
 
 ### Problem 2.1: Swap Function Pattern
 ```cpp
-// Classic swap with references
+// Classic swap with references - useful for swapping player scores
 void swap(int& a, int& b) {
     int temp = a;
     a = b;
@@ -71,20 +73,20 @@ void swap(T& a, T& b) {
 
 ### Problem 2.2: Struct Modification Pattern
 ```cpp
-struct Student {
+struct Player {
     char name[50];
-    double gpa;
+    double score;
 };
 
 // Read-only access
-void print_student(const Student& s) {
-    // s.gpa = 4.0;  // ERROR: cannot modify const reference
-    printf("%s: %.2f\n", s.name, s.gpa);
+void print_player(const Player& p) {
+    // p.score = 4.0;  // ERROR: cannot modify const reference
+    printf("%s: %.2f\n", p.name, p.score);
 }
 
 // Modification access
-void update_gpa(Student& s, double new_gpa) {
-    s.gpa = new_gpa;  // OK: non-const reference
+void update_score(Player& p, double new_score) {
+    p.score = new_score;  // OK: non-const reference
 }
 ```
 
@@ -102,7 +104,7 @@ int& bad_function() {
 }
 
 // Safe: returning reference to static/global
-int& get_counter() {
+int& get_match_counter() {
     static int counter = 0;
     return counter;  // OK: static lives forever
 }
@@ -128,29 +130,29 @@ void modifier(int& x) {
 ### Pattern 2: Reference vs Pointer Decision
 ```cpp
 // Use reference when:
-void process(Data& data) {  // Never null, must exist
-    data.value = 42;
+void process(Player& player) {  // Never null, must exist
+    player.score = 42;
 }
 
 // Use pointer when:
-void process(Data* data) {  // Could be nullptr
-    if (data) {
-        data->value = 42;
+void process(Player* player) {  // Could be nullptr
+    if (player) {
+        player->score = 42;
     }
 }
 ```
 
 ### Pattern 3: Large Object Optimization
 ```cpp
-struct LargeData {
-    char buffer[10000];
+struct PlayerWorld {
+    char terrain[10000];
 };
 
 // BAD: Makes expensive copy
-void slow_function(LargeData data) { }
+void slow_function(PlayerWorld world) { }
 
 // GOOD: No copy, read-only
-void fast_function(const LargeData& data) { }
+void fast_function(const PlayerWorld& world) { }
 ```
 
 ---
@@ -159,9 +161,9 @@ void fast_function(const LargeData& data) { }
 
 ### Check Reference Binding
 ```cpp
-int x = 5;
-int& ref = x;
-printf("x address: %p\n", &x);
+int health = 5;
+int& ref = health;
+printf("health address: %p\n", &health);
 printf("ref address: %p\n", &ref);  // Should be same!
 ```
 

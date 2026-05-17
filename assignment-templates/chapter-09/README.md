@@ -25,64 +25,74 @@
 - **Problem Set 2**: Lambda Expressions and Captures (60 minutes) 
 - **Problem Set 3**: Function Objects and Integration Project (30 minutes)
 
+> **Theme for this chapter**: a text-driven **command / filter pipeline**.
+> A dispatcher maps command names to handler functions, and a pipeline of
+> filters and transforms processes a stream of data records. Every problem
+> exercises functions, function pointers, lambdas, and functors in this one
+> coherent setting.
+
 ---
 
 ## Problem Set 1: Function Pointers and Callbacks (45 minutes)
 
-### Problem 1.1: Calculator with Function Pointers (15 minutes)
+### Problem 1.1: Command Dispatcher with Function Pointers (15 minutes)
 
 **Background**: Coming from Python's first-class functions or Java method references, learn C++ function pointer syntax and usage.
 
-**Task**: Create a simple calculator using function pointers for operations.
+**Task**: Create a command dispatcher that maps command names to handler functions using function pointers.
 
 **Requirements**:
-1. Implement basic arithmetic functions: add, subtract, multiply, divide
-2. Use function pointers to store and call operations
-3. Create a menu system that selects operations via function pointer array
-4. Handle division by zero appropriately
+1. Implement handler functions for four pipeline commands: `head`, `reverse`, `count`, `upper`
+2. Use function pointers to store and call command handlers
+3. Create a dispatcher that selects a handler via a function pointer array
+4. Handle unknown command names appropriately
+
+Each handler takes a line of text and a numeric argument and returns the transformed text:
+- `head`: keep the first `arg` characters
+- `reverse`: reverse the whole line (`arg` is ignored)
+- `count`: replace the line with its character count repeated `arg` times (e.g. result of running on `"hello"` with arg 1 is `"5"`)
+- `upper`: convert the line to upper case (`arg` is ignored)
 
 **Starter Code**:
 ```cpp
 #include <iostream>
-#include <cstdio>
+#include <string>
+#include <cstring>
 
-// TODO: Implement these functions
-double add(double a, double b) {
-    // Your implementation here
+// TODO: Implement these command handlers
+std::string cmd_head(const std::string& line, int arg) {
+    // Your implementation here - keep the first arg characters
 }
 
-double subtract(double a, double b) {
-    // Your implementation here
+std::string cmd_reverse(const std::string& line, int arg) {
+    // Your implementation here - reverse the line (arg ignored)
 }
 
-double multiply(double a, double b) {
-    // Your implementation here
+std::string cmd_count(const std::string& line, int arg) {
+    // Your implementation here - return the length as text
 }
 
-double divide(double a, double b) {
-    // Your implementation here - handle division by zero
+std::string cmd_upper(const std::string& line, int arg) {
+    // Your implementation here - upper-case the line (arg ignored)
 }
 
 int main() {
     // TODO: Create array of function pointers
-    double (*operations[])(double, double) = {add, subtract, multiply, divide};
-    const char* op_names[] = {"Add", "Subtract", "Multiply", "Divide"};
+    std::string (*handlers[])(const std::string&, int) =
+        {cmd_head, cmd_reverse, cmd_count, cmd_upper};
+    const char* cmd_names[] = {"head", "reverse", "count", "upper"};
     
-    double a, b;
-    int choice;
+    std::string line, command;
+    int arg;
     
-    std::cout << "Enter two numbers: ";
-    std::cin >> a >> b;
+    std::cout << "Enter a line of text: ";
+    std::getline(std::cin, line);
     
-    std::cout << "\nSelect operation:\n";
-    for(int i = 0; i < 4; i++) {
-        std::cout << i + 1 << ". " << op_names[i] << "\n";
-    }
-    std::cout << "Choice: ";
-    std::cin >> choice;
+    std::cout << "Enter command and numeric argument: ";
+    std::cin >> command >> arg;
     
-    // TODO: Validate choice and call appropriate function
-    // TODO: Display result
+    // TODO: Look up the command name, validate it, call the handler
+    // TODO: Display the transformed result
     
     return 0;
 }
@@ -90,23 +100,17 @@ int main() {
 
 **Expected Output**:
 ```
-Enter two numbers: 15 3
-Select operation:
-1. Add
-2. Subtract  
-3. Multiply
-4. Divide
-Choice: 4
-15 / 3 = 5
+Enter a line of text: hello world
+Enter command and numeric argument: head 5
+Result: hello
 
-Enter two numbers: 10 0
-Select operation:
-1. Add
-2. Subtract
-3. Multiply
-4. Divide
-Choice: 4
-Error: Division by zero!
+Enter a line of text: hello world
+Enter command and numeric argument: reverse 0
+Result: dlrow olleh
+
+Enter a line of text: hello world
+Enter command and numeric argument: rotate 3
+Error: Unknown command 'rotate'
 ```
 
 **Learning Goals**:
@@ -274,12 +278,12 @@ int main() {
 
 **Background**: Use lambdas with STL algorithms, similar to Python's list comprehensions or Java streams.
 
-**Task**: Process a list of student data using various STL algorithms with lambda expressions.
+**Task**: Process a stream of log entries using various STL algorithms with lambda expressions.
 
 **Requirements**:
 1. Use lambdas with std::for_each, std::find_if, std::transform, std::count_if
 2. Demonstrate different capture modes (by value, by reference)
-3. Process student grades and generate statistics
+3. Filter and transform log entries and generate statistics
 
 **Starter Code**:
 ```cpp
@@ -289,40 +293,40 @@ int main() {
 #include <string>
 #include <numeric>
 
-struct Student {
-    std::string name;
-    int grade;
+struct LogEntry {
+    std::string source;
+    int severity;  // 0 = trace ... 100 = critical
     
-    Student(const std::string& n, int g) : name(n), grade(g) {}
+    LogEntry(const std::string& s, int sev) : source(s), severity(sev) {}
 };
 
 int main() {
-    std::vector<Student> students = {
-        {"Alice", 92}, {"Bob", 87}, {"Charlie", 78}, 
-        {"Diana", 95}, {"Eve", 82}, {"Frank", 69}
+    std::vector<LogEntry> entries = {
+        {"auth", 92}, {"cache", 87}, {"db", 78}, 
+        {"net", 95}, {"ui", 82}, {"sync", 69}
     };
     
-    std::cout << "All students:\n";
-    // TODO: Use std::for_each with lambda to print all students
+    std::cout << "All log entries:\n";
+    // TODO: Use std::for_each with lambda to print all entries
     
-    std::cout << "\nHonor roll students (grade >= 90):\n";
-    // TODO: Use std::copy_if with lambda to find honor roll students
+    std::cout << "\nCritical entries (severity >= 90):\n";
+    // TODO: Use std::copy_if with lambda to find critical entries
     
-    // TODO: Count students passing (grade >= 70)
-    int passing_count = 0; // Use std::count_if
+    // TODO: Count entries that pass the alert threshold (severity >= 70)
+    int alerting_count = 0; // Use std::count_if
     
-    // TODO: Calculate average grade using std::accumulate and lambda
+    // TODO: Calculate average severity using std::accumulate and lambda
     double average = 0.0;
     
-    // TODO: Apply curve (+5 points) using std::transform with capture
-    int curve_points = 5;
+    // TODO: Apply a severity boost (+5) using std::transform with capture
+    int boost = 5;
     
-    std::cout << "\nAfter applying " << curve_points << " point curve:\n";
-    // TODO: Print curved grades
+    std::cout << "\nAfter applying " << boost << " point boost:\n";
+    // TODO: Print boosted severities
     
     std::cout << "\nStatistics:\n";
-    std::cout << "Passing students: " << passing_count << "\n";
-    std::cout << "Average grade: " << average << "\n";
+    std::cout << "Alerting entries: " << alerting_count << "\n";
+    std::cout << "Average severity: " << average << "\n";
     
     return 0;
 }
@@ -330,29 +334,29 @@ int main() {
 
 **Expected Output**:
 ```
-All students:
-Alice: 92
-Bob: 87
-Charlie: 78
-Diana: 95
-Eve: 82
-Frank: 69
+All log entries:
+auth: 92
+cache: 87
+db: 78
+net: 95
+ui: 82
+sync: 69
 
-Honor roll students (grade >= 90):
-Alice: 92
-Diana: 95
+Critical entries (severity >= 90):
+auth: 92
+net: 95
 
-After applying 5 point curve:
-Alice: 97
-Bob: 92
-Charlie: 83
-Diana: 100
-Eve: 87
-Frank: 74
+After applying 5 point boost:
+auth: 97
+cache: 92
+db: 83
+net: 100
+ui: 87
+sync: 74
 
 Statistics:
-Passing students: 5
-Average grade: 85.5
+Alerting entries: 5
+Average severity: 85.5
 ```
 
 **Learning Goals**:
@@ -783,7 +787,7 @@ Original -> Processed:
 ```
 chapter09_solutions/
 ├── problem_set_1/
-│   ├── problem_1_1_calculator.cpp
+│   ├── problem_1_1_command_dispatcher.cpp
 │   ├── problem_1_2_event_system.cpp
 │   └── problem_1_3_sorting.cpp
 ├── problem_set_2/

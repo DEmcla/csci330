@@ -1,28 +1,29 @@
-# Assignment Submissions - CSCI 330 U26
+# Assignment Submissions - CSCI 330
 
-This directory is where **your** weekly assignment work lives. Each student gets their own folder; week directories go inside that.
+This directory is where **your** assignment work lives. Each student gets their own folder; chapter directories go inside that.
 
 ## Directory Structure
 
 ```
 assignments/
 └── CSCI330_FirstName_LastName/     ← your personal folder (you create this once)
-    ├── week01/                      ← one folder per week
-    ├── week02/
-    ├── week03/
+    ├── onboarding/                 ← the GitHub Onboarding assignment
+    ├── chapter-02/                 ← one folder per chapter
+    ├── chapter-03/
+    ├── chapter-04/
     └── ...
 ```
 
 - **Folder name format:** `CSCI330_FirstName_LastName` — exact case and underscores matter. The grader uses this name to find your work.
-- **Week folders:** `week00` for the GitHub Onboarding assignment, then `week01` through `week06` for the six homework weeks.
+- **Chapter folders:** `onboarding` for the GitHub Onboarding assignment, then `chapter-NN` (e.g. `chapter-02`) for each chapter's homework.
 
-## Before HW 1: the Week 0 GitHub Onboarding assignment
+## First: the GitHub Onboarding assignment
 
-**Do this first.** `assignment-templates/HW_01/` is the **Week 0 GitHub Onboarding
+**Do this first.** `assignment-templates/HW_01/` is the **GitHub Onboarding
 assignment** — a tiny Hello-World project that walks you through one full
 fork → branch → copy → commit → push → PR cycle. It is a **graded prerequisite**:
 HW 1 will not be accepted until your onboarding pull request passes its CI checks.
-Copy it into `assignments/CSCI330_FirstName_LastName/week00/` and follow its
+Copy it into `assignments/CSCI330_FirstName_LastName/onboarding/` and follow its
 `README.md`.
 
 ## How you submit (every assignment)
@@ -35,20 +36,20 @@ Your PR runs automated **CI checks (scope + build)**. **Both must be green** for
 your submission to count. A red check means the submission is incomplete: read
 the check output, fix the problem, and push again to the same branch.
 
-The assignment specification for each week is the `README.md` inside that week's
-template (for example, `assignment-templates/chapter-02/README.md`) — it travels
-with the template when you copy it.
+The assignment specification for each chapter is the `README.md` inside that
+chapter's template (for example, `assignment-templates/chapter-02/README.md`) —
+it travels with the template when you copy it.
 
 ## Quick Start
 
 ### 1. Create your personal folder (one time, at the start of the term)
 
 ```bash
-# From the csci330_u26/ repo root (i.e., your clone of the course fork)
+# From the csci330/ repo root (i.e., your clone of the course fork)
 mkdir -p assignments/CSCI330_FirstName_LastName
 ```
 
-### 2. For each weekly assignment
+### 2. For each chapter assignment
 
 ```bash
 # a) Start from an up-to-date main
@@ -56,29 +57,29 @@ git checkout main
 git pull upstream main
 git push origin main
 
-# b) Create a feature branch for this week
-git checkout -b week01-types-and-arrays
+# b) Create a feature branch for this chapter
+git checkout -b chapter-02-types-and-arrays
 
-# c) Copy the chapter's template into your week folder
-cp -r assignment-templates/chapter-02 assignments/CSCI330_FirstName_LastName/week01/
+# c) Copy the chapter's template into your chapter folder
+cp -r assignment-templates/chapter-02 assignments/CSCI330_FirstName_LastName/chapter-02/
 
-# d) Enter your week folder and do the work
-cd assignments/CSCI330_FirstName_LastName/week01/
+# d) Enter your chapter folder and do the work
+cd assignments/CSCI330_FirstName_LastName/chapter-02/
 
 # e) Build and test inside the Dev Container
 cmake -B build
 cmake --build build
 ./build/<executable-name>
 
-# f) Stage ONLY your week folder (not the whole repo)
-cd ~/Desktop/csci330_u26     # go back to repo root
-git add assignments/CSCI330_FirstName_LastName/week01/src/
-git add assignments/CSCI330_FirstName_LastName/week01/README.md
+# f) Stage ONLY your chapter folder (not the whole repo)
+cd ~/Desktop/csci330     # go back to repo root
+git add assignments/CSCI330_FirstName_LastName/chapter-02/src/
+git add assignments/CSCI330_FirstName_LastName/chapter-02/README.md
 git status                    # verify nothing sneaky got staged
 
 # g) Commit and push
-git commit -m "Week 01: types and arrays"
-git push origin week01-types-and-arrays
+git commit -m "Chapter 02: types and arrays"
+git push origin chapter-02-types-and-arrays
 
 # h) Open the PR on github.com; fill out the template completely
 # i) Wait for the CI checks (scope + build) to go green, then submit the PR URL to Canvas
@@ -97,8 +98,8 @@ See [../setup/GIT_WORKFLOW.md](../setup/GIT_WORKFLOW.md) for:
 ## Important rules
 
 - Work only in `assignments/CSCI330_FirstName_LastName/` — never modify `assignment-templates/`, `setup/`, `project/`, or any other course directory
-- One week per Pull Request — don't submit multiple weeks in one PR
-- Never commit directly to `main`; always use a feature branch named `weekNN-short-description`
+- One chapter per Pull Request — don't submit multiple chapters in one PR
+- Never commit directly to `main`; always use a feature branch named `chapter-NN-short-description`
 - Stage specific paths with `git add <path>`, not `git add .` — the `.gitignore` has your back but being explicit keeps commits clean
 - Keep your fork synchronized at the start of each new assignment
 
@@ -106,7 +107,7 @@ See [../setup/GIT_WORKFLOW.md](../setup/GIT_WORKFLOW.md) for:
 
 **Commit:**
 - Your source files in `src/` (.cpp, .h)
-- Your `README.md` in the week folder explaining what you did
+- Your `README.md` in the chapter folder explaining what you did
 - Modified or added tests in `tests/` if the template has them
 - Any other files the assignment specifically asks you to create
 
@@ -122,5 +123,5 @@ If you accidentally committed junk, see `../setup/GIT_WORKFLOW.md` → "Accident
 ## Getting help
 
 - **Git commands:** [../reference/git-commands.md](../reference/git-commands.md)
-- **Assignment requirements:** the `README.md` inside that week's template — e.g. `../assignment-templates/chapter-02/README.md`
+- **Assignment requirements:** the `README.md` inside that chapter's template — e.g. `../assignment-templates/chapter-02/README.md`
 - **Async instructor support:** email the instructor or post on the Canvas discussion board; virtual 1:1 appointments available by request

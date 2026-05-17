@@ -1,4 +1,4 @@
-# CSCI 330 — C++ Programming (Summer 2026)
+# CSCI 330 — C++ Programming
 
 This repository is your **workbench** for CSCI 330: the assignment templates you
 build from, the workspace where your work lives, the build and CI configuration,
@@ -16,17 +16,17 @@ course site. Use Canvas to *learn* the material; use this repo to *do the work*.
 ## Quick Start for Students
 
 1. **Fork this repository** on GitHub.
-2. **Clone your fork:** `git clone https://github.com/YOUR_USERNAME/csci330_u26.git && cd csci330_u26`, then open the folder in VS Code.
+2. **Clone your fork:** `git clone https://github.com/YOUR_USERNAME/csci330.git && cd csci330`, then open the folder in VS Code.
 3. **Set up your environment:** follow [setup/DEVELOPMENT_SETUP.md](setup/DEVELOPMENT_SETUP.md).
 4. **Learn the Git workflow:** read [setup/GIT_WORKFLOW.md](setup/GIT_WORKFLOW.md) — this is how you submit every assignment.
 5. **Skim the common pitfalls:** [setup/STUDENT_PITFALLS.md](setup/STUDENT_PITFALLS.md).
-6. **Do the Week 0 GitHub Onboarding assignment first:** [assignment-templates/HW_01/README.md](assignment-templates/HW_01/README.md). It is graded and is a prerequisite for HW 1 — it proves you can drive the submission workflow before real work counts.
-7. **Then start Week 1** from the Canvas course site.
+6. **Do the GitHub Onboarding assignment first:** [assignment-templates/HW_01/README.md](assignment-templates/HW_01/README.md). It is graded and is a prerequisite for the Chapter 1 homework — it proves you can drive the submission workflow before real work counts.
+7. **Then start Chapter 1** from the Canvas course site.
 
 ## What's in this repo
 
 ```
-csci330_u26/
+csci330/
 ├── assignment-templates/   # Starter code + the spec for each assignment
 ├── assignments/            # YOUR submission workspace (you create your folder here)
 ├── project/                # The 3-phase capstone project guides
@@ -39,18 +39,35 @@ csci330_u26/
 Lecture notes, the syllabus, assessment details, and all course reading are on
 **Canvas**, not in this repo.
 
-## 6-Week Schedule
+## Chapter Sequence
 
-| Week | Chapters | Theme | Major Deliverable |
-|------|----------|-------|-------------------|
-| 1 | Ch 1 + 2 | Foundations: environment, types | HW 1 |
-| 2 | Ch 3 + 4 | Memory model: references, RAII | HW 2 · Capstone Phase 1 |
-| 3 | Ch 5 + 6 | Polymorphism: virtual, templates | HW 3 · **Midterm** |
-| 4 | Ch 7 + 8 + 9 | Language mechanics: expressions, functions, lambdas | HW 4 · Capstone Phase 2 |
-| 5 | Ch 11 + 12 + 13 | Modern C++: smart pointers, utilities, containers | HW 5 |
-| 6 | Ch 14 + 15 | STL: iterators, strings; wrap-up | HW 6 · **Final** · Capstone Phase 3 |
+CSCI 330 is organized as a sequence of chapters from *C++ Crash Course*. The
+chapter is the unit of work — each carries lecture notes (on Canvas), a homework
+assignment (in this repo), and a low-stakes chapter quiz (on Canvas).
 
-The Canvas course site is the authoritative schedule and the home of all lecture
+| # | Chapter | Topic |
+|---|---------|-------|
+| 1 | Up and Running | Environment, first programs, compilation |
+| 2 | Types | Fundamental types, arrays, memory layout |
+| 3 | Reference Types | Pointers, references |
+| 4 | Object Lifecycle | Constructors, destructors, RAII, move semantics |
+| 5 | Runtime Polymorphism | Inheritance, virtual functions |
+| 6 | Compile-Time Polymorphism | Templates, generic programming |
+| 7 | Expressions | Operators, operator overloading |
+| 8 | Statements | Control flow, exceptions |
+| 9 | Functions | Lambdas, function objects |
+| 11 | Smart Pointers | `unique_ptr`, `shared_ptr`, `weak_ptr` |
+| 12 | Utilities | `optional`, `variant`, `tuple`, `chrono` |
+| 13 | Containers | STL containers |
+| 14 | Iterators | Iterator patterns, algorithms |
+| 15 | Strings | String handling, text processing |
+
+The capstone project is introduced after Chapter 2; its three phases are
+anchored to Chapters 5, 11, and 15. Supplemental chapters (Ch 10 Testing; Ch
+16-18) are optional, available for capstone needs.
+
+**The Canvas course site is the authoritative schedule** — it maps this chapter
+sequence onto your term's weeks and due dates — and the home of all lecture
 material.
 
 ## How you submit work
@@ -58,25 +75,26 @@ material.
 Every homework assignment and capstone phase is submitted as a **GitHub Pull
 Request**:
 
-1. Sync your fork, then create a feature branch (`weekNN-short-description`).
-2. Copy the week's template into `assignments/CSCI330_First_Last/weekNN/` and do your work **there**.
+1. Sync your fork, then create a feature branch (`chapter-NN-short-description`).
+2. Copy the chapter's template into `assignments/CSCI330_First_Last/chapter-NN/` and do your work **there**. (The GitHub onboarding assignment goes in `assignments/CSCI330_First_Last/onboarding/`.)
 3. Build and test in the Dev Container (`cmake -B build && cmake --build build`).
 4. Commit, push, and open a Pull Request **in your own fork**.
 5. Wait for the **CI checks** on the PR to go green.
 6. Submit the **PR URL** in Canvas.
 
 The CI checks confirm two things automatically: your work stays inside your own
-week folder, and your code compiles. **A submission with red CI is not
+chapter folder, and your code compiles. **A submission with red CI is not
 complete.** See [reference/correct-submission.md](reference/correct-submission.md)
 for what a correct PR looks like, and [setup/GIT_WORKFLOW.md](setup/GIT_WORKFLOW.md)
 for the full workflow.
 
 ## Assessment model
 
-Your grade combines two cumulative assessments (midterm + final), the three-phase
-capstone project, async discussion and participation, and weekly homework. The
-**official weighting and grading scale are in the syllabus on Canvas.** No weekly
-quizzes this term.
+This course uses a **no-exam** model — there is no midterm and no final exam.
+Your grade combines the three-phase capstone project (35%), one low-stakes
+chapter quiz per chapter on Canvas (20%, lowest two dropped), per-chapter
+homework plus the GitHub onboarding assignment (25%), and participation (20%).
+The **official weighting and grading scale are in the syllabus on Canvas.**
 
 ## Learning Objectives
 
@@ -109,6 +127,3 @@ By the end of this course, you will be able to:
 - [Docker Documentation](https://docs.docker.com/)
 - [CMake Documentation](https://cmake.org/documentation/)
 
----
-
-**Course Version:** Summer 2026

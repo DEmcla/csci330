@@ -7,10 +7,10 @@ Use this page to check your Pull Request **before** you submit the URL to Canvas
 A correct submission is a Pull Request where:
 
 - The **diff** (the "Files changed" tab) shows **only** files inside your own
-  `assignments/CSCI330_First_Last/weekNN/` folder.
-- Both **CI checks are green** — "Work stays in your week folder" and "Your code
-  compiles".
-- The branch is named `weekNN-short-description`.
+  `assignments/CSCI330_First_Last/chapter-NN/` folder.
+- Both **CI checks are green** — "Work stays in your chapter folder" and "Your
+  code compiles".
+- The branch is named `chapter-NN-short-description`.
 
 If all three are true, you are done — submit the PR URL in Canvas.
 
@@ -24,10 +24,10 @@ If all three are true, you are done — submit the PR URL in Canvas.
 hundreds of files you did not write.
 
 **Cause:** you copied your work to the wrong place, or committed changes to files
-outside your week folder.
+outside your chapter folder.
 
-**Fix:** all your work must live in `assignments/CSCI330_First_Last/weekNN/` and
-nowhere else. Move your files there, commit, and push again.
+**Fix:** all your work must live in `assignments/CSCI330_First_Last/chapter-NN/`
+and nowhere else. Move your files there, commit, and push again.
 
 ### 2. Red "Your code compiles" check
 
@@ -39,15 +39,15 @@ nowhere else. Move your files there, commit, and push again.
 locally (`cmake -B build && cmake --build build`), commit, and push again — the
 PR updates itself.
 
-### 3. Red "Work stays in your week folder" check
+### 3. Red "Work stays in your chapter folder" check
 
 **What you see:** a red ✗ on the scope check, listing files.
 
-**Cause:** your commit changed files outside your `weekNN/` folder — often an
+**Cause:** your commit changed files outside your `chapter-NN/` folder — often an
 edited template or a course file.
 
 **Fix:** restore those files to their original state, keep your work inside your
-own week folder, commit, and push again.
+own chapter folder, commit, and push again.
 
 > _[Instructor: insert annotated screenshots of each failure here.]_
 

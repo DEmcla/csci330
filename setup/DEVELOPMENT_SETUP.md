@@ -5,10 +5,10 @@
 When everything is set up correctly, you can:
 
 - [ ] Launch **Docker Desktop** and see "Docker Desktop is running" in your system tray or menu bar
-- [ ] Open **VS Code** with the `csci330_u26/` folder, get a "Reopen in Container" prompt, click it, and see a new bottom-left indicator that says `Dev Container: C++ Development`
+- [ ] Open **VS Code** with the `csci330/` folder, get a "Reopen in Container" prompt, click it, and see a new bottom-left indicator that says `Dev Container: C++ Development`
 - [ ] Open a VS Code integrated terminal and type `g++ --version` — you should see GCC 11.x
 - [ ] `cd assignment-templates/chapter-02 && cmake -B build && cmake --build build` builds without errors
-- [ ] `git remote -v` lists both `origin` (your fork) and `upstream` (DEmcla/csci330_u26)
+- [ ] `git remote -v` lists both `origin` (your fork) and `upstream` (DEmcla/csci330)
 
 If any of those five fail, work through the matching Part of this guide below.
 
@@ -144,9 +144,9 @@ Now let's get your actual C++ workspace ready!
 This course uses **Pull Requests** for assignment submissions - the same workflow used by professional development teams!
 
 #### **Step 1: Fork the Course Repository**
-1. Go to the course repository on GitHub: `https://github.com/DEmcla/csci330_u26`
+1. Go to the course repository on GitHub: `https://github.com/DEmcla/csci330`
 2. Click the "Fork" button to create your personal copy
-3. This creates `https://github.com/YOUR_USERNAME/csci330_u26`
+3. This creates `https://github.com/YOUR_USERNAME/csci330`
 
 #### **Step 2: Clone Your Fork**
 ```bash
@@ -154,14 +154,14 @@ This course uses **Pull Requests** for assignment submissions - the same workflo
 cd Desktop  # or wherever you prefer
 
 # Clone YOUR fork (replace YOUR_USERNAME)
-git clone https://github.com/YOUR_USERNAME/csci330_u26.git
-cd csci330_u26
+git clone https://github.com/YOUR_USERNAME/csci330.git
+cd csci330
 ```
 
 #### **Step 3: Add Upstream Connection**
 ```bash
 # This connects you to the main course repository for updates
-git remote add upstream https://github.com/DEmcla/csci330_u26.git
+git remote add upstream https://github.com/DEmcla/csci330.git
 
 # Verify your connections
 git remote -v
@@ -178,7 +178,7 @@ git config user.email "your.email@university.edu"
 #### **Step 5: Create Your Assignment Directory**
 ```bash
 # Replace FirstName and LastName with your actual name
-# (You're already inside csci330_u26/ after Step 2)
+# (You're already inside csci330/ after Step 2)
 mkdir -p assignments/CSCI330_FirstName_LastName
 ```
 
@@ -204,10 +204,10 @@ If successful, you should see a Linux command prompt inside the container. Type 
 
 ### 2.3 Dev Container Integration 🔗
 
-**Good news:** the course already ships a `.devcontainer/` folder in `csci330_u26/` with everything configured. You do **not** need to create any VS Code config yourself.
+**Good news:** the course already ships a `.devcontainer/` folder in `csci330/` with everything configured. You do **not** need to create any VS Code config yourself.
 
 Just:
-1. Open the `csci330_u26/` folder in VS Code (File → Open Folder → select `csci330_u26`)
+1. Open the `csci330/` folder in VS Code (File → Open Folder → select `csci330`)
 2. When VS Code prompts "Reopen in Container", click it. If no prompt appears, press `Cmd+Shift+P` / `Ctrl+Shift+P` and run **Dev Containers: Reopen in Container**.
 3. Wait for the container to build on first launch (a few minutes). Subsequent launches are fast.
 
@@ -244,16 +244,16 @@ Here's how you'll work with your environment every day - it becomes second natur
 Navigate to an assignment-template directory and build. The layout in this course is:
 
 - **Templates** (starting code, read-only reference): `assignment-templates/chapter-NN/`
-- **Your work** (what you edit and submit): `assignments/CSCI330_FirstName_LastName/weekNN/`
+- **Your work** (what you edit and submit): `assignments/CSCI330_FirstName_LastName/chapter-NN/`
 
 For a typical workflow -- copy the template, enter your copy, build:
 
 ```bash
-# Copy the week's template into your personal directory (do this once per week)
-cp -r assignment-templates/chapter-02 assignments/CSCI330_FirstName_LastName/week01/
+# Copy the chapter's template into your personal directory (do this once per chapter)
+cp -r assignment-templates/chapter-02 assignments/CSCI330_FirstName_LastName/chapter-02/
 
 # Go to your copy
-cd assignments/CSCI330_FirstName_LastName/week01/
+cd assignments/CSCI330_FirstName_LastName/chapter-02/
 
 # Configure and build (CMake ≥ 3.10 is provided by the container)
 cmake -B build
@@ -330,18 +330,17 @@ git push origin main
 #### **Step 1: Create Feature Branch** 🌿
 ```bash
 # Create branch with descriptive name
-git checkout -b week01-types-and-arrays
+git checkout -b chapter-02-types-and-arrays
 ```
 
 #### **Step 2: Set Up Assignment Files** 📁
 ```bash
-# Copy the week's chapter template into your directory.
-# Week 1 covers Ch 1 + Ch 2; the Week 1 template is chapter-02.
+# Copy the chapter's template into your directory.
 # (replace FirstName_LastName with your name)
-cp -r assignment-templates/chapter-02 assignments/CSCI330_FirstName_LastName/week01/
+cp -r assignment-templates/chapter-02 assignments/CSCI330_FirstName_LastName/chapter-02/
 
 # Navigate to your assignment directory
-cd assignments/CSCI330_FirstName_LastName/week01/
+cd assignments/CSCI330_FirstName_LastName/chapter-02/
 ```
 
 #### **Step 3: Complete Your Work** 💻
@@ -356,7 +355,7 @@ cd assignments/CSCI330_FirstName_LastName/week01/
 #### **Step 4: Submit Pull Request** 🚀
 ```bash
 # Final push to your fork
-git push origin week01-types-and-arrays
+git push origin chapter-02-types-and-arrays
 ```
 
 Then on GitHub:
@@ -368,11 +367,11 @@ Then on GitHub:
 ### 4.3 Pull Request Requirements 📋
 
 Your PR must include:
-- ✅ **Proper title**: "Week X Assignment - FirstName LastName"
+- ✅ **Proper title**: "Chapter NN Assignment - FirstName LastName"
 - ✅ **Complete PR template**: All sections filled out
 - ✅ **Working code**: Compiles without errors/warnings
 - ✅ **All tests pass**: Run `make test` to verify
-- ✅ **Code in correct directory**: `assignments/CSCI330_YourName/weekXX/`
+- ✅ **Code in correct directory**: `assignments/CSCI330_YourName/chapter-NN/`
 
 ### 4.4 Code Review and Grading Process 👨‍🏫
 
@@ -391,8 +390,8 @@ git pull upstream main
 git push origin main
 
 # Delete old feature branch
-git branch -d week01-pointers-basics
-git push origin --delete week01-pointers-basics
+git branch -d chapter-02-types-and-arrays
+git push origin --delete chapter-02-types-and-arrays
 ```
 
 **📖 Full Details**: See [`GIT_WORKFLOW.md`](GIT_WORKFLOW.md) for complete instructions!

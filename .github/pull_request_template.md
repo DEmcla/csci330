@@ -1,10 +1,10 @@
-## Submission — Week ___ — CSCI 330
+## Submission — Chapter ___ — CSCI 330
 
 **Before you open this PR, confirm each box. An unchecked box means the
 submission is incomplete.**
 
-- [ ] My branch is named `weekNN-short-description`
-- [ ] All my work is inside `assignments/CSCI330_First_Last/weekNN/` — nothing else
+- [ ] My branch is named `chapter-NN-short-description`
+- [ ] All my work is inside `assignments/CSCI330_First_Last/chapter-NN/` — nothing else
 - [ ] My code compiles locally (`cmake -B build && cmake --build build`)
 - [ ] **The CI checks on this PR are green** (scope check + build check)
 - [ ] AI assistance, if any, is disclosed below per the syllabus AI policy

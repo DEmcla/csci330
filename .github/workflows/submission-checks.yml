@@ -7,7 +7,7 @@ on:
 
 jobs:
   scope-check:
-    name: Work stays in your week folder
+    name: Work stays in your chapter folder
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -18,15 +18,15 @@ jobs:
           [ -n "$base" ] || base="$(git rev-parse origin/main)"
           files="$(git diff --name-only "$base"...HEAD)"
           echo "Changed files:"; echo "$files"
-          bad="$(echo "$files" | grep -vE '^assignments/CSCI330_[^/]+/week[0-9]+/' || true)"
+          bad="$(echo "$files" | grep -vE '^assignments/CSCI330_[^/]+/(chapter-[0-9]+|onboarding)/' || true)"
           if [ -n "$bad" ]; then
-            echo "::error::These files are outside an assignments/CSCI330_.../weekNN/ folder. Move your work into your own week folder:"
+            echo "::error::These files are outside an assignments/CSCI330_.../chapter-NN/ (or onboarding/) folder. Move your work into your own chapter folder:"
             echo "$bad"
             exit 1
           fi
-          weeks="$(echo "$files" | sed -E 's#^(assignments/CSCI330_[^/]+/week[0-9]+)/.*#\1#' | sort -u)"
-          if [ "$(echo "$weeks" | grep -c .)" -gt 1 ]; then
-            echo "::error::One PR may change only one week folder. Found: $weeks"
+          folders="$(echo "$files" | sed -E 's#^(assignments/CSCI330_[^/]+/(chapter-[0-9]+|onboarding))/.*#\1#' | sort -u)"
+          if [ "$(echo "$folders" | grep -c .)" -gt 1 ]; then
+            echo "::error::One PR may change only one chapter folder. Found: $folders"
             exit 1
           fi
 
@@ -36,19 +36,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
-      - name: Compile the changed week folder
+      - name: Compile the changed chapter folder
         run: |
           base="${{ github.event.pull_request.base.sha }}"
           [ -n "$base" ] || base="$(git rev-parse origin/main)"
           dir="$(git diff --name-only "$base"...HEAD \
-            | sed -E 's#^(assignments/CSCI330_[^/]+/week[0-9]+)/.*#\1#' | sort -u | head -1)"
-          if [ -z "$dir" ]; then echo "No week folder changed; nothing to build."; exit 0; fi
+            | sed -E 's#^(assignments/CSCI330_[^/]+/(chapter-[0-9]+|onboarding))/.*#\1#' | sort -u | head -1)"
+          if [ -z "$dir" ]; then echo "No chapter folder changed; nothing to build."; exit 0; fi
           echo "Building $dir"
           cd "$dir"
           if [ -f CMakeLists.txt ]; then
             cmake -B build -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_STANDARD_REQUIRED=ON
             cmake --build build
           else
-            g++ -std=c++17 -Wall -Wextra *.cpp -o week_build
+            g++ -std=c++17 -Wall -Wextra *.cpp -o chapter_build
           fi
           echo "Build succeeded."

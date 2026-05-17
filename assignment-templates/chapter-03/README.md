@@ -11,6 +11,8 @@
 
 **🚫 Don't start these assignments until you've completed the textbook and lecture notes!**
 
+**Domain:** Every problem in this chapter works with **game player state** - the data a video game keeps for each player. You will use references to read and mutate that state without making expensive copies.
+
 **Total Time Budget: 2.25 hours across all problem sets**
 
 ## Problem Set 1: Basic References (45 minutes)
@@ -25,10 +27,10 @@ Create a program that demonstrates basic reference usage:
 #include <cstdio>
 
 int main() {
-    // TODO: Create an integer variable 'score' with value 85
-    // TODO: Create a reference 'score_ref' that refers to 'score'
-    // TODO: Print both score and score_ref
-    // TODO: Modify score through score_ref to 92
+    // TODO: Create an integer variable 'health' with value 85
+    // TODO: Create a reference 'health_ref' that refers to 'health'
+    // TODO: Print both health and health_ref
+    // TODO: Modify health through health_ref to 92
     // TODO: Print both values again to show they're the same
     
     return 0;
@@ -37,8 +39,8 @@ int main() {
 
 **Expected Output:**
 ```
-Original score: 85, Reference: 85
-Modified score: 92, Reference: 92
+Original health: 85, Reference: 85
+Modified health: 92, Reference: 92
 ```
 
 ### Problem 1.2: References vs Copies (15 minutes)
@@ -51,12 +53,12 @@ Write a program that shows the difference between references and copies:
 #include <cstdio>
 
 int main() {
-    int original = 100;
+    int score = 100;
     
-    // TODO: Create a copy of original called 'copy_val'
-    // TODO: Create a reference to original called 'ref_val'
+    // TODO: Create a copy of score called 'copy_score'
+    // TODO: Create a reference to score called 'score_ref'
     
-    // TODO: Modify original to 200
+    // TODO: Modify score to 200
     
     // TODO: Print all three values to show the difference
     
@@ -66,7 +68,7 @@ int main() {
 
 **Expected Output:**
 ```
-Original: 200, Copy: 100, Reference: 200
+Score: 200, Copy: 100, Reference: 200
 ```
 
 ### Problem 1.3: Multiple References (15 minutes)
@@ -79,10 +81,10 @@ Create a program where multiple references point to the same variable:
 #include <cstdio>
 
 int main() {
-    int shared_value = 50;
+    int shared_score = 50;
     
-    // TODO: Create two different references to shared_value
-    // TODO: Modify shared_value through the first reference
+    // TODO: Create two different references to shared_score
+    // TODO: Modify shared_score through the first reference
     // TODO: Print the value using the second reference
     // TODO: Show that all three (original + 2 references) have the same value
     
@@ -103,20 +105,20 @@ Create a program with functions that use const references:
 // Template provided:
 #include <cstdio>
 
-struct Student {
+struct Player {
     char name[50];
-    int age;
-    double gpa;
+    int level;
+    double score;
 };
 
-// TODO: Write a function 'display_student' that takes a const Student reference
-// and prints the student's information
+// TODO: Write a function 'display_player' that takes a const Player reference
+// and prints the player's information
 
-// TODO: Write a function 'is_honor_student' that takes a const Student reference
-// and returns true if GPA >= 3.5
+// TODO: Write a function 'is_top_player' that takes a const Player reference
+// and returns true if score >= 3.5
 
 int main() {
-    Student alice = {"Alice Johnson", 20, 3.8};
+    Player alice = {"Alice the Brave", 20, 3.8};
     
     // TODO: Call both functions with alice
     
@@ -126,8 +128,8 @@ int main() {
 
 **Expected Output:**
 ```
-Student: Alice Johnson, Age: 20, GPA: 3.80
-Alice is an honor student: Yes
+Player: Alice the Brave, Level: 20, Score: 3.80
+Alice the Brave is a top player: Yes
 ```
 
 ### Problem 2.2: Modifying Through Non-Const References (25 minutes)
@@ -140,28 +142,28 @@ Extend the previous program:
 #include <cstdio>
 #include <cstring>
 
-struct Student {
+struct Player {
     char name[50];
-    int age;
-    double gpa;
+    int level;
+    double score;
 };
 
-// TODO: Keep your display_student and is_honor_student functions from 2.1
+// TODO: Keep your display_player and is_top_player functions from 2.1
 
-// TODO: Write a function 'update_gpa' that takes a Student reference (non-const)
-// and a new GPA value, then updates the student's GPA
+// TODO: Write a function 'update_score' that takes a Player reference (non-const)
+// and a new score value, then updates the player's score
 
-// TODO: Write a function 'celebrate_birthday' that takes a Student reference
-// and increments their age by 1
+// TODO: Write a function 'level_up' that takes a Player reference
+// and increments their level by 1
 
 int main() {
-    Student bob = {"Bob Smith", 19, 3.2};
+    Player bob = {"Bob the Bold", 19, 3.2};
     
     // TODO: Display Bob's initial info
-    // TODO: Update Bob's GPA to 3.6
-    // TODO: Celebrate Bob's birthday
+    // TODO: Update Bob's score to 3.6
+    // TODO: Level Bob up
     // TODO: Display Bob's updated info
-    // TODO: Check if Bob is now an honor student
+    // TODO: Check if Bob is now a top player
     
     return 0;
 }
@@ -169,10 +171,10 @@ int main() {
 
 **Expected Output:**
 ```
-Initial - Student: Bob Smith, Age: 19, GPA: 3.20
-Bob is an honor student: No
-Updated - Student: Bob Smith, Age: 20, GPA: 3.60
-Bob is an honor student: Yes
+Initial - Player: Bob the Bold, Level: 19, Score: 3.20
+Bob the Bold is a top player: No
+Updated - Player: Bob the Bold, Level: 20, Score: 3.60
+Bob the Bold is a top player: Yes
 ```
 
 ---
@@ -188,28 +190,28 @@ Create a program that demonstrates reference return types:
 // Template provided:
 #include <cstdio>
 
-struct BankAccount {
-    double balance;
-    int account_number;
+struct Player {
+    double health;
+    int player_id;
 };
 
-// TODO: Write a function 'get_balance' that takes a const BankAccount reference
-// and returns a const reference to the balance
+// TODO: Write a function 'get_health' that takes a const Player reference
+// and returns a const reference to the health
 
-// TODO: Write a function 'get_account_for_update' that takes an array of BankAccount
-// and an account number, then returns a reference to the matching account
-// (For simplicity, assume the account exists and is at index = account_number - 1)
+// TODO: Write a function 'get_player_for_update' that takes a roster of Player
+// and a player id, then returns a reference to the matching player
+// (For simplicity, assume the player exists and is at index = player_id - 1)
 
 int main() {
-    BankAccount accounts[3] = {
+    Player roster[3] = {
         {1000.50, 1},
         {2500.75, 2}, 
         {750.25, 3}
     };
     
-    // TODO: Use get_balance to display account 2's balance
-    // TODO: Use get_account_for_update to modify account 1's balance to 1200.00
-    // TODO: Display all account balances
+    // TODO: Use get_health to display player 2's health
+    // TODO: Use get_player_for_update to modify player 1's health to 1200.00
+    // TODO: Display all player health values
     
     return 0;
 }
@@ -217,11 +219,11 @@ int main() {
 
 **Expected Output:**
 ```
-Account 2 balance: $2500.75
-Updated balances:
-Account 1: $1200.00
-Account 2: $2500.75
-Account 3: $750.25
+Player 2 health: 2500.75
+Updated health values:
+Player 1: 1200.00
+Player 2: 2500.75
+Player 3: 750.25
 ```
 
 ### Problem 3.2: Object Lifecycle with References (30 minutes)
@@ -234,43 +236,43 @@ Create a comprehensive program that demonstrates object lifecycle:
 #include <cstdio>
 #include <cstring>
 
-struct Book {
+struct Avatar {
     char title[100];
-    char author[50];
-    int pages;
-    double price;
+    char class_name[50];
+    int level;
+    double power;
 };
 
-// TODO: Write a function 'create_book' that takes title, author, pages, price
-// and returns a Book (by value)
+// TODO: Write a function 'create_avatar' that takes title, class_name, level, power
+// and returns an Avatar (by value)
 
-// TODO: Write a function 'print_book_info' that takes a const Book reference
-// and prints all book information
+// TODO: Write a function 'print_avatar_info' that takes a const Avatar reference
+// and prints all avatar information
 
-// TODO: Write a function 'apply_discount' that takes a Book reference and 
-// discount percentage, then reduces the price
+// TODO: Write a function 'apply_buff' that takes an Avatar reference and 
+// buff percentage, then increases the power
 
-// TODO: Write a function 'copy_book' that takes a const Book reference and
-// returns a new Book with the same information but prefix "Copy of " to title
+// TODO: Write a function 'clone_avatar' that takes a const Avatar reference and
+// returns a new Avatar with the same information but prefix "Clone of " to title
 
 int main() {
-    printf("=== Creating original book ===\n");
-    // TODO: Create a book "The C++ Journey" by "Jane Programmer", 300 pages, $49.99
+    printf("=== Creating original avatar ===\n");
+    // TODO: Create an avatar "Storm Walker" of class "Mage", level 30, power 49.99
     
-    printf("\n=== Original book info ===\n");
-    // TODO: Print the original book info
+    printf("\n=== Original avatar info ===\n");
+    // TODO: Print the original avatar info
     
-    printf("\n=== Applying 20%% discount ===\n");
-    // TODO: Apply 20% discount to original book
+    printf("\n=== Applying 20%% buff ===\n");
+    // TODO: Apply 20% buff to original avatar
     // TODO: Print updated info
     
-    printf("\n=== Creating a copy ===\n");
-    // TODO: Create a copy of the discounted book
-    // TODO: Print copy info
+    printf("\n=== Creating a clone ===\n");
+    // TODO: Create a clone of the buffed avatar
+    // TODO: Print clone info
     
-    printf("\n=== Modifying copy only ===\n");
-    // TODO: Apply 10% discount to copy only
-    // TODO: Print both original and copy to show they're different
+    printf("\n=== Modifying clone only ===\n");
+    // TODO: Apply 10% buff to clone only
+    // TODO: Print both original and clone to show they're different
     
     return 0;
 }
@@ -278,29 +280,29 @@ int main() {
 
 **Expected Output:**
 ```
-=== Creating original book ===
+=== Creating original avatar ===
 
-=== Original book info ===
-Title: The C++ Journey
-Author: Jane Programmer
-Pages: 300
-Price: $49.99
+=== Original avatar info ===
+Title: Storm Walker
+Class: Mage
+Level: 30
+Power: 49.99
 
-=== Applying 20% discount ===
-Title: The C++ Journey
-Author: Jane Programmer
-Pages: 300
-Price: $39.99
+=== Applying 20% buff ===
+Title: Storm Walker
+Class: Mage
+Level: 30
+Power: 59.99
 
-=== Creating a copy ===
-Title: Copy of The C++ Journey
-Author: Jane Programmer
-Pages: 300
-Price: $39.99
+=== Creating a clone ===
+Title: Clone of Storm Walker
+Class: Mage
+Level: 30
+Power: 59.99
 
-=== Modifying copy only ===
-Original - Title: The C++ Journey, Price: $39.99
-Copy - Title: Copy of The C++ Journey, Price: $35.99
+=== Modifying clone only ===
+Original - Title: Storm Walker, Power: 59.99
+Clone - Title: Clone of Storm Walker, Power: 65.99
 ```
 
 ---

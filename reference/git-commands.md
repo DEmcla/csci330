@@ -14,7 +14,7 @@ git log --oneline -5        # Show recent commits
 git checkout main           # Switch to main branch
 git pull upstream main      # Get latest course updates
 git push origin main        # Update your fork
-git checkout -b week##-assignment-name  # Create feature branch
+git checkout -b chapter-NN-assignment-name  # Create feature branch
 ```
 
 ### Work on Assignment
@@ -30,9 +30,9 @@ git push origin branch-name # Push to your fork
 ### Fork Setup
 ```bash
 # After forking on GitHub, clone your fork:
-git clone https://github.com/YOUR_USERNAME/csci330_u26.git
-cd csci330_u26
-git remote add upstream https://github.com/DEmcla/csci330_u26.git
+git clone https://github.com/YOUR_USERNAME/csci330.git
+cd csci330
+git remote add upstream https://github.com/DEmcla/csci330.git
 ```
 
 ### Configure Identity
@@ -57,9 +57,9 @@ git branch                          # List all branches
 
 ### Naming Conventions
 ```bash
-git checkout -b week01-pointers-basics
-git checkout -b week02-dynamic-memory  
-git checkout -b week03-classes-intro
+git checkout -b chapter-03-pointers-basics
+git checkout -b chapter-04-object-lifecycle
+git checkout -b chapter-05-polymorphism
 ```
 
 ### Cleaning Up Branches
@@ -176,7 +176,7 @@ git blame file.cpp          # Show who changed each line
 ### Accidentally on Main Branch
 ```bash
 # If you made changes on main instead of feature branch:
-git checkout -b week01-assignment-name  # Create branch with current changes
+git checkout -b chapter-NN-assignment-name  # Create branch with current changes
 # Now you're on the correct branch!
 ```
 
@@ -190,7 +190,7 @@ git checkout HEAD@{2}       # Go back to specific state
 ```bash
 git checkout main
 git pull upstream main
-git checkout -b week01-assignment-name-v2
+git checkout -b chapter-NN-assignment-name-v2
 # Copy your work manually if needed
 ```
 
@@ -201,7 +201,7 @@ git checkout -b week01-assignment-name-v2
 git checkout existing-branch-name     # Switch to it instead
 # OR delete it first:
 git branch -d old-branch-name
-git checkout -b week01-assignment-name
+git checkout -b chapter-NN-assignment-name
 ```
 
 ### "Nothing to commit"
@@ -226,7 +226,7 @@ git add .                   # Stage files if needed
 - [ ] `git checkout main`
 - [ ] `git pull upstream main` 
 - [ ] `git push origin main`
-- [ ] `git checkout -b week##-assignment-name`
+- [ ] `git checkout -b chapter-NN-assignment-name`
 
 ### During Assignment:
 - [ ] Work in your assignment directory

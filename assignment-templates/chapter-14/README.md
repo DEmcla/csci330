@@ -13,18 +13,18 @@
 ### Problem 1.1: First Steps with Iterators
 **Objective**: Understand basic iterator operations
 
-Given this vector, use iterators to accomplish the tasks:
+Given this sensor log, use iterators to accomplish the tasks:
 ```cpp
 #include <vector>
 #include <iostream>
 
 int main() {
-    std::vector<int> numbers{10, 20, 30, 40, 50};
+    std::vector<int> readings{10, 20, 30, 40, 50};  // sensor readings, °C
     
     // TODO: Use iterators to complete these tasks:
-    // 1. Print the first element using an iterator
-    // 2. Print the last element using an iterator  
-    // 3. Print all elements using a traditional iterator loop
+    // 1. Print the first reading using an iterator
+    // 2. Print the last reading using an iterator  
+    // 3. Print all readings using a traditional iterator loop
     
     return 0;
 }
@@ -49,19 +49,19 @@ Complete both versions of this program:
 #include <string>
 
 int main() {
-    std::vector<std::string> languages{"Python", "Java", "C++", "JavaScript"};
+    std::vector<std::string> sensors{"temp", "humidity", "pressure", "light"};
     
     // Version 1: Traditional index-based approach (like Java)
     std::cout << "Index-based:\n";
-    // TODO: Print all elements using indices
+    // TODO: Print all sensor names using indices
     
     // Version 2: Iterator-based approach  
     std::cout << "Iterator-based:\n";
-    // TODO: Print all elements using iterators
+    // TODO: Print all sensor names using iterators
     
     // Version 3: Range-based for loop (like Python)
     std::cout << "Range-based:\n";
-    // TODO: Print all elements using range-based for
+    // TODO: Print all sensor names using range-based for
     
     return 0;
 }
@@ -77,12 +77,12 @@ int main() {
 #include <iostream>
 
 int main() {
-    std::vector<int> data{1, 3, 5, 7, 9, 11, 13, 15};
+    std::vector<int> log{1, 3, 5, 7, 9, 11, 13, 15};  // timestamped sensor readings
     
     // TODO: Using iterators, accomplish these tasks:
-    // 1. Print the element at position 3 (should be 7)
-    // 2. Print every other element starting from the beginning
-    // 3. Print the last 3 elements
+    // 1. Print the reading at position 3 (should be 7)
+    // 2. Print every other reading starting from the beginning
+    // 3. Print the last 3 readings
     
     return 0;
 }
@@ -105,21 +105,21 @@ Rewrite these traditional loops using range-based for loops:
 #include <string>
 
 void old_style_examples() {
-    std::vector<double> grades{85.5, 92.0, 78.5, 96.0, 88.5};
+    std::vector<double> readings{85.5, 92.0, 78.5, 96.0, 88.5};  // sensor readings
     
     // Old style 1: Index-based
-    std::cout << "Grades: ";
-    for(size_t i = 0; i < grades.size(); ++i) {
-        std::cout << grades[i] << " ";
+    std::cout << "Readings: ";
+    for(size_t i = 0; i < readings.size(); ++i) {
+        std::cout << readings[i] << " ";
     }
     std::cout << "\n";
     
     // Old style 2: Iterator-based
     double total = 0.0;
-    for(auto it = grades.begin(); it != grades.end(); ++it) {
+    for(auto it = readings.begin(); it != readings.end(); ++it) {
         total += *it;
     }
-    std::cout << "Average: " << total / grades.size() << "\n";
+    std::cout << "Average: " << total / readings.size() << "\n";
 }
 
 int main() {
@@ -144,23 +144,23 @@ int main() {
 #include <string>
 
 int main() {
-    // Task 1: Double all numbers
-    std::vector<int> numbers{1, 2, 3, 4, 5};
-    // TODO: Use range-based for to double each number
+    // Task 1: Double all readings (recalibrate the sensor scale)
+    std::vector<int> readings{1, 2, 3, 4, 5};
+    // TODO: Use range-based for to double each reading
     
-    // Task 2: Convert strings to uppercase (first character only)
-    std::vector<std::string> words{"hello", "world", "cpp", "iterators"};
-    // TODO: Use range-based for to capitalize first letter of each word
+    // Task 2: Convert sensor labels to uppercase (first character only)
+    std::vector<std::string> labels{"temp", "humidity", "pressure", "light"};
+    // TODO: Use range-based for to capitalize first letter of each label
     
-    // Task 3: Count positive numbers
+    // Task 3: Count above-threshold readings
     std::vector<int> mixed{-5, 3, -1, 8, 0, -2, 7};
-    int positive_count = 0;
-    // TODO: Use range-based for to count positive numbers
+    int above_threshold_count = 0;
+    // TODO: Use range-based for to count readings greater than zero
     
     // Print results to verify
-    std::cout << "Doubled numbers: ";
-    for(const auto& num : numbers) {
-        std::cout << num << " ";
+    std::cout << "Doubled readings: ";
+    for(const auto& reading : readings) {
+        std::cout << reading << " ";
     }
     std::cout << "\n";
     
@@ -181,26 +181,26 @@ Fill in the blanks with the correct range-based for loop syntax:
 #include <string>
 
 int main() {
-    std::vector<std::string> names{"Alice", "Bob", "Charlie", "Diana"};
+    std::vector<std::string> sensors{"Sensor-A", "Sensor-B", "Sensor-C", "Sensor-D"};
     
     // Scenario 1: Just reading/printing (most efficient?)
-    std::cout << "Names: ";
-    for(_______ name : names) {  // Fill in the blank
-        std::cout << name << " ";
+    std::cout << "Sensors: ";
+    for(_______ sensor : sensors) {  // Fill in the blank
+        std::cout << sensor << " ";
     }
     std::cout << "\n";
     
     // Scenario 2: Modifying each element
-    std::cout << "Adding exclamation marks:\n";
-    for(_______ name : names) {  // Fill in the blank
-        name += "!";
-        std::cout << name << "\n";
+    std::cout << "Marking sensors offline:\n";
+    for(_______ sensor : sensors) {  // Fill in the blank
+        sensor += " [offline]";
+        std::cout << sensor << "\n";
     }
     
-    // Scenario 3: Expensive copy objects (what if names were large objects?)
+    // Scenario 3: Expensive copy objects (what if sensors held large objects?)
     std::cout << "Efficient reading:\n";
-    for(_______ name : names) {  // Fill in the blank
-        std::cout << "Hello, " << name << "\n";
+    for(_______ sensor : sensors) {  // Fill in the blank
+        std::cout << "Polling " << sensor << "\n";
     }
     
     return 0;
@@ -225,33 +225,33 @@ Create these utility functions:
 // TODO: Implement this function using iterators
 template<typename Container, typename T>
 bool contains(const Container& container, const T& value) {
-    // Return true if container contains value, false otherwise
+    // Return true if the sensor log contains value, false otherwise
     // Hint: Use iterators to search through the container
 }
 
 // TODO: Implement this function using iterators  
 template<typename Container, typename T>
 size_t count_occurrences(const Container& container, const T& value) {
-    // Count how many times value appears in container
+    // Count how many times a reading value appears in the log
     // Use iterators to traverse and count
 }
 
 // TODO: Implement this function using iterators
 template<typename Container>
 void print_reverse(const Container& container) {
-    // Print container elements in reverse order
+    // Print the sensor log in reverse (most recent reading first)
     // Hint: Some containers support reverse iterators (rbegin, rend)
 }
 
 int main() {
-    std::vector<int> data{1, 3, 7, 3, 9, 3, 5};
+    std::vector<int> log{1, 3, 7, 3, 9, 3, 5};  // sensor readings
     
     // Test your functions
-    std::cout << "Contains 7: " << contains(data, 7) << "\n";
-    std::cout << "Contains 4: " << contains(data, 4) << "\n";
-    std::cout << "Count of 3: " << count_occurrences(data, 3) << "\n";
+    std::cout << "Contains 7: " << contains(log, 7) << "\n";
+    std::cout << "Contains 4: " << contains(log, 4) << "\n";
+    std::cout << "Count of 3: " << count_occurrences(log, 3) << "\n";
     std::cout << "Reverse: ";
-    print_reverse(data);
+    print_reverse(log);
     std::cout << "\n";
     
     return 0;
@@ -263,28 +263,28 @@ int main() {
 ### Problem 3.2: Safe Container Modification
 **Objective**: Handle iterator invalidation correctly
 
-Fix this buggy code that tries to remove even numbers:
+Fix this buggy code that tries to remove faulty (even-valued) readings:
 
 ```cpp
 #include <vector>
 #include <iostream>
 
 int main() {
-    std::vector<int> numbers{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::vector<int> readings{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     
     // BUGGY CODE - Don't run this as-is!
-    // for(auto it = numbers.begin(); it != numbers.end(); ++it) {
+    // for(auto it = readings.begin(); it != readings.end(); ++it) {
     //     if(*it % 2 == 0) {
-    //         numbers.erase(it);  // This invalidates the iterator!
+    //         readings.erase(it);  // This invalidates the iterator!
     //     }
     // }
     
-    // TODO: Fix the above code to safely remove even numbers
+    // TODO: Fix the above code to safely remove the even-valued readings
     // Hint: erase() returns an iterator to the next element
     
-    std::cout << "Odd numbers remaining: ";
-    for(const auto& num : numbers) {
-        std::cout << num << " ";
+    std::cout << "Valid readings remaining: ";
+    for(const auto& reading : readings) {
+        std::cout << reading << " ";
     }
     std::cout << "\n";
     
@@ -292,45 +292,45 @@ int main() {
 }
 ```
 
-**Expected Output**: `Odd numbers remaining: 1 3 5 7 9`
+**Expected Output**: `Valid readings remaining: 1 3 5 7 9`
 
 ### Problem 3.3: Multi-Container Iterator Project
 **Objective**: Work with multiple containers and iterator patterns
 
-Create a simple gradebook system:
+Create a simple sensor monitoring system:
 
 ```cpp
 #include <vector>
 #include <iostream>
 #include <string>
 
-struct Student {
+struct Sensor {
     std::string name;
-    std::vector<double> grades;
+    std::vector<double> readings;
     
-    // TODO: Add a method to calculate average grade using iterators
+    // TODO: Add a method to calculate the average reading using iterators
     double calculate_average() const {
-        // Use iterators to sum grades and return average
+        // Use iterators to sum the readings and return the average
     }
 };
 
 int main() {
-    std::vector<Student> class_roster{
-        {"Alice", {85.0, 92.0, 78.0, 95.0}},
-        {"Bob", {88.0, 76.0, 92.0, 85.0}},
-        {"Charlie", {92.0, 88.0, 95.0, 90.0}}
+    std::vector<Sensor> sensor_array{
+        {"Sensor-A", {85.0, 92.0, 78.0, 95.0}},
+        {"Sensor-B", {88.0, 76.0, 92.0, 85.0}},
+        {"Sensor-C", {92.0, 88.0, 95.0, 90.0}}
     };
     
     // TODO: Using iterators and/or range-based for loops:
-    // 1. Print each student's name and average grade
-    // 2. Find the student with the highest average
-    // 3. Count how many students have an average above 85.0
+    // 1. Print each sensor's name and average reading
+    // 2. Find the sensor with the highest average reading
+    // 3. Count how many sensors have an average above 85.0
     
     return 0;
 }
 ```
 
-**Integration Challenge**: This combines containers (vector), custom types (Student), and multiple iteration patterns.
+**Integration Challenge**: This combines containers (vector), custom types (Sensor), and multiple iteration patterns.
 
 ---
 
@@ -341,23 +341,23 @@ For each code snippet, identify the problem and propose a fix:
 
 1. **Off-by-one Error**:
 ```cpp
-for(auto it = vec.begin(); it <= vec.end(); ++it) {  // What's wrong?
+for(auto it = log.begin(); it <= log.end(); ++it) {  // What's wrong?
     std::cout << *it << " ";
 }
 ```
 
 2. **Iterator Invalidation**:
 ```cpp
-for(auto it = vec.begin(); it != vec.end(); ++it) {
-    vec.push_back(*it * 2);  // What's wrong?
+for(auto it = log.begin(); it != log.end(); ++it) {
+    log.push_back(*it * 2);  // What's wrong?
 }
 ```
 
 3. **Mismatched Iterator Types**:
 ```cpp
-std::vector<int> vec{1, 2, 3};
+std::vector<int> log{1, 2, 3};
 std::vector<double> other{4.0, 5.0, 6.0};
-auto it = vec.begin();
+auto it = log.begin();
 auto end = other.end();  // What's wrong?
 for(; it != end; ++it) { /* ... */ }
 ```
@@ -413,7 +413,7 @@ chapter14_solutions/
 ├── problem_set_3/
 │   ├── problem_3_1_custom_functions.cpp
 │   ├── problem_3_2_safe_modification.cpp
-│   └── problem_3_3_gradebook.cpp
+│   └── problem_3_3_sensor_monitor.cpp
 └── README.md (with compilation notes and reflections)
 ```
 

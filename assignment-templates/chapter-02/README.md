@@ -31,6 +31,8 @@
 ## 🎯 Core Assignment 1: Type System Exploration (60 minutes)
 *Comprehensive project combining fundamental types, conversions, and practical applications*
 
+**Domain:** You are building software for an automated **weather station**. The station's sensors report raw counts; your code must turn those counts into calibrated measurements and analyze them.
+
 ### Part A: Type Discovery and Analysis (30 minutes)
 **Objective**: Build a comprehensive understanding of C++ type system through systematic exploration
 
@@ -67,22 +69,22 @@ Explicit vs Implicit:
   Explicit: static_cast<int>(3.14) = 3
 ```
 
-### Part B: Practical Application - Multi-Unit Converter (30 minutes)
-**Objective**: Apply type knowledge in a comprehensive conversion utility
+### Part B: Practical Application - Sensor Calibration Converter (30 minutes)
+**Objective**: Apply type knowledge in a comprehensive sensor-calibration utility
 
-Extend your program to include a multi-unit converter that handles:
+Extend your program to include a sensor converter that handles the unit conversions a weather station needs:
 
 **Temperature Conversions:**
 - Celsius ↔ Fahrenheit ↔ Kelvin
-- Handle integer inputs but provide precise double outputs
-- Show the impact of integer vs floating-point arithmetic
+- Handle integer sensor inputs but provide precise double outputs
+- Show the impact of integer vs floating-point arithmetic on a calibrated reading
 
-**Distance Conversions:**  
-- Miles ↔ Kilometers ↔ Meters
-- Feet ↔ Meters ↔ Inches
+**Atmospheric Conversions:**  
+- Pressure: hectopascals ↔ inches of mercury ↔ millibars
+- Wind speed: meters/second ↔ kilometers/hour ↔ miles/hour
 
 **Requirements:**
-1. Use appropriate types for each unit (int for counts, double for precise measurements)
+1. Use appropriate types for each unit (int for raw sensor counts, double for precise calibrated measurements)
 2. Demonstrate the difference between integer and floating-point division
 3. Format output with appropriate precision
 4. Handle common conversion scenarios with test cases
@@ -121,22 +123,22 @@ Create a comprehensive analysis program that demonstrates:
 ## 🎯 Core Assignment 2: Memory and Data Structures (75 minutes)
 *Comprehensive project integrating arrays, pointers, and structs for real-world data management*
 
-### Part A: Student Grade Management System (40 minutes)
-**Objective**: Build a comprehensive grade management system using arrays, pointers, and structs
+### Part A: Weather Station Reading Logger (40 minutes)
+**Objective**: Build a comprehensive reading logger using arrays, pointers, and structs
 
-Create a program called `student_manager.cpp` that manages multiple students and their grades:
+Create a program called `station_logger.cpp` that records and analyzes sensor readings collected over time:
 
 **Data Structures:**
-1. Create a `Student` struct with: name (char array), student_id (int), grades array, grade_count
-2. Create an array to store multiple students (at least 3 students)
+1. Create a `Reading` struct with: a station label (char array), a timestamp (int, minutes since midnight), a temperature array, and a sample_count
+2. Create an array to store multiple readings (at least 3 readings)
 3. Use both stack arrays and demonstrate pointer arithmetic
 
 **Core Functionality:**
-4. Initialize sample data for 3 students with varying numbers of grades
-5. Calculate individual student averages using pointer arithmetic
-6. Find class-wide statistics (highest/lowest individual averages, overall class average)
+4. Initialize sample data for 3 readings with varying numbers of temperature samples
+5. Calculate each reading's average temperature using pointer arithmetic
+6. Find station-wide statistics (highest/lowest individual averages, overall mean temperature)
 7. Implement safe array access with bounds checking
-8. Sort students by average grade (simple bubble sort)
+8. Sort readings by average temperature (simple bubble sort)
 
 **Memory Safety:**
 9. Demonstrate safe vs unsafe array access
@@ -145,33 +147,33 @@ Create a program called `student_manager.cpp` that manages multiple students and
 
 **Expected Output** (partial):
 ```
-=== Student Grade Management System ===
-Student: Alice Johnson (ID: 1001)
-  Grades: [85, 92, 78, 96, 88]
-  Average: 87.8
+=== Weather Station Reading Logger ===
+Reading: North Ridge (timestamp: 0480)
+  Samples: [18.5, 19.2, 17.8, 20.6, 18.8]
+  Average: 19.0
   
-Student: Bob Smith (ID: 1002)  
-  Grades: [90, 87, 93]
-  Average: 90.0
+Reading: Lake Shore (timestamp: 0540)
+  Samples: [21.0, 22.7, 20.3]
+  Average: 21.3
   
-Class Statistics:
-  Highest Average: Bob Smith (90.0)
-  Lowest Average: Alice Johnson (87.8)
-  Class Average: 88.9
+Station Statistics:
+  Highest Average: Lake Shore (21.3)
+  Lowest Average: North Ridge (19.0)
+  Overall Mean: 20.1
   
 [Memory Safety Demo]
-  Safe access: grades[2] = 78
-  Unsafe access: grades[10] = [undefined/crash]
+  Safe access: samples[2] = 17.8
+  Unsafe access: samples[10] = [undefined/crash]
 ```
 
 ### Part B: Advanced Memory Operations and Pointers (45 minutes)
 **Objective**: Master pointer arithmetic, memory layout, and dynamic operations
 
-Extend your student management program with advanced memory operations:
+Extend your reading logger with advanced memory operations:
 
 **Pointer Operations:**
 1. Rewrite array processing functions using pointer arithmetic instead of indices
-2. Create functions that take pointer parameters: `calculate_average(int* grades, size_t count)`
+2. Create functions that take pointer parameters: `calculate_average(double* samples, size_t count)`
 3. Demonstrate pointer vs array notation equivalence
 4. Show memory addresses of array elements (demonstrate contiguous layout)
 
@@ -179,7 +181,7 @@ Extend your student management program with advanced memory operations:
 5. Implement a generic `safe_access` function template that works with any array type
 6. Create array copying functions using pointers
 7. Implement array search functions (linear search using pointers)
-8. Build a simple "database" query system (find students by ID, by grade range)
+8. Build a simple "query" system (find readings by timestamp, by temperature range)
 
 **Memory Layout Investigation:**
 9. Print addresses of struct members to understand memory layout
@@ -191,7 +193,7 @@ Extend your student management program with advanced memory operations:
 13. Create error reporting system (error codes vs exceptions preview)
 14. Build defensive programming practices into all functions
 
-**Files**: `student_manager.cpp` (extended from Part A)
+**Files**: `station_logger.cpp` (extended from Part A)
 **Time Estimate**: 90 minutes total (45 + 45)
 **Skills Developed**: Memory management, pointer arithmetic, struct design, defensive programming
 
@@ -203,18 +205,18 @@ Extend your student management program with advanced memory operations:
 ### Challenge 1: Multi-dimensional Arrays (25 minutes)
 **Objective**: Master 2D arrays and matrix operations
 
-Create an advanced gradebook with matrix-style operations:
-1. Create a flexible gradebook supporting variable numbers of students and assignments
+Create an advanced sensor grid with matrix-style operations:
+1. Create a flexible grid supporting variable numbers of stations and time slots
 2. Implement matrix-style operations (row sums, column sums, transpose)
-3. Add grade curve calculations (add points to all grades, percentage scaling)
+3. Add calibration adjustments (add an offset to all readings, percentage scaling)
 4. Build a formatted report generator with proper alignment
-5. Implement simple statistical analysis (standard deviation, grade distribution)
+5. Implement simple statistical analysis (standard deviation, reading distribution)
 
-### Challenge 2: Dynamic Inventory System (30 minutes)
+### Challenge 2: Dynamic Sensor Network (30 minutes)
 **Objective**: Advanced struct design with complex data relationships
 
-Build an inventory management system:
-1. Create nested struct hierarchy (Product -> Category -> Inventory)
+Build a sensor network model:
+1. Create nested struct hierarchy (Sensor -> Station -> Network)
 2. Implement search and filtering capabilities
 3. Add data validation and error handling
 4. Create formatted reporting system
@@ -307,8 +309,8 @@ Before moving to Chapter 3, you should be able to:
 - **Share with Peers**: Help others and learn from different approaches
 
 ### Time Management:
-- **Week 1**: Complete Core Assignment 1 (Type System Exploration)
-- **Week 2**: Complete Core Assignment 2 (Memory and Data Structures)
+- **Stage 1**: Complete Core Assignment 1 (Type System Exploration)
+- **Stage 2**: Complete Core Assignment 2 (Memory and Data Structures)
 - **Bonus Time**: Work on Challenge Exercises if time permits
 
 Remember: The goal is deep understanding, not speed. Take the time you need to truly master these foundational concepts.

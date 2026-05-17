@@ -1,7 +1,8 @@
 # Phase 2: Minimum Viable Product + Feature Development
-**Duration**: Weeks 3-4
-**Due**: End of Week 4
+**Anchor**: Chapter 11
 **Points**: 130 of 300 (≈43% of project grade)
+
+> The calendar date this phase is due is set per offering in Canvas.
 
 ### Grading Breakdown (130 pts)
 | Component | Points |
@@ -15,11 +16,11 @@
 | Discussion post + 2 peer reviews on classmates' submissions | 5 |
 **Goal**: Get your project to a complete, working MVP, then add the features that make it actually interesting.
 
-This phase merges what was two phases in the 15-week course (MVP + Features) into one in the summer version. You are building the bulk of the project here.
+This phase combines core build-out and feature enrichment. You are building the bulk of the project here.
 
 ## Your Phase 2 Todo List
 
-### Week 3: Build Core / MVP (~5-6 hours)
+### Stage 1 -- Build Core / MVP (~5-6 hours)
 - [ ] Create the main classes, structures, and modules
 - [ ] Get the basic end-to-end flow working
 - [ ] Apply C++ practices you have just learned:
@@ -28,12 +29,12 @@ This phase merges what was two phases in the 15-week course (MVP + Features) int
   - Appropriate use of inheritance or templates (Ch 5, Ch 6)
 - [ ] Handle the obvious bad inputs so your program does not crash on them
 
-### Week 4: Add Interesting Features (~7-9 hours)
+### Stage 2 -- Add Interesting Features (~7-9 hours)
 - [ ] Add **2-3 features** that move your project from "works" to "actually useful or fun"
 - [ ] Use C++ features from the curriculum where they naturally fit:
-  - STL containers (vector, map) -- you will formally study these in Week 5
-  - Smart pointers if you have dynamic allocation -- you will formally study these in Week 5
-  - Templates if you have repeated logic over types -- Week 3 material
+  - STL containers (vector, map) -- Chapter 13 material
+  - Smart pointers if you have dynamic allocation -- Chapter 11 material
+  - Templates if you have repeated logic over types -- Chapter 6 material
 - [ ] Improve error messages so a user can diagnose what went wrong without reading your code
 - [ ] Run `valgrind --leak-check=full` once and fix major leaks if any appear
 - [ ] Make sure another student could clone the repo, run `cmake -B build && cmake --build build`, and launch it

@@ -49,7 +49,7 @@ See `setup/docker_troubleshooting.md` for the full list of installation-time iss
 
 **Fix:**
 1. Confirm the Dev Containers extension is installed: VS Code → Extensions → search `Dev Containers` → install if missing.
-2. Make sure you opened the **`csci330_u26/` folder** (the one that contains `README.md`, `assignment-templates/`, `setup/`, etc.) — not a parent folder, not a subfolder.
+2. Make sure you opened the **`csci330/` folder** (the one that contains `README.md`, `assignment-templates/`, `setup/`, etc.) — not a parent folder, not a subfolder.
 3. Check `.devcontainer/devcontainer.json` exists: in VS Code's Explorer panel, show hidden files (click the gear) and verify the folder.
 4. Manually trigger: `Cmd+Shift+P` (macOS) / `Ctrl+Shift+P` (Win/Linux) → type `Dev Containers: Reopen in Container` → press Enter.
 
@@ -70,7 +70,7 @@ See `setup/docker_troubleshooting.md` for the full list of installation-time iss
 
 **What's happening:** In prior terms, a stale `.vscode/devcontainer.json` coexisted with the real `.devcontainer/devcontainer.json`, causing mysterious path mismatches (workspace at `/workspace` vs `/home/student/workspace`).
 
-**U26 ships only the correct config.** If you find yourself with two, delete the one inside `.vscode/` — keep the one inside `.devcontainer/`.
+**The course ships only the correct config.** If you find yourself with two, delete the one inside `.vscode/` — keep the one inside `.devcontainer/`.
 
 ---
 
@@ -82,17 +82,17 @@ See `setup/docker_troubleshooting.md` for the full list of installation-time iss
 - Check you cloned **your fork** (URL contains your username), not the instructor's repo directly:
   ```bash
   git remote -v
-  # origin should be https://github.com/YOUR_USERNAME/csci330_u26.git
+  # origin should be https://github.com/YOUR_USERNAME/csci330.git
   ```
 - If the URL is wrong, fix it:
   ```bash
-  git remote set-url origin https://github.com/YOUR_USERNAME/csci330_u26.git
+  git remote set-url origin https://github.com/YOUR_USERNAME/csci330.git
   ```
 - If you're using SSH and hitting "Permission denied (publickey)", the quick fix is to switch to HTTPS (the URL above). SSH setup is outside the scope of this course.
 
 ### 🟥 "Oh no, I committed to `main`"
 
-**What's happening:** You forgot to create a feature branch. Very common in Week 1.
+**What's happening:** You forgot to create a feature branch. Very common on the first assignment.
 
 **Fix:** See `setup/GIT_WORKFLOW.md` → "Forgot to branch — committed on main." Two commands and you're back on a proper feature branch with your work intact.
 
@@ -104,12 +104,12 @@ See `setup/docker_troubleshooting.md` for the full list of installation-time iss
 
 ### 🟥 "I cloned the repo inside the repo"
 
-**What's happening:** You ran `git clone` from inside your existing clone, creating a nested `csci330_u26/csci330_u26/` situation. This happened to several F25 students.
+**What's happening:** You ran `git clone` from inside your existing clone, creating a nested `csci330/csci330/` situation. This happened to several F25 students.
 
 **Fix:**
 ```bash
 # From your outer clone directory
-rm -rf csci330_u26   # ⚠️ careful -- make sure you're deleting the nested copy, not yours
+rm -rf csci330   # ⚠️ careful -- make sure you're deleting the nested copy, not yours
 git status            # verify you're still inside your real clone
 ```
 
@@ -125,8 +125,8 @@ git status            # verify you're still inside your real clone
 
 **Fix forever:** stop using `git add .`. Stage specific paths:
 ```bash
-git add assignments/CSCI330_FirstName_LastName/week01/src/
-git add assignments/CSCI330_FirstName_LastName/week01/README.md
+git add assignments/CSCI330_FirstName_LastName/chapter-02/src/
+git add assignments/CSCI330_FirstName_LastName/chapter-02/README.md
 ```
 
 The course `.gitignore` blocks `build/`, `*.o`, `*.exe`, `.DS_Store`, and a dozen other categories by default. Trust it.
@@ -144,9 +144,9 @@ git commit -m "Rename assignment folder to match convention"
 
 ### 🟥 I edited a template or a setup file by mistake
 
-**What's happening:** You changed a file outside your own week folder — a file in `assignment-templates/`, `setup/`, or another student's folder. The PR's automatic scope check will fail it (see section 5).
+**What's happening:** You changed a file outside your own chapter folder — a file in `assignment-templates/`, `setup/`, or another student's folder. The PR's automatic scope check will fail it (see section 5).
 
-**Fix:** work **only** inside `assignments/CSCI330_FirstName_LastName/weekNN/`. Never edit a template in place — copy it first, then edit the copy. If you want to take notes, keep a `NOTES.md` inside your own week folder.
+**Fix:** work **only** inside `assignments/CSCI330_FirstName_LastName/chapter-NN/`. Never edit a template in place — copy it first, then edit the copy. If you want to take notes, keep a `NOTES.md` inside your own chapter folder.
 
 ### 🟥 My PR targets the wrong branch
 
@@ -159,6 +159,7 @@ git commit -m "Rename assignment folder to match convention"
 **What's happening:** You submitted a blank PR body, or filled out only the title.
 
 **Fix:** when you open a PR for this repo, the template auto-populates with a short checklist plus "What I did", "Hardest part", and an AI-disclosure prompt. Fill in every box and prompt. Partial PR bodies lose process points even when the code is perfect.
+
 
 ---
 
@@ -177,14 +178,14 @@ compiler error — it names the file and line. Fix it locally
 (`cmake -B build && cmake --build build`), commit, and push again to the same
 branch. The PR updates itself and the check re-runs.
 
-### 🟥 Red "Work stays in your week folder" check
+### 🟥 Red "Work stays in your chapter folder" check
 
 **What's happening:** your commit changed a file outside
-`assignments/CSCI330_FirstName_LastName/weekNN/` — often an edited template, a
-setup file, or two week folders in one PR. The check output lists the files.
+`assignments/CSCI330_FirstName_LastName/chapter-NN/` — often an edited template, a
+setup file, or two chapter folders in one PR. The check output lists the files.
 
 **Fix:** restore those files to their original state (`git checkout -- <file>`),
-keep all your work inside your own single week folder, commit, and push again.
+keep all your work inside your own single chapter folder, commit, and push again.
 
 A red check is normal and recoverable — it is the system catching a mistake
 *before* your instructor does. Push a fix and it turns green.
@@ -194,9 +195,9 @@ A red check is normal and recoverable — it is the system catching a mistake
 ## Before you submit — the 60-second check
 
 ```
-✅ Is my PR title "Week NN Assignment - FirstName LastName"?
+✅ Is my PR title "Chapter NN Assignment - FirstName LastName"?
 ✅ Does my PR target MY fork's main (not DEmcla's main)?
-✅ Does the "Files changed" tab show ONLY files under assignments/CSCI330_My_Name/weekNN/?
+✅ Does the "Files changed" tab show ONLY files under assignments/CSCI330_My_Name/chapter-NN/?
 ✅ Is there no build/, .o, .exe, .DS_Store, or .vscode/*.user.json in the file list?
 ✅ Did I fill out every section of the PR template, including AI disclosure?
 ```

@@ -1,10 +1,10 @@
 # CSCI 330 - Project Brainstorming Guide
 
-## What Makes a Good Summer Term Project?
+## What Makes a Good Capstone Project?
 
 Your project should be:
 - **Substantial**: ~1500-2500 lines by the end, starting from 200-500
-- **Interesting**: Something you're excited to work on for 6 weeks
+- **Interesting**: Something you're excited to work on across the whole term
 - **Practical**: Solves a real problem or provides entertainment
 - **Portfolio-worthy**: You'd be proud to show this in interviews
 
@@ -104,17 +104,17 @@ Your project should be:
 - **Growth Path**: Discovery, chunking, multiple peers, integrity checks
 - **Technical Skills**: Distributed systems, protocols, networking
 
-## Reality Check: Scope for 6 Weeks
+## Reality Check: Scope for One Term
 
 ### Phase Progression Guidelines
 
-| Phase | Week | Lines of Code | What You Should Have |
-|-------|------|--------------|---------------------|
-| 1 | 2 | 200-500 | Core algorithm working |
-| 2 | 4 | 800-1800 | Complete MVP + key features |
-| 3 | 6 | 1500-2500+ | Robust, polished, presented |
+| Phase | Anchor | Lines of Code | What You Should Have |
+|-------|--------|--------------|---------------------|
+| 1 | Chapter 5 | 200-500 | Core algorithm working |
+| 2 | Chapter 11 | 800-1800 | Complete MVP + key features |
+| 3 | Chapter 15 | 1500-2500+ | Robust, polished, presented |
 
-### Warning Signs Your Scope is Too Big (ambitious for a 6-week summer)
+### Warning Signs Your Scope is Too Big
 - Needs multiple complex algorithms to work at all
 - Requires extensive external libraries just to start
 - "It's like Facebook but..."
@@ -152,11 +152,11 @@ How will you expand across phases?
 
 Before committing to your project:
 
-- Can you build a proof of concept in 200-500 lines (in under two weeks)?
+- Can you build a proof of concept in 200-500 lines by the Phase 1 anchor (Chapter 5)?
 - Do you have 5-8 features to add over the term?
 - Will you learn new C++17 concepts building this?
 - Would you demo this in a job interview?
-- Are you excited to work on this for 6 weeks?
+- Are you excited to work on this for a whole term?
 
 ---
 

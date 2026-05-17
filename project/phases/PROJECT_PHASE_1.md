@@ -1,7 +1,8 @@
 # Phase 1: Planning & Proof of Concept
-**Duration**: Weeks 1-2
-**Due**: End of Week 2
+**Anchor**: Chapter 5 (the capstone is introduced after Chapter 2 and runs parallel to the chapters from there)
 **Points**: 40 of 300 (≈13% of project grade)
+
+> The calendar date this phase is due is set per offering in Canvas.
 
 ### Grading Breakdown (40 pts)
 | Component | Points |
@@ -14,11 +15,11 @@
 
 ## Learning Path Note
 
-**Remember**: You can use ANY C++ features you need, even if they haven't been covered in the week yet. If your project needs vectors, file I/O, or classes -- research them (cppreference, the textbook's later chapters, AI assistants) and use them. Document what you used and why. This is how real development works.
+**Remember**: You can use ANY C++ features you need, even if they haven't been covered in a chapter yet. If your project needs vectors, file I/O, or classes -- research them (cppreference, the textbook's later chapters, AI assistants) and use them. Document what you used and why. This is how real development works.
 
 ## Your Phase 1 Todo List
 
-### Week 1: Planning (~2-3 hours)
+### Stage 1 -- Planning (~2-3 hours)
 - [ ] Read `brainstorming-guide.md` for idea starters
 - [ ] Pick a project that interests you
 - [ ] Write a 1-page proposal covering:
@@ -29,7 +30,7 @@
 - [ ] Create a GitHub repository for your project (public or private, your choice)
 - [ ] Push the proposal (as `README.md`) to the repo
 
-### Week 2: Proof of Concept (~4-6 hours)
+### Stage 2 -- Proof of Concept (~4-6 hours)
 - [ ] Identify the **single hardest technical challenge** and code a small program that proves it is solvable
 - [ ] Don't worry about polish -- a bare-bones terminal program is fine
 - [ ] Write a minimal test or a printed demonstration that shows it works
@@ -52,7 +53,7 @@
 ## Common Pitfalls to Avoid
 
 - Starting with easy parts (UI, menus) instead of the core functionality
-- Picking a project that is either too ambitious for 6 weeks or too simple to be interesting
+- Picking a project that is either too ambitious for one term or too simple to be interesting
 - Working in isolation without any peer feedback
 - Not pushing code to GitHub regularly -- late pushes mean you lose the ability to use the repo as evidence of work
 

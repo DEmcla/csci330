@@ -90,7 +90,7 @@ check_file ".gitignore"
 check_file "COURSE.md"
 check_file "chapters/chapter-01/lecture-notes.md"
 check_file "setup/DEVELOPMENT_SETUP.md"
-check_file "docs/csci330_u26_syllabus.md"
+check_file "docs/csci330_syllabus.md"
 
 echo ""
 echo "4. Checking Docker configuration..."

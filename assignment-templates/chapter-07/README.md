@@ -455,72 +455,52 @@ int main() {
 ### Problem 3.2: Design Challenge - When NOT to Overload (20 minutes)
 **Skill**: Making good design decisions about operator overloading
 
-Review the following class designs and identify which operator overloadings are appropriate and which are not. Rewrite the problematic ones:
+Review the following `Fraction` class. Some of its operator overloads are
+appropriate and some are not. Identify which is which, and rewrite the
+problematic ones:
 
 ```cpp
 #include <iostream>
-#include <string>
-#include <vector>
+#include <numeric>  // for std::gcd
 using namespace std;
 
-// Design 1: Student class
-class Student {
+// A Fraction class for exact rational arithmetic.
+class Fraction {
 private:
-    string name;
-    double gpa;
-    
-public:
-    Student(const string& name, double gpa) : name(name), gpa(gpa) {}
-    
-    // Question: Are these good operator overloads?
-    Student operator+(const Student& other) const {
-        // "Adding" students by averaging their GPAs?
-        return Student(name + " & " + other.name, (gpa + other.gpa) / 2);
-    }
-    
-    bool operator<(const Student& other) const {
-        // Comparing by GPA for sorting
-        return gpa < other.gpa;
-    }
-    
-    Student& operator<<(const string& course) {
-        // "Enrolling" student in course?
-        cout << name << " enrolled in " << course << endl;
-        return *this;
-    }
-    
-    string get_name() const { return name; }
-    double get_gpa() const { return gpa; }
-};
+    int numerator;
+    int denominator;
 
-// Design 2: BankAccount class
-class BankAccount {
-private:
-    string account_number;
-    double balance;
-    
 public:
-    BankAccount(const string& account_number, double initial_balance = 0.0) 
-        : account_number(account_number), balance(initial_balance) {}
-    
+    Fraction(int num = 0, int den = 1) : numerator(num), denominator(den) {}
+
     // Question: Are these good operator overloads?
-    BankAccount operator+(double amount) const {
-        // Adding money to account
-        return BankAccount(account_number, balance + amount);
+
+    // Addition of two fractions: a/b + c/d = (ad + cb) / (bd)
+    Fraction operator+(const Fraction& other) const {
+        return Fraction(numerator * other.denominator + other.numerator * denominator,
+                        denominator * other.denominator);
     }
-    
-    BankAccount operator-(const BankAccount& other) const {
-        // Transferring money between accounts?
-        return BankAccount(account_number, balance - other.balance);
+
+    // Less-than comparison: cross-multiply to compare a/b and c/d
+    bool operator<(const Fraction& other) const {
+        return numerator * other.denominator < other.numerator * denominator;
     }
-    
-    bool operator>(const BankAccount& other) const {
-        // Comparing account balances
-        return balance > other.balance;
+
+    // "Reducing" the fraction to lowest terms?
+    Fraction operator!() const {
+        int g = std::gcd(numerator, denominator);
+        if (g == 0) return *this;
+        return Fraction(numerator / g, denominator / g);
     }
-    
-    double get_balance() const { return balance; }
-    string get_account_number() const { return account_number; }
+
+    // "Converting" the fraction to a decimal value?
+    Fraction operator++() {
+        // returns... a fraction? but really wants to give a double
+        return Fraction(numerator, denominator);
+    }
+
+    int get_numerator() const { return numerator; }
+    int get_denominator() const { return denominator; }
 };
 
 // TODO: For each questionable operator overload above, suggest a better alternative
@@ -529,43 +509,37 @@ public:
 /*
 Your analysis:
 
-Design 1 (Student class):
-- operator+(): [Good/Bad?] Why?
-- operator<(): [Good/Bad?] Why?  
-- operator<<(): [Good/Bad?] Why?
-- Better alternatives:
-
-Design 2 (BankAccount class):
-- operator+(): [Good/Bad?] Why?
-- operator-(): [Good/Bad?] Why?
-- operator>(): [Good/Bad?] Why?
+Fraction class:
+- operator+():  [Good/Bad?] Why?
+- operator<():  [Good/Bad?] Why?
+- operator!():  [Good/Bad?] Why?
+- operator++(): [Good/Bad?] Why?
 - Better alternatives:
 */
 
 int main() {
-    // Test the designs and think about whether they feel natural
-    Student alice("Alice", 3.8);
-    Student bob("Bob", 3.2);
-    
+    // Test the design and think about whether each operation feels natural
+    Fraction half(1, 2);
+    Fraction third(1, 3);
+
     // Does this make sense?
-    Student combined = alice + bob;
-    cout << "Combined student: " << combined.get_name() 
-         << " with GPA: " << combined.get_gpa() << endl;
-    
+    Fraction sum = half + third;
+    cout << "Sum: " << sum.get_numerator() << "/" << sum.get_denominator() << endl;
+
     // Does this make sense?
-    alice << "Mathematics" << "Physics";
-    
-    BankAccount account1("12345", 1000.0);
-    BankAccount account2("67890", 500.0);
-    
+    cout << "third < half: " << (third < half) << endl;
+
     // Does this make sense?
-    BankAccount after_deposit = account1 + 200.0;
-    cout << "After deposit: $" << after_deposit.get_balance() << endl;
-    
+    Fraction big(6, 8);
+    Fraction reduced = !big;
+    cout << "Reduced: " << reduced.get_numerator() << "/"
+         << reduced.get_denominator() << endl;
+
     // Does this make sense?
-    BankAccount after_transfer = account1 - account2;
-    cout << "After transfer: $" << after_transfer.get_balance() << endl;
-    
+    Fraction converted = ++half;
+    cout << "Converted: " << converted.get_numerator() << "/"
+         << converted.get_denominator() << endl;
+
     return 0;
 }
 ```

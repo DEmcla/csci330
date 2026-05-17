@@ -25,38 +25,42 @@
 - **Problem Set 2**: Exception Handling & RAII (50 minutes) 
 - **Problem Set 3**: Advanced Integration Project (40 minutes)
 
+> **Theme for this chapter**: a self-service **vending machine / checkout kiosk**.
+> Every problem builds a piece of the kiosk, so you exercise statements and
+> exceptions in a single coherent scenario.
+
 ---
 
 ## Problem Set 1: Control Flow Fundamentals (45 minutes)
 
-### Problem 1.1: Grade Calculator with Switch (15 minutes)
+### Problem 1.1: Vending Slot Selector with Switch (15 minutes)
 
 **Background**: Coming from Python dictionaries or Java if-else chains, learn C++ switch statements.
 
-**Task**: Create a program that converts numeric grades to letter grades using a switch statement.
+**Task**: Create a program that maps a kiosk slot code to a product name and price using a switch statement.
 
 **Requirements**:
-1. Read a numeric grade (0-100) from user input
-2. Convert to letter grade using this scale:
-   - 90-100: A
-   - 80-89: B  
-   - 70-79: C
-   - 60-69: D
-   - Below 60: F
+1. Read a slot code (1-99) from user input
+2. Map slot codes to products using this scale (group ranges with fall-through):
+   - 1-9: Snacks (e.g., "Chips") - $1.50
+   - 10-19: Candy (e.g., "Chocolate Bar") - $1.25
+   - 20-29: Cold Drinks (e.g., "Bottled Water") - $2.00
+   - 30-39: Hot Drinks (e.g., "Coffee") - $2.50
+   - 40-99: Premium items (e.g., "Trail Mix") - $3.75
 3. Use a switch statement (not if-else)
-4. Handle invalid input (negative numbers, > 100)
+4. Handle invalid input (negative numbers, slot code 0, > 99)
 
 **Starter Code**:
 ```cpp
 #include <iostream>
 
 int main() {
-    std::cout << "Enter numeric grade (0-100): ";
-    int grade;
-    std::cin >> grade;
+    std::cout << "Enter slot code (1-99): ";
+    int slot;
+    std::cin >> slot;
     
     // TODO: Validate input
-    // TODO: Convert to letter grade using switch
+    // TODO: Map slot code to product/price using switch
     // TODO: Print result
     
     return 0;
@@ -65,14 +69,14 @@ int main() {
 
 **Expected Output**:
 ```
-Enter numeric grade (0-100): 87
-Grade: B
+Enter slot code (1-99): 24
+Slot 24: Cold Drinks - $2.00
 
-Enter numeric grade (0-100): 105
-Error: Grade must be between 0 and 100
+Enter slot code (1-99): 105
+Error: Slot code must be between 1 and 99
 
-Enter numeric grade (0-100): -5
-Error: Grade must be between 0 and 100
+Enter slot code (1-99): -5
+Error: Slot code must be between 1 and 99
 ```
 
 **Learning Goals**:
@@ -82,42 +86,42 @@ Error: Grade must be between 0 and 100
 
 ---
 
-### Problem 1.2: Number Pattern Generator (15 minutes)
+### Problem 1.2: Stock Shelf Display Generator (15 minutes)
 
 **Background**: Practice nested loops and loop control (break/continue).
 
-**Task**: Generate number patterns using nested for loops.
+**Task**: Generate a stock-shelf diagram using nested for loops.
 
 **Requirements**:
-1. Ask user for pattern size (1-10)
-2. Generate this pattern for size = 5:
+1. Ask user for shelf count (1-10)
+2. Generate this diagram for shelf count = 5 (shelf N holds N items, drawn as `#`):
 ```
-1
-12
-123
-1234
-12345
+#
+##
+###
+####
+#####
 ```
 3. Use nested for loops
 4. Validate input range
-5. Use continue to skip even-numbered rows if user chooses "odd only" mode
+5. Use continue to skip even-numbered shelves if user chooses "odd shelves only" mode (those shelves are out of service)
 
 **Starter Code**:
 ```cpp
 #include <iostream>
 
 int main() {
-    int size;
+    int shelves;
     char mode;
     
-    std::cout << "Enter pattern size (1-10): ";
-    std::cin >> size;
+    std::cout << "Enter shelf count (1-10): ";
+    std::cin >> shelves;
     
-    std::cout << "Show all rows (a) or odd rows only (o)? ";
+    std::cout << "Show all shelves (a) or in-service odd shelves only (o)? ";
     std::cin >> mode;
     
     // TODO: Validate inputs
-    // TODO: Generate pattern with nested loops
+    // TODO: Generate diagram with nested loops
     // TODO: Use continue for odd-only mode
     
     return 0;
@@ -135,14 +139,14 @@ int main() {
 
 **Background**: Transition from Python's for-in loops to C++ range-based for loops.
 
-**Task**: Create a program that processes a list of temperatures.
+**Task**: Create a program that processes the prices of items currently loaded in the kiosk.
 
 **Requirements**:
-1. Start with a vector of temperatures: `{68.5, 72.1, 69.8, 74.2, 71.5, 73.0, 70.2}`
-2. Display all temperatures using range-based for loop
-3. Find and display the average temperature
-4. Count temperatures above average
-5. Modify all temperatures by adding 2.0 degrees (using range-based for with references)
+1. Start with a vector of item prices: `{1.50, 2.25, 0.99, 3.75, 1.25, 2.00, 1.75}`
+2. Display all prices using range-based for loop
+3. Find and display the average price
+4. Count items priced above average
+5. Apply a $0.25 price increase to all items (using range-based for with references)
 
 **Starter Code**:
 ```cpp
@@ -150,13 +154,13 @@ int main() {
 #include <vector>
 
 int main() {
-    std::vector<double> temperatures = {68.5, 72.1, 69.8, 74.2, 71.5, 73.0, 70.2};
+    std::vector<double> prices = {1.50, 2.25, 0.99, 3.75, 1.25, 2.00, 1.75};
     
-    // TODO: Display all temperatures
+    // TODO: Display all prices
     // TODO: Calculate average
     // TODO: Count above average
-    // TODO: Add 2.0 to all temperatures
-    // TODO: Display modified temperatures
+    // TODO: Add 0.25 to all prices
+    // TODO: Display modified prices
     
     return 0;
 }
@@ -172,41 +176,47 @@ int main() {
 
 ## Problem Set 2: Exception Handling & RAII (50 minutes)
 
-### Problem 2.1: Safe Division Calculator (20 minutes)
+### Problem 2.1: Safe Payment Handler (20 minutes)
 
 **Background**: Learn proper exception handling patterns, transitioning from Python's try/except or Java's try/catch.
 
-**Task**: Create a calculator that safely handles division by zero and invalid input.
+**Task**: Create a payment handler for the kiosk that safely rejects invalid purchases.
 
 **Requirements**:
-1. Create a `safe_divide` function that throws appropriate exceptions
+1. Create a `process_purchase` function that throws appropriate exceptions
 2. Handle different types of exceptions with specific catch blocks
 3. Use standard exception types (`std::invalid_argument`, `std::runtime_error`)
-4. Implement a menu-driven calculator with exception handling
+4. Implement a menu-driven purchase loop with exception handling
+
+The handler should reject a purchase when:
+- The slot code is unknown (`std::invalid_argument`)
+- The selected slot is out of stock (`std::runtime_error`)
+- The amount inserted is less than the item price (`std::runtime_error`)
 
 **Starter Code**:
 ```cpp
 #include <iostream>
 #include <stdexcept>
 
-double safe_divide(double numerator, double denominator) {
+// Returns the change due (amount_inserted - price)
+double process_purchase(int slot_code, double amount_inserted) {
     // TODO: Implement with proper exception throwing
 }
 
 int main() {
-    double a, b;
-    char operation;
+    int slot;
+    double amount;
     
     while (true) {
-        std::cout << "Enter calculation (a op b) or 'q' to quit: ";
+        std::cout << "Enter slot code and amount inserted (or 'q' to quit): ";
         
-        if (!(std::cin >> a >> operation >> b)) {
+        if (!(std::cin >> slot >> amount)) {
             if (std::cin.eof()) break;
             // TODO: Handle invalid input
         }
         
         try {
-            // TODO: Implement calculator with exception handling
+            // TODO: Implement purchase handling with exception handling
         } catch (/* TODO: Add appropriate catch blocks */) {
             // TODO: Handle specific exceptions
         }
@@ -218,14 +228,14 @@ int main() {
 
 **Expected Behavior**:
 ```
-Enter calculation (a op b) or 'q' to quit: 10 / 2
-Result: 5
+Enter slot code and amount inserted (or 'q' to quit): 24 5.00
+Dispensing Cold Drinks. Change due: $3.00
 
-Enter calculation (a op b) or 'q' to quit: 10 / 0
-Error: Division by zero is not allowed
+Enter slot code and amount inserted (or 'q' to quit): 24 1.00
+Error: Insufficient funds for Cold Drinks ($2.00)
 
-Enter calculation (a op b) or 'q' to quit: abc
-Error: Invalid input format
+Enter slot code and amount inserted (or 'q' to quit): 77 5.00
+Error: Slot 77 is out of stock
 ```
 
 **Learning Goals**:
@@ -236,18 +246,18 @@ Error: Invalid input format
 
 ---
 
-### Problem 2.2: File Processor with RAII (30 minutes)
+### Problem 2.2: Transaction Log with RAII (30 minutes)
 
 **Background**: Learn RAII (Resource Acquisition Is Initialization) - a key C++ concept not present in Python/Java garbage collection.
 
-**Task**: Create a file processing class that demonstrates RAII principles.
+**Task**: Create a transaction-log class that demonstrates RAII principles.
 
 **Requirements**:
-1. Create a `FileProcessor` class that opens a file in constructor
-2. Implement RAII: file should auto-close in destructor
-3. Add methods to count lines, words, and characters
+1. Create a `TransactionLog` class that opens a log file in its constructor
+2. Implement RAII: the file should auto-close (with a closing summary line) in the destructor
+3. Add methods to record sales and to report counts (entries logged, total revenue)
 4. Handle file-related exceptions properly
-5. Demonstrate that files close even when exceptions occur
+5. Demonstrate that the log file closes even when exceptions occur
 
 **Starter Code**:
 ```cpp
@@ -256,61 +266,61 @@ Error: Invalid input format
 #include <string>
 #include <stdexcept>
 
-class FileProcessor {
+class TransactionLog {
 private:
-    std::ifstream file;
+    std::ofstream file;
     std::string filename;
 
 public:
-    // TODO: Constructor - acquire resource (open file)
-    FileProcessor(const std::string& filename) {
+    // TODO: Constructor - acquire resource (open log file)
+    TransactionLog(const std::string& filename) {
         // TODO: Open file and handle errors
     }
     
-    // TODO: Destructor - release resource (close file)
-    ~FileProcessor() {
+    // TODO: Destructor - release resource (write summary, close file)
+    ~TransactionLog() {
         // TODO: Ensure file is closed
     }
     
     // TODO: Delete copy constructor and assignment (RAII best practice)
     
-    int count_lines() {
-        // TODO: Count lines in file
-        // TODO: Reset file position after counting
+    void record_sale(const std::string& product, double price) {
+        // TODO: Write a log entry, update counters
     }
     
-    int count_words() {
-        // TODO: Count words in file
+    int entries_logged() const {
+        // TODO: Return number of recorded sales
     }
     
-    int count_characters() {
-        // TODO: Count characters in file
+    double total_revenue() const {
+        // TODO: Return accumulated revenue
     }
 };
 
 // Test function that demonstrates RAII even with exceptions
-void test_file_processing(const std::string& filename) {
+void run_shift(const std::string& filename) {
     try {
-        FileProcessor processor(filename);
+        TransactionLog log(filename);
         
-        std::cout << "Lines: " << processor.count_lines() << std::endl;
-        std::cout << "Words: " << processor.count_words() << std::endl;
-        std::cout << "Characters: " << processor.count_characters() << std::endl;
+        log.record_sale("Chips", 1.50);
+        log.record_sale("Coffee", 2.50);
+        
+        std::cout << "Entries: " << log.entries_logged() << std::endl;
+        std::cout << "Revenue: $" << log.total_revenue() << std::endl;
         
         // Simulate an exception
-        if (processor.count_lines() > 100) {
-            throw std::runtime_error("File too large!");
+        if (log.total_revenue() > 1000.0) {
+            throw std::runtime_error("Cash box full - service required!");
         }
         
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << std::endl;
-        // File should still be properly closed due to RAII
+        // Log file should still be properly closed due to RAII
     }
 }
 
 int main() {
-    // TODO: Create a test file or use existing file
-    // TODO: Test with valid and invalid filenames
+    // TODO: Run a shift and test with valid and invalid log filenames
     // TODO: Demonstrate RAII behavior
     
     return 0;
@@ -328,23 +338,23 @@ int main() {
 
 ## Problem Set 3: Advanced Integration Project (40 minutes)
 
-### Problem 3.1: Student Management System (40 minutes)
+### Problem 3.1: Vending Machine Controller (40 minutes)
 
 **Background**: Integrate all Chapter 8 concepts into a comprehensive program that demonstrates control flow, exception handling, and RAII.
 
-**Task**: Create a student management system with robust error handling.
+**Task**: Create a vending machine controller with robust error handling.
 
 **Requirements**:
 
 **Core Features**:
-1. Store student records (ID, name, grades)
+1. Store product records (slot code, name, price, quantity in stock)
 2. Menu-driven interface with switch statement
-3. Add, remove, search, and display students
-4. Calculate GPA with exception handling
-5. Save/load data from file using RAII
+3. Add products, restock, search, and display inventory
+4. Process a purchase with exception handling
+5. Save/load inventory data from file using RAII
 
 **Control Flow Requirements**:
-- Use switch statement for menu system
+- Use switch statement for the menu system
 - Use range-based for loops for processing collections
 - Use traditional for loops where appropriate
 - Implement input validation loops
@@ -370,42 +380,52 @@ int main() {
 #include <algorithm>
 
 // Custom exception classes
-class StudentNotFoundException : public std::runtime_error {
+class SlotNotFoundException : public std::runtime_error {
 public:
-    StudentNotFoundException(const std::string& message)
+    SlotNotFoundException(const std::string& message)
         : std::runtime_error(message) {}
 };
 
-class InvalidGradeException : public std::invalid_argument {
+class OutOfStockException : public std::runtime_error {
 public:
-    InvalidGradeException(const std::string& message)
-        : std::invalid_argument(message) {}
+    OutOfStockException(const std::string& message)
+        : std::runtime_error(message) {}
 };
 
-// Student class
-class Student {
+class InsufficientFundsException : public std::runtime_error {
+public:
+    InsufficientFundsException(const std::string& message)
+        : std::runtime_error(message) {}
+};
+
+// Product class
+class Product {
 private:
-    int id;
+    int slot_code;
     std::string name;
-    std::vector<double> grades;
+    double price;
+    int quantity;
 
 public:
     // TODO: Implement constructors
-    Student(int id, const std::string& name) : id(id), name(name) {}
+    Product(int slot_code, const std::string& name, double price, int quantity)
+        : slot_code(slot_code), name(name), price(price), quantity(quantity) {}
     
     // TODO: Implement getters
-    int get_id() const { return id; }
+    int get_slot_code() const { return slot_code; }
     const std::string& get_name() const { return name; }
+    double get_price() const { return price; }
+    int get_quantity() const { return quantity; }
     
-    // TODO: Implement grade management with validation
-    void add_grade(double grade) {
-        // TODO: Validate grade (0-100)
-        // TODO: Throw InvalidGradeException if invalid
+    // TODO: Implement stock management with validation
+    void restock(int amount) {
+        // TODO: Validate amount (must be positive)
+        // TODO: Throw std::invalid_argument if invalid
     }
     
-    double calculate_gpa() const {
-        // TODO: Calculate GPA
-        // TODO: Handle empty grades vector
+    void dispense() {
+        // TODO: Decrement quantity
+        // TODO: Throw OutOfStockException if quantity is 0
     }
     
     // TODO: Implement display method
@@ -413,47 +433,47 @@ public:
 };
 
 // RAII File Manager
-class StudentFileManager {
+class InventoryFileManager {
 private:
     std::string filename;
 
 public:
-    StudentFileManager(const std::string& filename) : filename(filename) {}
+    InventoryFileManager(const std::string& filename) : filename(filename) {}
     
-    // TODO: Implement save_students with RAII file handling
-    void save_students(const std::vector<Student>& students) {
+    // TODO: Implement save_products with RAII file handling
+    void save_products(const std::vector<Product>& products) {
         // TODO: Use RAII for file operations
         // TODO: Handle file exceptions
     }
     
-    // TODO: Implement load_students with RAII file handling
-    std::vector<Student> load_students() {
+    // TODO: Implement load_products with RAII file handling
+    std::vector<Product> load_products() {
         // TODO: Use RAII for file operations
         // TODO: Handle file exceptions
-        // TODO: Return loaded students
+        // TODO: Return loaded products
     }
 };
 
 // Main application class
-class StudentManagementSystem {
+class VendingMachine {
 private:
-    std::vector<Student> students;
-    StudentFileManager file_manager;
+    std::vector<Product> products;
+    InventoryFileManager file_manager;
 
 public:
-    StudentManagementSystem(const std::string& data_file)
+    VendingMachine(const std::string& data_file)
         : file_manager(data_file) {
         try {
-            students = file_manager.load_students();
+            products = file_manager.load_products();
         } catch (const std::exception& e) {
             std::cout << "Warning: Could not load existing data: " 
                       << e.what() << std::endl;
         }
     }
     
-    ~StudentManagementSystem() {
+    ~VendingMachine() {
         try {
-            file_manager.save_students(students);
+            file_manager.save_products(products);
         } catch (const std::exception& e) {
             std::cout << "Warning: Could not save data: " 
                       << e.what() << std::endl;
@@ -475,19 +495,19 @@ public:
             try {
                 switch (choice) {
                     case 1:
-                        add_student();
+                        add_product();
                         break;
                     case 2:
-                        remove_student();
+                        restock_product();
                         break;
                     case 3:
-                        search_student();
+                        search_product();
                         break;
                     case 4:
-                        display_all_students();
+                        display_all_products();
                         break;
                     case 5:
-                        add_grade_to_student();
+                        buy_product();
                         break;
                     case 0:
                         std::cout << "Goodbye!" << std::endl;
@@ -495,10 +515,12 @@ public:
                     default:
                         std::cout << "Invalid choice!" << std::endl;
                 }
-            } catch (const StudentNotFoundException& e) {
-                std::cout << "Student Error: " << e.what() << std::endl;
-            } catch (const InvalidGradeException& e) {
-                std::cout << "Grade Error: " << e.what() << std::endl;
+            } catch (const SlotNotFoundException& e) {
+                std::cout << "Slot Error: " << e.what() << std::endl;
+            } catch (const OutOfStockException& e) {
+                std::cout << "Stock Error: " << e.what() << std::endl;
+            } catch (const InsufficientFundsException& e) {
+                std::cout << "Payment Error: " << e.what() << std::endl;
             } catch (const std::exception& e) {
                 std::cout << "Error: " << e.what() << std::endl;
             }
@@ -508,30 +530,30 @@ public:
 
 private:
     void display_menu() {
-        std::cout << "\n=== Student Management System ===" << std::endl;
-        std::cout << "1. Add Student" << std::endl;
-        std::cout << "2. Remove Student" << std::endl;
-        std::cout << "3. Search Student" << std::endl;
-        std::cout << "4. Display All Students" << std::endl;
-        std::cout << "5. Add Grade to Student" << std::endl;
+        std::cout << "\n=== Vending Machine Controller ===" << std::endl;
+        std::cout << "1. Add Product" << std::endl;
+        std::cout << "2. Restock Product" << std::endl;
+        std::cout << "3. Search Product" << std::endl;
+        std::cout << "4. Display Inventory" << std::endl;
+        std::cout << "5. Buy Product" << std::endl;
         std::cout << "0. Exit" << std::endl;
     }
     
     // TODO: Implement menu functions
-    void add_student();
-    void remove_student();
-    void search_student();
-    void display_all_students();
-    void add_grade_to_student();
+    void add_product();
+    void restock_product();
+    void search_product();
+    void display_all_products();
+    void buy_product();
     
-    // TODO: Helper function to find student by ID
-    Student* find_student_by_id(int id);
+    // TODO: Helper function to find a product by slot code
+    Product* find_product_by_slot(int slot_code);
 };
 
 int main() {
     try {
-        StudentManagementSystem system("students.txt");
-        system.run();
+        VendingMachine machine("inventory.txt");
+        machine.run();
     } catch (const std::exception& e) {
         std::cout << "Fatal error: " << e.what() << std::endl;
         return 1;
@@ -545,8 +567,8 @@ int main() {
 1. **Menu System**: Clean switch-based menu
 2. **Data Validation**: All inputs validated with appropriate exceptions
 3. **File Operations**: Automatic save/load with RAII
-4. **Search Functionality**: Find students by ID with proper error handling
-5. **Grade Management**: Add grades with validation
+4. **Search Functionality**: Find products by slot code with proper error handling
+5. **Purchase Processing**: Buy items with stock and payment validation
 6. **Error Recovery**: System continues running after non-fatal errors
 
 **Learning Goals**:

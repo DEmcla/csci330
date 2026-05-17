@@ -88,7 +88,7 @@ Value at index 3: 9
 
 ### Problem 1.2: Factory Pattern with `unique_ptr` (15 minutes)
 
-**Scenario**: Create a factory that produces different types of shapes using smart pointers.
+**Scenario**: Create a factory that produces different types of game monsters using smart pointers. The factory owns construction; the `unique_ptr` it returns hands exclusive ownership to the caller.
 
 **Your Task**:
 ```cpp
@@ -96,68 +96,69 @@ Value at index 3: 9
 #include <iostream>
 #include <string>
 
-class Shape {
+class Monster {
 public:
-    virtual ~Shape() = default;
-    virtual void draw() const = 0;
-    virtual double area() const = 0;
+    virtual ~Monster() = default;
+    virtual void describe() const = 0;
+    virtual int threat_level() const = 0;
 };
 
-class Circle : public Shape {
-    double radius;
+class Goblin : public Monster {
+    int hit_points;
 public:
-    Circle(double r) : radius(r) {}
-    void draw() const override {
-        std::cout << "Drawing circle with radius " << radius << std::endl;
+    Goblin(int hp) : hit_points(hp) {}
+    void describe() const override {
+        std::cout << "Goblin with " << hit_points << " HP" << std::endl;
     }
-    double area() const override {
-        return 3.14159 * radius * radius;
-    }
-};
-
-class Rectangle : public Shape {
-    double width, height;
-public:
-    Rectangle(double w, double h) : width(w), height(h) {}
-    void draw() const override {
-        std::cout << "Drawing rectangle " << width << "x" << height << std::endl;
-    }
-    double area() const override {
-        return width * height;
+    int threat_level() const override {
+        return hit_points / 10;
     }
 };
 
-class ShapeFactory {
+class Dragon : public Monster {
+    int hit_points, fire_damage;
+public:
+    Dragon(int hp, int dmg) : hit_points(hp), fire_damage(dmg) {}
+    void describe() const override {
+        std::cout << "Dragon with " << hit_points << " HP, "
+                  << fire_damage << " fire damage" << std::endl;
+    }
+    int threat_level() const override {
+        return hit_points / 10 + fire_damage;
+    }
+};
+
+class MonsterFactory {
 public:
     // TODO: Implement this method
-    static std::unique_ptr<Shape> create_shape(const std::string& type, double param1, double param2 = 0);
+    static std::unique_ptr<Monster> create_monster(const std::string& type, int param1, int param2 = 0);
 };
 ```
 
-Complete the `create_shape` method that:
-- Returns a `Circle` if type is "circle" (uses param1 as radius, ignores param2)
-- Returns a `Rectangle` if type is "rectangle" (uses param1 as width, param2 as height)
+Complete the `create_monster` method that:
+- Returns a `Goblin` if type is "goblin" (uses param1 as hit points, ignores param2)
+- Returns a `Dragon` if type is "dragon" (uses param1 as hit points, param2 as fire damage)
 - Returns `nullptr` for unknown types
 
 Test with:
 ```cpp
 int main() {
-    auto circle = ShapeFactory::create_shape("circle", 5.0);
-    auto rectangle = ShapeFactory::create_shape("rectangle", 3.0, 4.0);
-    auto unknown = ShapeFactory::create_shape("triangle", 1.0, 2.0);
+    auto goblin = MonsterFactory::create_monster("goblin", 50);
+    auto dragon = MonsterFactory::create_monster("dragon", 300, 40);
+    auto unknown = MonsterFactory::create_monster("unicorn", 1, 2);
     
-    if (circle) {
-        circle->draw();
-        std::cout << "Area: " << circle->area() << std::endl;
+    if (goblin) {
+        goblin->describe();
+        std::cout << "Threat level: " << goblin->threat_level() << std::endl;
     }
     
-    if (rectangle) {
-        rectangle->draw();
-        std::cout << "Area: " << rectangle->area() << std::endl;
+    if (dragon) {
+        dragon->describe();
+        std::cout << "Threat level: " << dragon->threat_level() << std::endl;
     }
     
     if (!unknown) {
-        std::cout << "Unknown shape type" << std::endl;
+        std::cout << "Unknown monster type" << std::endl;
     }
     
     return 0;

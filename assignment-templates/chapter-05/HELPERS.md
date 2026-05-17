@@ -33,48 +33,48 @@ struct Derived : Base {
 
 ## Problem Set 1: Basic Inheritance and Virtual Functions
 
-This set asks for an `Animal` base class and `Dog` / `Cat` derived classes.
+This set asks for a `MediaItem` base class and `Song` / `Podcast` derived classes.
 
 ### Base and Derived Classes
 ```cpp
 #include <iostream>
 
-struct Animal {
-    virtual ~Animal() = default;             // virtual destructor
+struct MediaItem {
+    virtual ~MediaItem() = default;             // virtual destructor
 
-    virtual void make_sound() const {
-        std::cout << "Some generic animal sound\n";
+    virtual void play() const {
+        std::cout << "Playing a generic media item\n";
     }
 };
 
-struct Dog : Animal {
-    void make_sound() const override {       // override catches signature typos
-        std::cout << "Woof!\n";
+struct Song : MediaItem {
+    void play() const override {                // override catches signature typos
+        std::cout << "Now playing a song\n";
     }
 };
 
-struct Cat : Animal {
-    void make_sound() const override {
-        std::cout << "Meow!\n";
+struct Podcast : MediaItem {
+    void play() const override {
+        std::cout << "Streaming a podcast episode\n";
     }
 };
 ```
 
 ### The `override` keyword (Problem 1.2)
-If you misspell the function (`make_soud`) or change its signature, `override`
+If you misspell the function (`ploy`) or change its signature, `override`
 turns a silent "this is a brand-new function" mistake into a **compiler error**.
 Always use it on functions meant to override a base virtual.
 
 ### Polymorphic Behavior Through Base Pointers (Problem 1.3)
 ```cpp
-Animal* zoo[3] = { new Dog(), new Cat(), new Animal() };
+MediaItem* playlist[3] = { new Song(), new Podcast(), new MediaItem() };
 
-for (Animal* a : zoo) {
-    a->make_sound();        // calls the correct override at run time
+for (MediaItem* m : playlist) {
+    m->play();              // calls the correct override at run time
 }
 
-for (Animal* a : zoo) {
-    delete a;               // virtual ~Animal() ensures correct cleanup
+for (MediaItem* m : playlist) {
+    delete m;               // virtual ~MediaItem() ensures correct cleanup
 }
 ```
 
@@ -82,149 +82,155 @@ for (Animal* a : zoo) {
 
 ## Problem Set 2: Abstract Classes and Pure Virtual Functions
 
-This set asks for an abstract `Shape` class with `Rectangle` and `Circle`.
+This set asks for an abstract `Track` class with `AudioTrack` and `VideoTrack`.
 
 ### Abstract Base Class
 ```cpp
 #include <iostream>
-#include <cmath>      // for M_PI
+#include <string>
 
-struct Shape {
-    virtual ~Shape() = default;
+struct Track {
+    virtual ~Track() = default;
 
-    // Pure virtual functions => Shape is abstract, cannot be instantiated
-    virtual double area() const = 0;
-    virtual double perimeter() const = 0;
+    // Pure virtual functions => Track is abstract, cannot be instantiated
+    virtual int duration() const = 0;          // length in seconds
+    virtual std::string title() const = 0;
 
     // A concrete function the base can implement using the pure virtuals
     virtual void display_info() const {
-        std::cout << "Area: " << area()
-                  << ", Perimeter: " << perimeter() << "\n";
+        std::cout << "Title: " << title()
+                  << ", Duration: " << duration() << "s\n";
     }
 };
 ```
 
-### Concrete Shapes
+### Concrete Tracks
 ```cpp
-struct Rectangle : Shape {
-    double width, height;
+struct AudioTrack : Track {
+    std::string name;
+    int seconds;
 
-    Rectangle(double w, double h) : width(w), height(h) {}
+    AudioTrack(const std::string& n, int s) : name(n), seconds(s) {}
 
-    double area() const override      { return width * height; }
-    double perimeter() const override { return 2 * (width + height); }
+    int duration() const override      { return seconds; }
+    std::string title() const override { return name; }
 };
 
-struct Circle : Shape {
-    double radius;
+struct VideoTrack : Track {
+    std::string name;
+    int seconds;
 
-    Circle(double r) : radius(r) {}
+    VideoTrack(const std::string& n, int s) : name(n), seconds(s) {}
 
-    double area() const override      { return M_PI * radius * radius; }
-    double perimeter() const override { return 2 * M_PI * radius; }
+    int duration() const override      { return seconds; }
+    std::string title() const override { return name; }
+
+    // VideoTrack also overrides the regular virtual display_info()
+    void display_info() const override {
+        std::cout << "Title: " << title()
+                  << ", Duration: " << duration() << "s [video]\n";
+    }
 };
 ```
 
-### Polymorphic Shape Collection (Problem 2.3)
+### Polymorphic Track Collection (Problem 2.3)
 ```cpp
 #include <vector>
 
 int main() {
-    std::vector<Shape*> shapes;
-    shapes.push_back(new Rectangle(5.0, 4.0));
-    shapes.push_back(new Circle(2.0));
+    std::vector<Track*> tracks;
+    tracks.push_back(new AudioTrack("Intro Theme", 95));
+    tracks.push_back(new VideoTrack("Episode 1", 1820));
 
-    for (const Shape* s : shapes) {
-        s->display_info();          // polymorphic call
+    for (const Track* t : tracks) {
+        t->display_info();          // polymorphic call
     }
 
-    for (Shape* s : shapes) {
-        delete s;                   // virtual destructor -> correct cleanup
+    for (Track* t : tracks) {
+        delete t;                   // virtual destructor -> correct cleanup
     }
 }
 ```
 
 ---
 
-## Problem Set 3: Advanced Logging System
+## Problem Set 3: Configurable Media Player
 
-This set asks for a `Logger` interface, three concrete loggers, and an
-`Application` that is configured with whichever logger you pass it.
+This set asks for a `Playable` interface, three concrete media types, and a
+`Player` that is configured with whichever item you pass it.
 
-### Logger Interface
+### Playable Interface
 ```cpp
 #include <iostream>
-#include <fstream>
 #include <string>
 
-struct Logger {
-    virtual ~Logger() = default;
-    virtual void log(const std::string& message) const = 0;
+struct Playable {
+    virtual ~Playable() = default;
+    virtual void play() const = 0;
 
     // Convenience function implemented once, in the base
-    virtual void log_error(const std::string& message) const {
-        log("ERROR: " + message);
+    virtual void play_with_announcement() const {
+        std::cout << "Up next: ";
+        play();
     }
 };
 ```
 
-### Concrete Loggers
+### Concrete Playable Types
 ```cpp
-struct ConsoleLogger : Logger {
-    void log(const std::string& message) const override {
-        std::cout << "[Console] " << message << "\n";
+struct Song : Playable {
+    void play() const override {
+        std::cout << "[Song] track is playing\n";
     }
 };
 
-struct FileLogger : Logger {
-    std::string filename;
-    FileLogger(const std::string& file) : filename(file) {}
+struct Podcast : Playable {
+    std::string episode;
+    Podcast(const std::string& ep) : episode(ep) {}
 
-    void log(const std::string& message) const override {
-        std::ofstream out(filename, std::ios::app);
-        if (out) {
-            out << "[File] " << message << "\n";
-        }
+    void play() const override {
+        std::cout << "[Podcast] streaming episode: " << episode << "\n";
     }
 };
 
-// SilentLogger: satisfies the interface but produces no output.
-// Useful for tests, or to switch logging off without changing other code.
-struct SilentLogger : Logger {
-    void log(const std::string&) const override {
+// SilentItem: satisfies the interface but produces no playback output.
+// Useful for tests, or as an empty placeholder slot in a playlist.
+struct SilentItem : Playable {
+    void play() const override {
         // intentionally empty
     }
 };
 ```
 
-### Configurable Application (Problem 3.3)
+### Configurable Player (Problem 3.3)
 ```cpp
-struct Application {
-    Logger* logger;                          // not owned - just used
-    Application(Logger* log) : logger(log) {}
+struct Player {
+    Playable* item;                          // not owned - just used
+    Player(Playable* media) : item(media) {}
 
-    void run() {
-        logger->log("Application started");
-        logger->log_error("Something went wrong!");
-        logger->log("Application finished");
+    void start() {
+        std::cout << "Player started\n";
+        item->play();
+        item->play_with_announcement();
+        std::cout << "Player finished\n";
     }
 };
 
 int main() {
-    ConsoleLogger console;
-    SilentLogger  silent;
+    Song    song;
+    SilentItem silent;
 
-    Application app1(&console);   // same Application code...
-    app1.run();
+    Player player1(&song);     // same Player code...
+    player1.start();
 
-    Application app2(&silent);    // ...different logging behavior
-    app2.run();
+    Player player2(&silent);   // ...different playback behavior
+    player2.start();
 }
 ```
 
-The point: `Application::run()` never changes, yet its logging behavior is
-selected entirely by which `Logger` you hand it. That is polymorphism solving a
-real design problem.
+The point: `Player::start()` never changes, yet its playback behavior is
+selected entirely by which `Playable` you hand it. That is polymorphism solving
+a real design problem.
 
 ---
 
@@ -233,27 +239,27 @@ real design problem.
 ### Factory Function
 A factory hides the `new` and the type choice behind one call:
 ```cpp
-Logger* make_logger(const std::string& kind) {
-    if (kind == "console") return new ConsoleLogger();
-    if (kind == "silent")  return new SilentLogger();
-    return new FileLogger("app.log");        // default
+Playable* make_item(const std::string& kind) {
+    if (kind == "song")    return new Song();
+    if (kind == "silent")  return new SilentItem();
+    return new Podcast("Episode 1");         // default
 }
 ```
 
 ### Interface Segregation
 Keep interfaces small and focused; a class can implement several:
 ```cpp
-struct Drawable {
-    virtual ~Drawable() = default;
-    virtual void draw() const = 0;
+struct Playable {
+    virtual ~Playable() = default;
+    virtual void play() const = 0;
 };
 
-struct Resizable {
-    virtual ~Resizable() = default;
-    virtual void resize(double factor) = 0;
+struct Downloadable {
+    virtual ~Downloadable() = default;
+    virtual void download() const = 0;
 };
 
-struct Sprite : Drawable, Resizable {
+struct OfflineSong : Playable, Downloadable {
     // implements both interfaces
 };
 ```
