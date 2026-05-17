@@ -2,7 +2,7 @@
 
 **🎯 Build Something Ambitious**
 
-The capstone project is your opportunity to apply everything you learn in a substantial, portfolio-worthy C++ application. It runs in **3 phases**, each anchored to a chapter in the course sequence. The capstone is *introduced* after Chapter 2; the three phases land at Chapter 5, Chapter 11, and Chapter 15 (course end).
+The capstone project is your opportunity to apply everything you learn in a substantial, portfolio-worthy C++ application. It runs in **3 phases**, each anchored to a chapter in the course sequence. The capstone is *introduced* after Chapter 2; the three phases land at Chapter 5, Chapter 11, and Chapter 17 (course end).
 
 > **A note on the calendar.** This guide describes the capstone in terms of *chapters*, not weeks. The actual dates for each phase — and how the chapters are spread across a term — are set per offering in Canvas. A short, intensive offering and a full-semester offering run the *same* 3-phase capstone, on different calendars.
 
@@ -34,7 +34,7 @@ The capstone project is your opportunity to apply everything you learn in a subs
 - **🏗️ [3-Phase Development](phases/)** -- structured progression, each phase is a graded checkpoint
   - **[Phase 1](phases/PROJECT_PHASE_1.md)**: Planning + Proof of Concept (anchored at **Chapter 5**, 40 pts)
   - **[Phase 2](phases/PROJECT_PHASE_2.md)**: MVP + Feature Development (anchored at **Chapter 11**, 130 pts)
-  - **[Phase 3](phases/PROJECT_PHASE_3.md)**: Robustness, Polish & Presentation (anchored at **Chapter 15**, course end, 130 pts)
+  - **[Phase 3](phases/PROJECT_PHASE_3.md)**: Robustness, Polish & Presentation (anchored at **Chapter 17**, course end, 130 pts)
 
 ### **Collaboration and Feedback**
 - **👥 [Code Review Guide](../reference/code-review-guide.md)** -- how to give a useful GitHub code review on a classmate's PR at each checkpoint
@@ -63,7 +63,7 @@ The capstone is introduced after Chapter 2 and runs parallel to the chapters fro
 |-------|----------------|--------|-------|
 | 1 -- Planning & PoC | Chapter 5 | 40 | Prove the idea works |
 | 2 -- MVP + Features | Chapter 11 | 130 | Core functionality + interesting features |
-| 3 -- Robustness + Polish + Presentation | Chapter 15 (course end) | 130 | Production-quality polish + demo |
+| 3 -- Robustness + Polish + Presentation | Chapter 17 (course end) | 130 | Production-quality polish + demo |
 | **Total** | | **300** | 35% of course grade |
 
 ---

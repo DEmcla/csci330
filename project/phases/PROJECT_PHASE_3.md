@@ -1,5 +1,5 @@
 # Phase 3: Robustness, Polish & Presentation
-**Anchor**: Chapter 15 (course end) -- final submission + presentation
+**Anchor**: Chapter 17 (course end) -- final submission + presentation
 **Points**: 130 of 300 (≈43% of project grade)
 **Goal**: Make the project solid, make it look professional, and present it convincingly.
 

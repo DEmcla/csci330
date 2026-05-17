@@ -61,10 +61,12 @@ assignment (in this repo), and a low-stakes chapter quiz (on Canvas).
 | 13 | Containers | STL containers |
 | 14 | Iterators | Iterator patterns, algorithms |
 | 15 | Strings | String handling, text processing |
+| 16 | Streams | File I/O, string streams, formatted output |
+| 17 | Filesystems | Paths, directory iteration, file operations |
 
 The capstone project is introduced after Chapter 2; its three phases are
-anchored to Chapters 5, 11, and 15. Supplemental chapters (Ch 10 Testing; Ch
-16-18) are optional, available for capstone needs.
+anchored to Chapters 5, 11, and 17. Supplemental chapters (Ch 10 Testing;
+Ch 18 STL Algorithms) are optional, available for capstone needs.
 
 **The Canvas course site is the authoritative schedule** — it maps this chapter
 sequence onto your term's weeks and due dates — and the home of all lecture

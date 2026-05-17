@@ -8,7 +8,7 @@ This is an audacious project: I'm asking you to build a substantial C++ applicat
 **Weight**: 35% of course grade (300 points)
 **Philosophy**: This is a serious project, so I expect you to build something real, substantial, and portfolio-worthy
 
-> **A note on the calendar.** This guide describes the capstone in terms of *chapters*, not weeks or dates. The capstone is *introduced* after Chapter 2; its three phases are anchored at Chapter 5, Chapter 11, and Chapter 15 (course end). The actual due dates — and how the chapters are spread across a term — are set per offering in Canvas. A short, intensive offering and a full-semester offering run the *same* 3-phase capstone, on different calendars.
+> **A note on the calendar.** This guide describes the capstone in terms of *chapters*, not weeks or dates. The capstone is *introduced* after Chapter 2; its three phases are anchored at Chapter 5, Chapter 11, and Chapter 17 (course end). The actual due dates — and how the chapters are spread across a term — are set per offering in Canvas. A short, intensive offering and a full-semester offering run the *same* 3-phase capstone, on different calendars.
 
 > **How to Use These Documents:**
 > - Start here for the complete project overview ("map of the world")
@@ -44,7 +44,7 @@ Each phase has its own detailed guide with todo checklists to keep you on track:
 **Detailed Todo List**: PROJECT_PHASE_2.md
 
 ### Phase 3: Robustness, Polish & Presentation
-**Anchor**: Chapter 15 (course end)
+**Anchor**: Chapter 17 (course end)
 **Points**: 130 (43%)
 **Focus**: Production quality, professional finish, and reflection
 **Detailed Todo List**: PROJECT_PHASE_3.md
